@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام التوكنز المتقدم</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 30px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .header h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #718096;
+            font-size: 1.1em;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 10px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .control-group label {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        
+        .control-group input,
+        .control-group select {
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+        
+        .control-group input:focus,
+        .control-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-success {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #f56565;
+            color: white;
+        }
+        
+        .btn-info {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-warning {
+            background: #ed8936;
+            color: white;
+        }
+        
+        .btn-purple {
+            background: #9f7aea;
+            color: white;
+        }
+        
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.85em;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-card h3 {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .stat-card .value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        thead {
+            background: #2d3748;
+            color: white;
+        }
+        
+        th {
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85em;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        td {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        tbody tr:hover {
+            background: #f7fafc;
+        }
+        
+        .token-input {
+            width: 60px;
+            padding: 6px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .token-positive {
+            color: #48bb78;
+        }
+        
+        .token-negative {
+            color: #f56565;
+        }
+        
+        .gender-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .gender-male {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        .gender-female {
+            background: #fed7d7;
+            color: #9b2c2c;
+        }
+        
+        .chart-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 10px;
+        }
+        
+        .chart-container h2 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .chart-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        canvas {
+            max-height: 350px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 20px;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .modal-header h2 {
+            color: #2d3748;
+        }
+        
+        .close-btn {
+            background: #f56565;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-btn:hover {
+            background: #e53e3e;
+        }
+        
+        .student-report {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        
+        .student-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        
+        .report-charts {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .activity-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .buttons, .controls {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 نظام التوكنز المتقدم لتتبع أداء التلاميذ</h1>
+            <p>نظام متكامل لإدارة الصف وتحفيز التلاميذ مع تحليلات متقدمة</p>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>📅 اليوم:</label>
+                <select id="daySelect">
+                    <option value="الإثنين">الإثنين</option>
+                    <option value="الثلاثاء">الثلاثاء</option>
+                    <option value="الأربعاء">الأربعاء</option>
+                    <option value="الخميس">الخميس</option>
+                    <option value="الجمعة">الجمعة</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>👤 اسم التلميذ:</label>
+                <input type="text" id="studentName" placeholder="أدخل اسم التلميذ">
+            </div>
+            
+            <div class="control-group">
+                <label>⚥ الجنس:</label>
+                <select id="genderSelect">
+                    <option value="ذكر">ذكر</option>
+                    <option value="أنثى">أنثى</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>📚 المادة:</label>
+                <select id="subjectSelect">
+                    <option value="اللغة العربية">اللغة العربية</option>
+                    <option value="اللغة الفرنسية">اللغة الفرنسية</option>
+                    <option value="الرياضيات">الرياضيات</option>
+                    <option value="النشاط العلمي">النشاط العلمي</option>
+                    <option value="التربية الإسلامية">التربية الإسلامية</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>🎭 نوع النشاط:</label>
+                <select id="activitySelect">
+                    <option value="Rituels">أنشطة اعتيادية (Rituels)</option>
+                    <option value="Interaction">تفاعل شفهي (Interaction orale)</option>
+                    <option value="Compréhension">فهم المسموع (Compréhension)</option>
+                    <option value="Parler">الاسترسال في الكلام (Parler)</option>
+                    <option value="Lecture">قراءة (Lecture)</option>
+                    <option value="Écriture">كتابة (Écriture)</option>
+                    <option value="Comportement">السلوك (Comportement)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button class="btn btn-primary" onclick="addStudent()">➕ إضافة تلميذ</button>
+            <button class="btn btn-success" onclick="addToken()">⭐ إضافة توكن (+1)</button>
+            <button class="btn btn-danger" onclick="removeToken()">⚠️ خصم توكن (-1)</button>
+            <button class="btn btn-info" onclick="exportToExcel()">📥 تصدير Excel</button>
+            <button class="btn btn-purple" onclick="exportToPDF()">📄 تصدير PDF</button>
+            <button class="btn btn-primary" onclick="showCharts()">📊 المخططات العامة</button>
+            <button class="btn btn-warning" onclick="showGenderCharts()">👥 إحصائيات الجنس</button>
+            <button class="btn btn-warning" onclick="showSubjectCharts()">📚 إحصائيات المواد</button>
+            <button class="btn btn-danger" onclick="clearData()">🗑️ مسح البيانات</button>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>إجمالي التلاميذ</h3>
+                <div class="value" id="totalStudents">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>الذكور</h3>
+                <div class="value" id="totalMales">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>الإناث</h3>
+                <div class="value" id="totalFemales">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>إجمالي التوكنز اليوم</h3>
+                <div class="value" id="totalTokensToday">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>إجمالي التوكنز الأسبوع</h3>
+                <div class="value" id="totalTokensWeek">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>متوسط التوكنز</h3>
+                <div class="value" id="averageTokens">0</div>
+            </div>
+        </div>
+        
+        <div class="activity-legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: #667eea;"></div>
+                <span>Rituels - أنشطة اعتيادية</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #48bb78;"></div>
+                <span>Interaction - تفاعل شفهي</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #4299e1;"></div>
+                <span>Compréhension - فهم المسموع</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ed8936;"></div>
+                <span>Parler - الاسترسال في الكلام</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #9f7aea;"></div>
+                <span>Lecture - قراءة</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #f56565;"></div>
+                <span>Écriture - كتابة</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #e53e3e;"></div>
+                <span>Comportement - السلوك</span>
+            </div>
+        </div>
+        
+        <div class="table-container">
+            <table id="tokenTable">
+                <thead>
+                    <tr>
+                        <th>الرقم</th>
+                        <th>اسم التلميذ</th>
+                        <th>الجنس</th>
+                        <th>اليوم</th>
+                        <th>المادة</th>
+                        <th>Rituels</th>
+                        <th>Interaction</th>
+                        <th>Compréhension</th>
+                        <th>Parler</th>
+                        <th>Lecture</th>
+                        <th>Écriture</th>
+                        <th>Comportement</th>
+                        <th>المجموع اليومي</th>
+                        <th>المجموع الأسبوعي</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="chart-container" id="chartContainer" style="display: none;">
+            <h2>📊 تحليلات الأداء</h2>
+            <div class="charts-grid" id="chartsGrid"></div>
+        </div>
+    </div>
+    
+    <!-- Modal للتعديل -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>✏️ تعديل بيانات التلميذ</h2>
+                <button class="close-btn" onclick="closeEditModal()">×</button>
+            </div>
+            <div class="controls">
+                <div class="control-group">
+                    <label>اسم التلميذ:</label>
+                    <input type="text" id="editStudentName">
+                </div>
+                <div class="control-group">
+                    <label>الجنس:</label>
+                    <select id="editGender">
+                        <option value="ذكر">ذكر</option>
+                        <option value="أنثى">أنثى</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>اليوم:</label>
+                    <select id="editDay">
+                        <option value="الإثنين">الإثنين</option>
+                        <option value="الثلاثاء">الثلاثاء</option>
+                        <option value="الأربعاء">الأربعاء</option>
+                        <option value="الخميس">الخميس</option>
+                        <option value="الجمعة">الجمعة</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>المادة:</label>
+                    <select id="editSubject">
+                        <option value="اللغة العربية">اللغة العربية</option>
+                        <option value="اللغة الفرنسية">اللغة الفرنسية</option>
+                        <option value="الرياضيات">الرياضيات</option>
+                        <option value="النشاط العلمي">النشاط العلمي</option>
+                        <option value="التربية الإسلامية">التربية الإسلامية</option>
+                    </select>
+                </div>
+            </div>
+            <div style="margin-top: 20px; display: flex; gap: 10px;">
+                <button class="btn btn-success" onclick="saveEdit()" style="flex: 1;">💾 حفظ التعديلات</button>
+                <button class="btn btn-danger" onclick="closeEditModal()" style="flex: 1;">❌ إلغاء</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal لتقرير التلميذ -->
+    <div class="modal" id="studentReportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📊 تقرير التلميذ</h2>
+                <button class="close-btn" onclick="closeStudentReportModal()">×</button>
+            </div>
+            <div id="studentReportContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let students = [];
+        let weeklyData = {};
+        let editingIndex = -1;
+        let allCharts = {};
+        
+        function addStudent() {
+            const name = document.getElementById('studentName').value.trim();
+            const gender = document.getElementById('genderSelect').value;
+            
+            if (!name) {
+                alert('⚠️ الرجاء إدخال اسم التلميذ');
+                return;
+            }
+            
+            const day = document.getElementById('daySelect').value;
+            const subject = document.getElementById('subjectSelect').value;
+            
+            const student = {
+                name: name,
+                gender: gender,
+                day: day,
+                subject: subject,
+                Rituels: 0,
+                Interaction: 0,
+                Compréhension: 0,
+                Parler: 0,
+                Lecture: 0,
+                Écriture: 0,
+                Comportement: 0,
+                dailyTotal: 0,
+                weeklyTotal: 0
+            };
+            
+            students.push(student);
+            
+            if (!weeklyData[name]) {
+                weeklyData[name] = {
+                    gender: gender,
+                    days: {},
+                    subjects: {}
+                };
+            }
+            
+            updateTable();
+            updateStats();
+            document.getElementById('studentName').value = '';
+            
+            alert('✅ تم إضافة التلميذ بنجاح!');
+        }
+        
+        function addToken() {
+            const name = document.getElementById('studentName').value.trim();
+            const day = document.getElementById('daySelect').value;
+            const activity = document.getElementById('activitySelect').value;
+            
+            if (!name) {
+                alert('⚠️ الرجاء إدخال اسم التلميذ');
+                return;
+            }
+            
+            const student = students.find(s => s.name === name && s.day === day);
+            if (student) {
+                student[activity]++;
+                updateDailyTotal(student);
+                updateWeeklyData(name);
+                updateTable();
+                updateStats();
+            } else {
+                alert('⚠️ التلميذ غير موجود في هذا اليوم. الرجاء إضافته أولاً.');
+            }
+        }
+        
+        function removeToken() {
+            const name = document.getElementById('studentName').value.trim();
+            const day = document.getElementById('daySelect').value;
+            const activity = document.getElementById('activitySelect').value;
+            
+            if (!name) {
+                alert('⚠️ الرجاء إدخال اسم التلميذ');
+                return;
+            }
+            
+            const student = students.find(s => s.name === name && s.day === day);
+            if (student) {
+                student[activity]--;
+                updateDailyTotal(student);
+                updateWeeklyData(name);
+                updateTable();
+                updateStats();
+            }
+        }
+        
+        function editStudent(index) {
+            editingIndex = index;
+            const student = students[index];
+            
+            document.getElementById('editStudentName').value = student.name;
+            document.getElementById('editGender').value = student.gender;
+            document.getElementById('editDay').value = student.day;
+            document.getElementById('editSubject').value = student.subject;
+            
+            document.getElementById('editModal').style.display = 'flex';
+        }
+        
+        function saveEdit() {
+            if (editingIndex === -1) return;
+            
+            const student = students[editingIndex];
+            student.name = document.getElementById('editStudentName').value.trim();
+            student.gender = document.getElementById('editGender').value;
+            student.day = document.getElementById('editDay').value;
+            student.subject = document.getElementById('editSubject').value;
+            
+            updateTable();
+            updateStats();
+            closeEditModal();
+            
+            alert('✅ تم تحديث البيانات بنجاح!');
+        }
+        
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+            editingIndex = -1;
+        }
+        
+        function deleteStudent(index) {
+            if (confirm('⚠️ هل أنت متأكد من حذف هذا التلميذ؟')) {
+                students.splice(index, 1);
+                updateTable();
+                updateStats();
+                alert('✅ تم حذف التلميذ بنجاح!');
+            }
+        }
+        
+        function viewStudentReport(studentName) {
+            const studentData = students.filter(s => s.name === studentName);
+            if (studentData.length === 0) return;
+            
+            const days = ['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+            
+            if (allCharts.studentDaily) allCharts.studentDaily.destroy();
+            if (allCharts.studentActivity) allCharts.studentActivity.destroy();
+            
+            const ctx1 = document.getElementById('studentDailyChart').getContext('2d');
+            allCharts.studentDaily = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: days,
+                    datasets: [{
+                        label: 'النقاط اليومية',
+                        data: dailyTotals,
+                        borderColor: '#667eea',
+                        backgroundColor: '#667eea40',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'عدد النقاط' }
+                        }
+                    }
+                }
+            });
+            
+            const activities = ['Rituels', 'Interaction', 'Compréhension', 'Parler', 'Lecture', 'Écriture', 'Comportement'];
+            const activityLabels = ['أنشطة اعتيادية', 'تفاعل شفهي', 'فهم المسموع', 'الاسترسال', 'قراءة', 'كتابة', 'السلوك'];
+            
+            const ctx2 = document.getElementById('studentActivityChart').getContext('2d');
+            allCharts.studentActivity = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: activityLabels,
+                    datasets: [{
+                        label: 'مجموع النقاط',
+                        data: activityTotals,
+                        backgroundColor: ['#667eea', '#48bb78', '#4299e1', '#ed8936', '#9f7aea', '#f56565', '#e53e3e'],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'عدد النقاط' }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function closeStudentReportModal() {
+            document.getElementById('studentReportModal').style.display = 'none';
+        }
+        
+        function updateDailyTotal(student) {
+            student.dailyTotal = student.Rituels + student.Interaction + 
+                student.Compréhension + student.Parler + 
+                student.Lecture + student.Écriture + student.Comportement;
+        }
+        
+        function updateWeeklyData(name) {
+            const studentRecords = students.filter(s => s.name === name);
+            let weeklyTotal = 0;
+            studentRecords.forEach(s => {
+                weeklyTotal += s.dailyTotal;
+            });
+            
+            studentRecords.forEach(s => {
+                s.weeklyTotal = weeklyTotal;
+            });
+        }
+        
+        function updateTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            students.forEach((student, index) => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td><strong style="cursor: pointer; color: #667eea;" onclick="viewStudentReport('${student.name}')">${student.name}</strong></td>
+                    <td><span class="gender-badge gender-${student.gender === 'ذكر' ? 'male' : 'female'}">${student.gender}</span></td>
+                    <td>${student.day}</td>
+                    <td>${student.subject}</td>
+                    <td><input type="number" class="token-input" value="${student.Rituels}" readonly></td>
+                    <td><input type="number" class="token-input" value="${student.Interaction}" readonly></td>
+                    <td><input type="number" class="token-input" value="${student.Compréhension}" readonly></td>
+                    <td><input type="number" class="token-input" value="${student.Parler}" readonly></td>
+                    <td><input type="number" class="token-input" value="${student.Lecture}" readonly></td>
+                    <td><input type="number" class="token-input" value="${student.Écriture}" readonly></td>
+                    <td><input type="number" class="token-input ${student.Comportement < 0 ? 'token-negative' : 'token-positive'}" value="${student.Comportement}" readonly></td>
+                    <td><strong class="${student.dailyTotal < 0 ? 'token-negative' : 'token-positive'}">${student.dailyTotal}</strong></td>
+                    <td><strong class="${student.weeklyTotal < 0 ? 'token-negative' : 'token-positive'}">${student.weeklyTotal}</strong></td>
+                    <td>
+                        <button class="btn btn-warning btn-small" onclick="editStudent(${index})">✏️</button>
+                        <button class="btn btn-danger btn-small" onclick="deleteStudent(${index})">🗑️</button>
+                    </td>
+                `;
+            });
+        }
+        
+        function updateStats() {
+            const uniqueStudents = {};
+            students.forEach(s => {
+                if (!uniqueStudents[s.name]) {
+                    uniqueStudents[s.name] = s.gender;
+                }
+            });
+            
+            const totalStudents = Object.keys(uniqueStudents).length;
+            const males = Object.values(uniqueStudents).filter(g => g === 'ذكر').length;
+            const females = Object.values(uniqueStudents).filter(g => g === 'أنثى').length;
+            
+            document.getElementById('totalStudents').textContent = totalStudents;
+            document.getElementById('totalMales').textContent = males;
+            document.getElementById('totalFemales').textContent = females;
+            
+            const day = document.getElementById('daySelect').value;
+            const todayTokens = students
+                .filter(s => s.day === day)
+                .reduce((sum, s) => sum + s.dailyTotal, 0);
+            document.getElementById('totalTokensToday').textContent = todayTokens;
+            
+            const weekTokens = students.reduce((sum, s) => sum + s.dailyTotal, 0);
+            document.getElementById('totalTokensWeek').textContent = weekTokens;
+            
+            const avg = totalStudents > 0 ? Math.round(weekTokens / totalStudents) : 0;
+            document.getElementById('averageTokens').textContent = avg;
+        }
+        
+        function showCharts() {
+            const chartContainer = document.getElementById('chartContainer');
+            chartContainer.style.display = 'block';
+            
+            const chartsGrid = document.getElementById('chartsGrid');
+            chartsGrid.innerHTML = `
+                <div class="chart-box">
+                    <h3 style="text-align: center; margin-bottom: 15px;">تطور التلاميذ خلال الأسبوع</h3>
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+            `;
+            
+            const studentNames = [...new Set(students.map(s => s.name))];
+            const days = ['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+            
+            const datasets = studentNames.map((name, index) => {
+                const colors = ['#667eea', '#48bb78', '#4299e1', '#ed8936', '#9f7aea', '#f56565'];
+                const data = days.map(day => {
+                    const student = students.find(s => s.name === name && s.day === day);
+                    return student ? student.dailyTotal : 0;
+                });
+                
+                return {
+                    label: name,
+                    data: data,
+                    borderColor: colors[index % colors.length],
+                    backgroundColor: colors[index % colors.length] + '20',
+                    tension: 0.4,
+                    fill: true
+                };
+            });
+            
+            if (allCharts.weekly) allCharts.weekly.destroy();
+            
+            const ctx = document.getElementById('weeklyChart').getContext('2d');
+            allCharts.weekly = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: days,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: true, position: 'top' } },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'عدد التوكنز' }
+                        }
+                    }
+                }
+            });
+            
+            chartContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function showGenderCharts() {
+            const chartContainer = document.getElementById('chartContainer');
+            chartContainer.style.display = 'block';
+            
+            const chartsGrid = document.getElementById('chartsGrid');
+            chartsGrid.innerHTML = `
+                <div class="chart-box">
+                    <h3 style="text-align: center; margin-bottom: 15px;">مقارنة الأداء حسب الجنس</h3>
+                    <canvas id="genderChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3 style="text-align: center; margin-bottom: 15px;">توزيع التوكنز حسب الجنس</h3>
+                    <canvas id="genderPieChart"></canvas>
+                </div>
+            `;
+            
+            const days = ['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+            
+            const maleData = days.map(day => {
+                return students.filter(s => s.day === day && s.gender === 'ذكر').reduce((sum, s) => sum + s.dailyTotal, 0);
+            });
+            
+            const femaleData = days.map(day => {
+                return students.filter(s => s.day === day && s.gender === 'أنثى').reduce((sum, s) => sum + s.dailyTotal, 0);
+            });
+            
+            if (allCharts.gender) allCharts.gender.destroy();
+            
+            const ctx1 = document.getElementById('genderChart').getContext('2d');
+            allCharts.gender = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: days,
+                    datasets: [
+                        { label: 'الذكور', data: maleData, backgroundColor: '#4299e1', borderWidth: 2 },
+                        { label: 'الإناث', data: femaleData, backgroundColor: '#f56565', borderWidth: 2 }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: true } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+            
+            const totalMale = students.filter(s => s.gender === 'ذكر').reduce((sum, s) => sum + s.dailyTotal, 0);
+            const totalFemale = students.filter(s => s.gender === 'أنثى').reduce((sum, s) => sum + s.dailyTotal, 0);
+            
+            if (allCharts.genderPie) allCharts.genderPie.destroy();
+            
+            const ctx2 = document.getElementById('genderPieChart').getContext('2d');
+            allCharts.genderPie = new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['الذكور', 'الإناث'],
+                    datasets: [{ data: [totalMale, totalFemale], backgroundColor: ['#4299e1', '#f56565'] }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+            
+            chartContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function showSubjectCharts() {
+            const chartContainer = document.getElementById('chartContainer');
+            chartContainer.style.display = 'block';
+            
+            const subjects = ['اللغة العربية', 'اللغة الفرنسية', 'الرياضيات', 'النشاط العلمي', 'التربية الإسلامية'];
+            const days = ['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+            
+            const chartsGrid = document.getElementById('chartsGrid');
+            chartsGrid.innerHTML = `
+                <div class="chart-box">
+                    <h3 style="text-align: center; margin-bottom: 15px;">مقارنة الأداء حسب المادة</h3>
+                    <canvas id="subjectChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3 style="text-align: center; margin-bottom: 15px;">توزيع التوكنز حسب المادة</h3>
+                    <canvas id="subjectBarChart"></canvas>
+                </div>
+            `;
+            
+            const datasets = subjects.map((subject, i) => {
+                const colors = ['#667eea', '#48bb78', '#4299e1', '#ed8936', '#9f7aea'];
+                const data = days.map(day => {
+                    return students.filter(s => s.day === day && s.subject === subject).reduce((sum, s) => sum + s.dailyTotal, 0);
+                });
+                return { label: subject, data, borderColor: colors[i], backgroundColor: colors[i] + '40', tension: 0.4 };
+            });
+            
+            if (allCharts.subject) allCharts.subject.destroy();
+            
+            const ctx1 = document.getElementById('subjectChart').getContext('2d');
+            allCharts.subject = new Chart(ctx1, {
+                type: 'line',
+                data: { labels: days, datasets },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: true } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+            
+            const subjectTotals = subjects.map(subject => {
+                return students.filter(s => s.subject === subject).reduce((sum, s) => sum + s.dailyTotal, 0);
+            });
+            
+            if (allCharts.subjectBar) allCharts.subjectBar.destroy();
+            
+            const ctx2 = document.getElementById('subjectBarChart').getContext('2d');
+            allCharts.subjectBar = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: subjects,
+                    datasets: [{ label: 'إجمالي التوكنز', data: subjectTotals, backgroundColor: ['#667eea', '#48bb78', '#4299e1', '#ed8936', '#9f7aea'] }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+            
+            chartContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function exportToExcel() {
+            if (students.length === 0) {
+                alert('⚠️ لا توجد بيانات للتصدير');
+                return;
+            }
+            
+            const ws_data = [
+                ['الرقم', 'اسم التلميذ', 'الجنس', 'اليوم', 'المادة', 'Rituels', 'Interaction', 
+                 'Compréhension', 'Parler', 'Lecture', 'Écriture', 'Comportement', 
+                 'المجموع اليومي', 'المجموع الأسبوعي']
+            ];
+            
+            students.forEach((student, index) => {
+                ws_data.push([
+                    index + 1, student.name, student.gender, student.day, student.subject,
+                    student.Rituels, student.Interaction, student.Compréhension, student.Parler,
+                    student.Lecture, student.Écriture, student.Comportement,
+                    student.dailyTotal, student.weeklyTotal
+                ]);
+            });
+            
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.aoa_to_sheet(ws_data);
+            XLSX.utils.book_append_sheet(wb, ws, 'نظام التوكنز');
+            XLSX.writeFile(wb, `نظام_التوكنز_${Date.now()}.xlsx`);
+            alert('✅ تم التصدير بنجاح!');
+        }
+        
+        async function exportToPDF() {
+            if (students.length === 0) {
+                alert('⚠️ لا توجد بيانات للتصدير');
+                return;
+            }
+            
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            
+            const element = document.querySelector('.container');
+            const canvas = await html2canvas(element, { scale: 2 });
+            const imgData = canvas.toDataURL('image/png');
+            
+            const imgWidth = 210;
+            const pageHeight = 297;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight;
+            let position = 0;
+            
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+            
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+            
+            pdf.save(`نظام_التوكنز_${Date.now()}.pdf`);
+            alert('✅ تم تصدير PDF بنجاح!');
+        }
+        
+        async function exportStudentPDF(studentName) {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            
+            const element = document.querySelector('.student-report');
+            const canvas = await html2canvas(element, { scale: 2 });
+            const imgData = canvas.toDataURL('image/png');
+            
+            const imgWidth = 210;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            
+            pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+            pdf.save(`تقرير_${studentName}_${Date.now()}.pdf`);
+            alert('✅ تم تصدير تقرير التلميذ بنجاح!');
+        }
+        
+        function clearData() {
+            if (confirm('⚠️ هل أنت متأكد من مسح جميع البيانات؟')) {
+                students = [];
+                weeklyData = {};
+                updateTable();
+                updateStats();
+                document.getElementById('chartContainer').style.display = 'none';
+                alert('✅ تم مسح البيانات!');
+            }
+        }
+    </script>
+</body>
+</html>اء', 'الخميس', 'الجمعة'];
+            const dailyTotals = days.map(day => {
+                const record = studentData.find(s => s.day === day);
+                return record ? record.dailyTotal : 0;
+            });
+            
+            const activities = ['Rituels', 'Interaction', 'Compréhension', 'Parler', 'Lecture', 'Écriture', 'Comportement'];
+            const activityTotals = activities.map(activity => {
+                return studentData.reduce((sum, s) => sum + s[activity], 0);
+            });
+            
+            const totalTokens = studentData.reduce((sum, s) => sum + s.dailyTotal, 0);
+            const gender = studentData[0].gender;
+            
+            const reportHTML = `
+                <div class="student-report">
+                    <div class="student-header">
+                        <h2>${studentName}</h2>
+                        <p>الجنس: <span class="gender-badge gender-${gender === 'ذكر' ? 'male' : 'female'}">${gender}</span></p>
+                        <p style="margin-top: 10px; font-size: 1.2em;">إجمالي التوكنز: <strong>${totalTokens}</strong></p>
+                    </div>
+                    
+                    <div class="report-charts">
+                        <div class="chart-box">
+                            <h3 style="text-align: center; margin-bottom: 15px;">تطور النقاط اليومية</h3>
+                            <canvas id="studentDailyChart"></canvas>
+                        </div>
+                        
+                        <div class="chart-box">
+                            <h3 style="text-align: center; margin-bottom: 15px;">توزيع النقاط حسب الأنشطة</h3>
+                            <canvas id="studentActivityChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; text-align: center;">
+                        <button class="btn btn-purple" onclick="exportStudentPDF('${studentName}')">📄 تصدير تقرير PDF</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('studentReportContent').innerHTML = reportHTML;
+            document.getElementById('studentReportModal').style.display = 'flex';
+            
+            setTimeout(() => {
+                createStudentCharts(dailyTotals, activityTotals);
+            }, 100);
+        }
+        
+        function createStudentCharts(dailyTotals, activityTotals) {
+            const days = ['الإثنين', 'الثلاثاء', 'الأربع
