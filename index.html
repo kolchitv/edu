@@ -162,12 +162,17 @@
             padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center; border: 2px solid transparent;
             display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
         }
-        .status-good { background-color: #e8f8f5; border-color: #27ae60; color: #27ae60; }
-        .status-bad { background-color: #fdedec; border-color: #c0392b; color: #c0392b; }
+        .status-good { background-color: #e8f8f5; border-color: #27ae60; color: #2d3436; }
+        .status-bad { background-color: #fdedec; border-color: #c0392b; color: #2d3436; }
         
-        .status-icon { font-size: 4rem; line-height: 1; }
+        .status-icon { font-size: 4rem; line-height: 1; margin: 10px 0; }
         .status-title { font-size: 1.5rem; font-weight: 900; margin: 0; }
         .status-advice { font-size: 1.1rem; font-weight: 600; font-style: italic; }
+
+        .general-level-report {
+            width: 100%; text-align: center; padding-bottom: 15px; margin-bottom: 15px; border-bottom: 2px dashed rgba(0,0,0,0.1);
+        }
+        .general-level-text { font-size: 1.4rem; font-weight: 900; color: var(--primary); }
 
         /* Sharing Section */
         .share-section {
@@ -773,28 +778,61 @@
             document.getElementById('pTotal').innerText = getGrandTotal(s);
             document.getElementById('pAbsences').innerText = s.absences;
 
-            // Behavior Logic (French)
-            const behaviorBox = document.getElementById('behaviorAnalysisBox');
+            // 1. حساب نقاط السلوك فقط (Strict Behavior Score)
             let behaviorScore = 0;
             behaviorSkills.forEach(skill => {
-                behaviorScore += (s.scores[skill.id] * skill.val);
+                const score = s.scores[skill.id] || 0;
+                behaviorScore += (score * skill.val);
             });
 
+            // 2. حساب التقييم العام (General Level - based on Grand Total)
+            const grandTotal = getGrandTotal(s);
+            let generalGradeAr = "ضعيف";
+            let generalGradeFr = "Faible";
+            let gradeColor = "var(--danger)";
+
+            if (grandTotal >= 10) {
+                generalGradeAr = "ممتاز";
+                generalGradeFr = "Excellent";
+                gradeColor = "var(--success)";
+            } else if (grandTotal > 0) {
+                generalGradeAr = "جيد";
+                generalGradeFr = "Bien";
+                gradeColor = "var(--accent)";
+            }
+
+            // Behavior Logic (Visual Feedback based ONLY on behaviorScore)
+            const behaviorBox = document.getElementById('behaviorAnalysisBox');
+            let behaviorHtml = '';
+
             if (behaviorScore >= 0) {
+                // Good Behavior
                 behaviorBox.className = 'behavior-status-box status-good';
-                behaviorBox.innerHTML = `
+                behaviorHtml = `
+                    <div class="general-level-report">
+                        <div style="font-size:0.9rem; color:#7f8c8d;">المستوى العام / Niveau Général</div>
+                        <div class="general-level-text" style="color:${gradeColor}">${generalGradeAr} - ${generalGradeFr}</div>
+                    </div>
                     <div class="status-icon">😃</div>
-                    <div class="status-title">Bon Comportement</div>
+                    <div class="status-title">Bon Comportement (Points: ${behaviorScore})</div>
                     <div class="status-advice">"Bravo ! Excellent travail, continue tes efforts."</div>
+                    <div style="font-size:0.9rem; color:#27ae60; margin-top:5px; font-weight:bold;">سلوك جيد، استمر في الاجتهاد</div>
                 `;
             } else {
+                // Bad Behavior
                 behaviorBox.className = 'behavior-status-box status-bad';
-                behaviorBox.innerHTML = `
+                behaviorHtml = `
+                    <div class="general-level-report">
+                        <div style="font-size:0.9rem; color:#7f8c8d;">المستوى العام / Niveau Général</div>
+                        <div class="general-level-text" style="color:${gradeColor}">${generalGradeAr} - ${generalGradeFr}</div>
+                    </div>
                     <div class="status-icon">😡</div>
-                    <div class="status-title">Attention au Comportement</div>
-                    <div class="status-advice">"Attention ! Tu dois améliorer ton comportement en classe."</div>
+                    <div class="status-title">Attention au Comportement (Points: ${behaviorScore})</div>
+                    <div class="status-advice">"Attention ! Tu dois améliorer ton comportement."</div>
+                    <div style="font-size:0.9rem; color:#c0392b; margin-top:5px; font-weight:bold;">انتبه! يجب عليك تحسين سلوكك</div>
                 `;
             }
+            behaviorBox.innerHTML = behaviorHtml;
 
             // Generate QR
             document.getElementById('qrcode').innerHTML = "";
