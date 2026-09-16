@@ -1,1065 +1,270 @@
 <!DOCTYPE html>
-<html lang="fr" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Système de Jetons - Prof Said (Desktop)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <!-- Librairies Externes -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    
-    <style>
-        :root {
-            --bg-color: #f0f2f5;
-            --primary: #2c3e50;
-            --accent: #3498db;
-            --success: #27ae60;
-            --danger: #e74c3c;
-            --warning: #f39c12;
-            --text-dark: #2c3e50;
-            --girl: #fd79a8;
-            --boy: #0984e3;
-            --homework-paper: #fffcf0;
-            --homework-line: #e3e3e3;
-        }
-
-        * { font-family: 'Cairo', sans-serif !important; box-sizing: border-box; }
-
-        body {
-            background: var(--bg-color);
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            color: var(--text-dark);
-        }
-
-        /* --- Landing Page Styles --- */
-        #schoolSelectionPage {
-            max-width: 1400px; margin: 0 auto;
-            text-align: center; padding: 40px 20px;
-        }
-        .landing-header h1 { font-size: 3rem; color: var(--primary); margin-bottom: 10px; }
-        .landing-header p { font-size: 1.2rem; color: #7f8c8d; margin-bottom: 50px; }
-        
-        .schools-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;
-        }
-        
-        .school-card {
-            background: white; border-radius: 20px; overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 2px solid transparent; text-align: left;
-            display: flex; flex-direction: column;
-            position: relative;
-        }
-        .school-card:hover {
-            transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-            border-color: var(--accent);
-        }
-        .school-card-header {
-            padding: 20px; color: white; position: relative;
-        }
-        .school-card-header h3 { margin: 0; font-size: 1.3rem; line-height: 1.4; font-weight: 800; }
-        .school-card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; gap: 10px; font-size: 0.95rem; color: #555; }
-        .school-info-item { display: flex; align-items: flex-start; gap: 10px; }
-        .school-badge { 
-            background: rgba(255,255,255,0.2); color: white; padding: 5px 10px; 
-            border-radius: 15px; font-size: 0.8rem; position: absolute; top: 20px; right: 20px;
-            backdrop-filter: blur(5px);
-        }
-        
-        .subgroup-buttons { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; margin-top: 15px; }
-        .btn-subgroup {
-            padding: 8px 5px; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: bold;
-            cursor: pointer; color: white; transition: 0.2s; text-align: center;
-        }
-        .btn-subgroup:hover { transform: scale(1.05); }
-        .btn-enter-school {
-            background: var(--primary); color: white; border: none; width: 100%; padding: 12px;
-            border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px;
-            transition: 0.2s; font-size: 1rem;
-        }
-        .btn-enter-school:hover { background: #34495e; }
-
-        /* --- Main App --- */
-        #mainApp { display: none; }
-
-        .main-container {
-            max-width: 1600px; margin: 0 auto; background: #ffffff;
-            border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            padding: 30px; min-height: 90vh;
-        }
-
-        .header {
-            display: flex; justify-content: space-between; align-items: flex-start;
-            gap: 20px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 2px solid #f1f2f6;
-        }
-        .header h1 { margin: 0; color: var(--primary); font-size: 1.8rem; font-weight: 900; }
-        .back-home-btn { background: #95a5a6; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-
-        /* Map */
-        .map-container {
-            width: 100%; height: 250px; background: #eee; border-radius: 15px; overflow: hidden;
-            margin-bottom: 25px; border: 1px solid #ddd; position: relative;
-        }
-        .map-frame { width: 100%; height: 100%; border: 0; }
-        
-        /* Add Student Area */
-        .add-student-area {
-            display: flex; gap: 10px; background: #f8f9fa; padding: 15px;
-            border: 1px solid #dfe6e9; border-radius: 12px; align-items: flex-end;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02); margin-bottom: 20px;
-        }
-        .input-group { display: flex; flex-direction: column; gap: 5px; flex: 1; }
-        .input-label { font-size: 0.8rem; color: #7f8c8d; font-weight: bold; }
-        .input-student, .select-gender, .select-school, .input-date { 
-            padding: 10px; border: 1px solid #bdc3c7; border-radius: 8px; font-weight: 600; width: 100%;
-        }
-        .btn-add { 
-            background: var(--accent); color: white; border: none; padding: 10px 20px; 
-            border-radius: 8px; cursor: pointer; font-weight: bold; height: 42px; min-width: 100px;
-            transition: 0.2s;
-        }
-        .btn-add:hover { background: #2980b9; transform: translateY(-2px); }
-
-        /* Controls */
-        .control-row {
-            display: flex; justify-content: space-between; align-items: center; 
-            background: #fff; padding: 15px; border-radius: 15px; border: 1px solid #e1e1e1; margin-bottom: 25px;
-        }
-        .subgroup-select {
-            padding: 10px 15px; border: 2px solid var(--accent); border-radius: 8px;
-            font-weight: bold; font-size: 1rem; color: var(--accent); min-width: 250px;
-            background-color: #f0f8ff; cursor: pointer;
-        }
-        .control-buttons { display: flex; gap: 15px; }
-        .btn-action { 
-            padding: 10px 25px; border: none; border-radius: 8px; cursor: pointer; color: white; 
-            font-weight: bold; font-size: 1rem; transition: 0.2s; display: flex; align-items: center; gap: 8px;
-        }
-        .btn-save { background: var(--success); }
-        .btn-reset { background: var(--danger); }
-
-        /* --- Tabs --- */
-        .tabs { display: flex; gap: 15px; margin-bottom: 25px; padding: 5px; border-bottom: 2px solid #f1f2f6; overflow-x: auto;}
-        .tab-btn {
-            padding: 12px 30px; border: none; background: transparent; border-radius: 10px 10px 0 0;
-            cursor: pointer; font-weight: 700; color: var(--text-light); transition: 0.2s; font-size: 1.1rem;
-            border-bottom: 3px solid transparent; white-space: nowrap;
-        }
-        .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); background: #f8f9fa; }
-
-        /* --- HOMEWORK PAGE STYLES (NEW) --- */
-        .homework-notebook {
-            background-color: var(--homework-paper);
-            background-image: linear-gradient(var(--homework-line) 1px, transparent 1px);
-            background-size: 100% 2.5rem; /* Line height */
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 20px 40px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            min-height: 500px;
-            position: relative;
-        }
-        .homework-notebook::before {
-            content: ''; position: absolute; left: 30px; top: 0; bottom: 0;
-            width: 2px; background: #ffaaaa; /* Red margin line */
-        }
-        #homeworkTextarea {
-            width: 100%; height: 100%; min-height: 450px;
-            background: transparent; border: none; outline: none;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1.3rem; line-height: 2.5rem;
-            color: #2c3e50; resize: none;
-            padding-left: 20px;
-        }
-        .homework-info {
-            text-align: center; color: #7f8c8d; margin-top: 10px; font-style: italic;
-        }
-
-        /* --- Profile Split Layout --- */
-        .profile-layout { display: flex; gap: 30px; align-items: flex-start; }
-        .profile-sidebar {
-            flex: 1; min-width: 300px; position: sticky; top: 20px;
-            background: #f8f9fa; padding: 20px; border-radius: 15px; border: 1px solid #eee;
-            display: flex; flex-direction: column; gap: 20px;
-        }
-        .profile-preview {
-            flex: 2; display: flex; justify-content: center;
-            background: #555; padding: 20px; border-radius: 15px; overflow-x: auto;
-        }
-        
-        .school-filter-select {
-            padding: 10px 15px; border: 2px solid var(--primary); border-radius: 8px;
-            font-weight: bold; font-size: 1rem; color: var(--primary); width: 100%;
-        }
-
-        /* Report Card */
-        #reportCard { 
-            background: white !important; padding: 40px; width: 210mm; min-height: 297mm; 
-            margin: 0; box-shadow: 0 0 20px rgba(0,0,0,0.5); 
-            color: black !important; position: relative; transform-origin: top center;
-        }
-        .report-header { display: flex; justify-content: space-between; border-bottom: 3px solid #2c3e50; padding-bottom: 20px; margin-bottom: 30px; }
-        .daily-report-table { width: 100%; border-collapse: collapse; margin-top: 25px; border: 2px solid #2c3e50; }
-        .daily-report-table th, .daily-report-table td { border: 1px solid #7f8c8d; padding: 8px; text-align: center; font-size: 0.9rem; }
-        .daily-report-table th { background: #ecf0f1; font-weight: 800; border-bottom: 2px solid #2c3e50; }
-
-        .report-homework-box {
-            margin-top: 20px; padding: 15px; border: 2px dashed #f39c12; background: #fffdf5;
-            border-radius: 10px;
-        }
-        .report-homework-box h4 { margin: 0 0 5px 0; color: #d35400; text-transform: uppercase; font-size: 0.9rem; }
-        .report-homework-text { font-family: 'Courier New', monospace; white-space: pre-wrap; font-size: 1rem; color: #333; }
-        
-        /* Grid & Components */
-        .student-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
-        .student-card { background: white; border: 1px solid #eee; border-radius: 16px; padding: 20px; transition: all 0.3s ease; position: relative; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-        .student-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--accent); }
-        .student-card.girl { border-top: 5px solid var(--girl); }
-        .student-card.boy { border-top: 5px solid var(--boy); }
-        .student-card.absent { opacity: 0.6; filter: grayscale(100%); background: #f9f9f9; }
-        .student-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
-        .student-name { font-size: 1.3rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
-        .total-badge { background: var(--primary); color: white; padding: 5px 15px; border-radius: 20px; font-weight: 900; font-size: 1.5rem; min-width: 60px; text-align: center; }
-        .skill-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; background: #fff; padding: 5px; border-radius: 5px; border: 1px solid #f0f0f0; }
-        .btn-control { width: 30px; height: 30px; border-radius: 6px; border: none; cursor: pointer; font-weight: bold; transition:0.2s; }
-        .btn-minus { background: #ecf0f1; color: #7f8c8d; }
-        .btn-plus { background: var(--success); color: white; }
-        .behavior-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 15px; }
-        .behavior-btn { border: 1px solid #eee; border-radius: 8px; cursor: pointer; padding: 8px 2px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 65px; text-align: center; font-size: 0.75rem; transition: 0.2s; position: relative; }
-        .behavior-counter { position: absolute; top: -5px; right: -5px; background: #2c3e50; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
-        
-        .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
-        .kpi-card { background: white; padding: 25px; border-radius: 15px; text-align: center; border: 1px solid #eee; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
-        .kpi-card .value { font-size: 2.5rem; font-weight: 900; color: var(--primary); margin-top: 10px; }
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 30px; }
-        .chart-container { background: white; padding: 20px; border-radius: 15px; border: 1px solid #eee; min-height: 400px; }
-        .school-ranking-list { list-style: none; padding: 0; }
-        .school-rank-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; margin-bottom: 10px; border-radius: 8px; border: 1px solid #eee; }
-        .attendance-switch { position: relative; display: inline-block; width: 50px; height: 26px; }
-        .attendance-switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
-        .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: var(--success); }
-        input:checked + .slider:before { transform: translateX(24px); }
-        .content-section { display: none; }
-        .podium-container { display: flex; justify-content: center; align-items: flex-end; gap: 20px; height: 250px; margin-bottom: 40px; }
-        .podium-place { text-align: center; width: 120px; position: relative; }
-        .podium-bar { width: 100%; border-radius: 10px 10px 0 0; color: white; font-weight: bold; padding-top: 10px; font-size: 1.5rem; }
-        .rank-1 .podium-bar { height: 180px; background: linear-gradient(to bottom, #f1c40f, #f39c12); }
-        .rank-2 .podium-bar { height: 130px; background: linear-gradient(to bottom, #bdc3c7, #95a5a6); }
-        .rank-3 .podium-bar { height: 90px; background: linear-gradient(to bottom, #e67e22, #d35400); }
-        .crown { font-size: 3rem; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-10px); } }
-        .rank-row-1 { background-color: #fffde7 !important; border: 2px solid #fbc02d; font-size: 1.1rem; font-weight: bold; }
-        .rank-row-2 { background-color: #f5f5f5 !important; border: 2px solid #95a5a6; font-size: 1.05rem; font-weight: bold; }
-        .rank-row-3 { background-color: #fff3e0 !important; border: 2px solid #e67e22; font-size: 1.05rem; font-weight: bold; }
-        .medal-icon { font-size: 1.8rem; display: inline-block; }
-        .profile-charts-row { display: flex; gap: 20px; margin-bottom: 20px; height: 250px; }
-        .profile-chart-box { flex: 1; border: 1px solid #eee; border-radius: 10px; padding: 10px; position: relative; }
-        .profile-chart-box h4 { text-align: center; margin: 0 0 10px 0; font-size: 0.95rem; color: #2c3e50; }
-        .competence-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px dashed #ccc; }
-        .stat-item { display: flex; justify-content: space-between; align-items: center; padding: 8px; border-radius: 6px; border: 1px solid #eee; background: white; }
-        .stat-label { font-weight: bold; font-size: 0.85rem; }
-        .stat-val-box { display: flex; gap: 10px; align-items: center; }
-        .stat-score { font-weight: 900; font-size: 1.1rem; color: var(--primary); }
-        .stat-badge { font-size: 0.75rem; padding: 3px 8px; border-radius: 12px; color: white; font-weight: bold; min-width: 70px; text-align: center; }
-        .badge-none { background: #95a5a6; }
-        .badge-encours { background: #f39c12; }
-        .badge-acquis { background: #27ae60; }
-        .badge-expert { background: #8e44ad; }
-        .stat-item.behavior-positive { border: 1px solid #27ae60; background-color: #eafaf1; }
-        .stat-item.behavior-negative { border: 1px solid #c0392b; background-color: #fdedec; color: #c0392b; }
-        .stat-comment { font-size: 0.8rem; font-weight: 600; color: #555; max-width: 140px; text-align: right; line-height: 1.2; }
-        .stat-item.behavior-negative .stat-comment { color: #c0392b; }
-        .edit-profile-btn { background: #3498db; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; margin-left: 10px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAID EILE • تعلّم العربية للأطفال</title>
+  <meta name="description" content="منصة SAID EILE لتعلّم اللغة العربية للأطفال الناطقين بالفرنسية — المستوى A1 وA2.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fredoka:wght@400;600;700&family=Noto+Naskh+Arabic:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#17324d;
+      --muted:#60758a;
+      --sky:#0284c7;
+      --sky-dark:#075985;
+      --green:#059669;
+      --green-dark:#065f46;
+      --gold:#f59e0b;
+      --cream:#fffaf0;
+      --white:#fff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:'Cairo',system-ui,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 8% 12%, rgba(125,211,252,.32), transparent 25%),
+        radial-gradient(circle at 92% 18%, rgba(110,231,183,.28), transparent 24%),
+        linear-gradient(135deg,#f8fbff 0%,#eef9ff 48%,#f0fdf4 100%);
+      overflow-x:hidden;
+    }
+    .font-fr{font-family:'Fredoka',system-ui,sans-serif}
+    .font-ar{font-family:'Noto Naskh Arabic',serif}
+    .top{
+      background:linear-gradient(100deg,#082f49,#0f766e,#064e3b);
+      color:#fff;
+      padding:10px 20px;
+    }
+    .top-inner{
+      max-width:1100px;margin:auto;display:flex;justify-content:space-between;
+      gap:15px;align-items:center;font-size:13px;
+    }
+    .brand-mini{display:flex;align-items:center;gap:9px;font-weight:900}
+    .brand-mini .flag{font-size:20px}
+    .brand-mini .name{color:#fde68a;letter-spacing:1px}
+    .badge{
+      background:#fbbf24;color:#172033;border:1px solid #fde68a;
+      padding:4px 10px;border-radius:999px;font-weight:900;font-size:11px;
+    }
+    main{max-width:1100px;margin:auto;padding:30px 18px 50px}
+    .hero{text-align:center;padding:20px 10px 18px}
+    .logo{
+      width:76px;height:76px;margin:0 auto 13px;border-radius:24px;
+      display:grid;place-items:center;font-size:39px;
+      background:linear-gradient(135deg,#0ea5e9,#047857);
+      box-shadow:0 14px 30px rgba(3,105,161,.18);
+    }
+    h1{margin:0;font-size:clamp(30px,6vw,52px);font-weight:900;color:#0f3550}
+    .hero h1 span{display:inline-block}
+    .hero p{
+      margin:8px auto 0;max-width:680px;color:var(--muted);
+      font-size:clamp(14px,2vw,18px);font-weight:700;
+    }
+    .stars{margin-top:12px;color:#b45309;font-weight:900;font-size:14px}
+    .levels{
+      display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;
+      margin-top:28px;
+    }
+    .card{
+      position:relative;overflow:hidden;text-decoration:none;color:inherit;
+      background:rgba(255,255,255,.93);border:2px solid transparent;
+      border-radius:30px;padding:26px;min-height:300px;
+      box-shadow:0 16px 40px rgba(15,50,75,.10);
+      transition:.22s ease;display:flex;flex-direction:column;
+    }
+    .card:hover{transform:translateY(-7px);box-shadow:0 22px 50px rgba(15,50,75,.16)}
+    .card:active{transform:scale(.99)}
+    .a1{border-color:#bae6fd}
+    .a2{border-color:#a7f3d0}
+    .orb{
+      position:absolute;width:150px;height:150px;border-radius:50%;right:-45px;top:-55px;opacity:.16
+    }
+    .a1 .orb{background:#0284c7}
+    .a2 .orb{background:#059669}
+    .level-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .level{
+      width:68px;height:68px;border-radius:22px;color:white;display:grid;place-items:center;
+      font-family:'Fredoka',sans-serif;font-size:25px;font-weight:900;box-shadow:0 9px 18px rgba(0,0,0,.12)
+    }
+    .a1 .level{background:linear-gradient(135deg,#0284c7,#0369a1)}
+    .a2 .level{background:linear-gradient(135deg,#059669,#047857)}
+    .age{font-size:11px;font-weight:900;padding:6px 10px;border-radius:999px;background:#f1f5f9;color:#475569}
+    .card h2{margin:18px 0 3px;font-size:25px;font-weight:900}
+    .card .fr{font-family:'Fredoka',sans-serif;font-weight:700;color:#64748b;font-size:15px}
+    .desc{font-size:13px;line-height:1.9;color:#52677a;margin:13px 0 15px}
+    .features{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto}
+    .feature{font-size:11px;font-weight:800;padding:6px 9px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0}
+    .go{
+      margin-top:18px;width:100%;border:0;border-radius:16px;padding:12px 15px;
+      color:white;font-family:'Cairo',sans-serif;font-weight:900;font-size:14px;
+    }
+    .a1 .go{background:linear-gradient(100deg,#0284c7,#0369a1)}
+    .a2 .go{background:linear-gradient(100deg,#059669,#047857)}
+    .hint{
+      text-align:center;margin:25px auto 0;max-width:700px;
+      background:rgba(255,255,255,.72);border:1px solid #dbeafe;border-radius:18px;
+      padding:12px 15px;color:#60758a;font-size:12px;font-weight:700
+    }
+    footer{text-align:center;padding:0 18px 25px;color:#718096;font-size:11px;font-weight:700}
+    @media(max-width:720px){
+      .top-inner{justify-content:center}
+      .top-inner .right{display:none}
+      main{padding-top:20px}
+      .levels{grid-template-columns:1fr}
+      .card{min-height:270px;padding:22px}
+      .hero{padding-top:10px}
+    }
+  </style>
 </head>
 <body>
+  <div class="top">
+    <div class="top-inner">
+      <div class="brand-mini">
+        <span class="flag">🇲🇦</span>
+        <span class="name font-fr">SAID EILE</span>
+        <span>•</span>
+        <span class="font-ar">العَرَبِيَّةُ</span>
+      </div>
+      <div class="right">
+        <span>منصة تعلّم العربية للأطفال الناطقين بالفرنسية</span>
+        <span class="badge font-fr">CECRL</span>
+      </div>
+    </div>
+  </div>
 
-    <!-- 1. LANDING PAGE -->
-    <div id="schoolSelectionPage">
-        <div class="landing-header">
-            <h1>💎 Espace Professeur Said</h1>
-            <p>Sélectionnez votre établissement pour accéder à la gestion de classe</p>
+  <main>
+    <section class="hero">
+      <div class="logo">🏫</div>
+      <h1>
+        <span class="font-ar">مَرْحَبًا بِكَ فِي مَنْصَّةِ العَرَبِيَّةِ</span>
+      </h1>
+      <p>اختر مستواك وابدأ رحلة تعلّم العربية بطريقة تفاعلية وممتعة ⭐</p>
+      <div class="stars">🎧 استمع • 📖 اقرأ • ✍️ اكتب • 🏆 تعلّم والعب</div>
+    </section>
+
+    <section class="levels" aria-label="مستويات تعلم العربية">
+      <a class="card a1" href="a1.html" aria-label="الانتقال إلى المستوى الأول A1">
+        <div class="orb"></div>
+        <div class="level-row">
+          <div class="level">A1</div>
+          <div class="age">المستوى الأول</div>
         </div>
-        <div class="schools-grid" id="schoolsGrid"></div>
+        <h2 class="font-ar">المستوى الأوّل</h2>
+        <div class="fr">Niveau A1 • Débutant</div>
+        <p class="desc">
+          البداية مع الحروف والكلمات والتعريف بالنفس والحياة المدرسية،
+          مع أنشطة تفاعلية للاستماع والقراءة والكتابة.
+        </p>
+        <div class="features">
+          <span class="feature">🔤 الحروف</span>
+          <span class="feature">🗣️ التواصل</span>
+          <span class="feature">✍️ الكتابة والخط</span>
+          <span class="feature">🎮 ألعاب تفاعلية</span>
+        </div>
+        <button class="go">🚀 ابدأ المستوى A1</button>
+      </a>
+
+      <a class="card a2" href="a2.html" aria-label="الانتقال إلى المستوى الثاني A2">
+        <div class="orb"></div>
+        <div class="level-row">
+          <div class="level">A2</div>
+          <div class="age">المستوى الثاني</div>
+        </div>
+        <h2 class="font-ar">المستوى الثّاني</h2>
+        <div class="fr">Niveau A2 • Progression</div>
+        <p class="desc">
+          تطوير التعبير الشفوي والقراءة والفهم والتراكيب والإملاء،
+          مع الثقافة المغربية والتطبيقات الكتابية والتقويم.
+        </p>
+        <div class="features">
+          <span class="feature">🗣️ التعبير</span>
+          <span class="feature">📖 القراءة</span>
+          <span class="feature">🧩 التراكيب</span>
+          <span class="feature">🏆 التقويم</span>
+        </div>
+        <button class="go">🚀 ابدأ المستوى A2</button>
+      </a>
+    </section>
+
+    <div class="hint">💡 اضغط على المستوى المناسب للانتقال مباشرة إلى صفحة الدروس.</div>
+  </main>
+
+  
+<section class="max-w-6xl mx-auto px-4 pb-16">
+  <div class="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+    <div class="p-7 md:p-10 text-center">
+      <div class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full font-bold mb-4">
+        🌍 CEFR • Cadre européen commun de référence
+      </div>
+      <h2 class="text-2xl md:text-3xl font-black text-slate-800 mb-4">
+        برنامج تعلّم العربية وفق الإطار الأوروبي المرجعي للغات
+      </h2>
+      <p class="text-slate-600 leading-8 max-w-4xl mx-auto" dir="rtl">
+        يعتمد هذا البرنامج على مستويات <strong>الإطار الأوروبي المشترك المرجعي للغات (CEFR)</strong>،
+        وهو إطار معترف به دوليًا لوصف مستويات الكفاءة في اللغات، مع تطوير مهارات
+        <strong>الاستماع والتحدث والقراءة والكتابة</strong>.
+      </p>
+      <p class="text-slate-600 leading-8 max-w-4xl mx-auto mt-3" dir="ltr">
+        Notre programme d’apprentissage de l’arabe s’inscrit dans le
+        <strong>Cadre européen commun de référence pour les langues (CECRL / CEFR)</strong>,
+        un cadre reconnu internationalement pour décrire les niveaux de compétence
+        en langues et développer les quatre compétences : <strong>compréhension orale,
+        expression orale, compréhension écrite et expression écrite</strong>.
+      </p>
     </div>
 
-    <!-- 2. MAIN APP -->
-    <div id="mainApp" class="main-container">
-        <!-- Header -->
-        <div class="header">
-            <div>
-                <button class="back-home-btn" onclick="goBackHome()">⬅ Retour aux écoles</button>
-                <h1 style="margin-top:10px;">Gestion: <span id="currentSchoolDisplay" style="color:var(--accent)">-</span></h1>
-                <p style="color:#7f8c8d;">Version Ordinateur v54</p>
-            </div>
-            
-            <div class="add-student-area">
-                <input type="hidden" id="editIndex" value="-1">
-                <div class="input-group">
-                    <label class="input-label">Nom</label>
-                    <input type="text" id="studentName" class="input-student" placeholder="Nom...">
-                </div>
-                <div class="input-group" style="flex:0.6">
-                    <label class="input-label">Sexe</label>
-                    <select id="studentGender" class="select-gender">
-                        <option value="boy">Garçon 👦</option>
-                        <option value="girl">Fille 👧</option>
-                    </select>
-                </div>
-                <input type="hidden" id="studentSchool"> 
-                <div class="input-group">
-                    <label class="input-label">Naissance</label>
-                    <input type="date" id="studentBirth" class="input-date">
-                </div>
-                <div style="display:flex; gap:5px;">
-                    <button id="addBtn" class="btn-add" onclick="handleStudentSubmit()">Ajouter</button>
-                    <button id="cancelEditBtn" class="btn-add" onclick="cancelEdit()" style="display: none; background: #95a5a6;">Annuler</button>
-                </div>
-            </div>
+    <div class="bg-slate-50 px-5 md:px-10 py-8">
+      <h3 class="text-xl font-black text-slate-800 text-center mb-7">
+        📊 Les 6 niveaux du CECRL / مستويات CEFR الستة
+      </h3>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-2xl p-5 border border-blue-100">
+          <div class="font-black text-blue-700 text-lg mb-2">A1 — Débutant</div>
+          <p class="text-sm text-slate-600 leading-7">Comprendre et utiliser des expressions quotidiennes simples et des phrases de base.</p>
+          <p dir="rtl" class="text-sm text-slate-600 leading-7 mt-2">فهم واستخدام التعبيرات اليومية البسيطة والعبارات الأساسية.</p>
         </div>
-
-        <!-- DASHBOARD MAP -->
-        <div id="schoolMapContainer" class="map-container" style="display:none;">
-            <iframe id="schoolMapFrame" class="map-frame" src="" allowfullscreen="" loading="lazy"></iframe>
+        <div class="bg-white rounded-2xl p-5 border border-blue-100">
+          <div class="font-black text-blue-700 text-lg mb-2">A2 — Élémentaire</div>
+          <p class="text-sm text-slate-600 leading-7">Comprendre des phrases et expressions courantes liées aux situations de la vie quotidienne.</p>
+          <p dir="rtl" class="text-sm text-slate-600 leading-7 mt-2">فهم الجمل والتعابير الشائعة المرتبطة بالمجالات المباشرة.</p>
         </div>
-
-        <!-- Tabs -->
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('dashboard', this)">🏠 Accueil</button>
-            <button class="tab-btn" onclick="switchTab('ranking', this)">🏆 Classement</button>
-            <button class="tab-btn" onclick="switchTab('analytics', this)">📊 Statistiques</button>
-            <button class="tab-btn" onclick="switchTab('homeworkPage', this)">📝 Devoirs</button>
-            <button class="tab-btn" onclick="switchTab('profile', this)">📄 Profil & PDF</button>
-            <button class="tab-btn" onclick="switchTab('records', this)">📅 Historique</button>
+        <div class="bg-white rounded-2xl p-5 border border-amber-100">
+          <div class="font-black text-amber-700 text-lg mb-2">B1 — Intermédiaire</div>
+          <p class="text-sm text-slate-600 leading-7">Faire face à la plupart des situations courantes et comprendre l’essentiel de sujets familiers.</p>
+          <p dir="rtl" class="text-sm text-slate-600 leading-7 mt-2">التعامل مع معظم المواقف المألوفة وفهم النقاط الرئيسية في المواضيع المعتادة.</p>
         </div>
-
-        <!-- Controls -->
-        <div class="control-row">
-            <div style="display:flex; align-items:center; gap:10px;">
-                <span style="font-weight:bold; color:var(--primary);">Classe active :</span>
-                <span id="activeFilterLabel" style="font-weight:bold; color:var(--accent); font-size:1.1rem; display:none;">-</span>
-                <select id="parcSubGroupSelector" class="subgroup-select" style="display:none;" onchange="updateParcSubGroup()">
-                    <option value="Lundi parc artigues">🔵 Groupe Lundi</option>
-                    <option value="Mardi parc artigues">🟣 Groupe Mardi</option>
-                    <option value="Mercredi parc artigues">🟠 Groupe Mercredi</option>
-                </select>
-            </div>
-            <div class="control-buttons">
-                <button class="btn-action btn-save" onclick="saveDay()">💾 Sauvegarder la journée</button>
-                <button class="btn-action btn-reset" onclick="resetAll()">🔄 Réinitialiser</button>
-            </div>
+        <div class="bg-white rounded-2xl p-5 border border-amber-100">
+          <div class="font-black text-amber-700 text-lg mb-2">B2 — Intermédiaire supérieur</div>
+          <p class="text-sm text-slate-600 leading-7">Comprendre les idées principales de textes complexes et communiquer avec aisance.</p>
+          <p dir="rtl" class="text-sm text-slate-600 leading-7 mt-2">فهم الأفكار الرئيسية في النصوص المعقدة والتحدث بطلاقة وتلقائية.</p>
         </div>
-
-        <!-- DASHBOARD -->
-        <div id="dashboard" class="content-section" style="display:block;">
-            <div id="podiumDisplay" class="podium-container" style="display:none;"></div>
-            <div class="student-grid" id="studentsContainer"></div>
-            <div id="emptyState" style="text-align: center; color: #999; display: none; padding: 40px;">
-                <h3>La liste est vide. Ajoutez des élèves ci-dessus. 🎒</h3>
-            </div>
+        <div class="bg-white rounded-2xl p-5 border border-violet-100">
+          <div class="font-black text-violet-700 text-lg mb-2">C1 — Avancé</div>
+          <p class="text-sm text-slate-600 leading-7">Comprendre une large gamme de textes exigeants et s’exprimer avec souplesse et aisance.</p>
+          <p dir="rtl" class="text-sm text-slate-600 leading-7 mt-2">فهم مجموعة واسعة من النصوص الصعبة والتعبير بمرونة وطلاقة.</p>
         </div>
-
-        <!-- RANKING -->
-        <div id="ranking" class="content-section">
-            <h2 style="text-align: center; color: var(--primary);">🏆 Tableau d'Honneur</h2>
-            <table class="daily-report-table" style="margin-top:20px; border-collapse: separate; border-spacing: 0 5px;">
-                <thead><tr><th>Rang</th><th>Nom</th><th>École</th><th>Total des Points</th></tr></thead>
-                <tbody id="rankingTableBody"></tbody>
-            </table>
+        <div class="bg-white rounded-2xl p-5 border border-violet-100">
+          <div class="font-black text-violet-700 text-lg mb-2">C2 — Maîtrise</div>
+          <p class="text-sm text-slate-600 leading-7">Comprendre pratiquement tout ce qui est lu ou entendu et s’exprimer avec grande précision.</p>
+          <p dir="rtl" class="text-sm text-slate-600 leading-7 mt-2">فهم ما يُقرأ أو يُسمع بسهولة كبيرة وإعادة صياغة الأفكار والحجج بشكل متماسك.</p>
         </div>
-
-        <!-- STATS -->
-        <div id="analytics" class="content-section">
-            <h2 id="statsTitle" style="text-align:center; color:var(--primary); margin-bottom:20px;">Vue Globale</h2>
-            <div class="kpi-row">
-                <div class="kpi-card"><h4>Total Points</h4><div id="statTotalPoints" class="value">0</div></div>
-                <div class="kpi-card"><h4>Taux de Présence</h4><div id="statAttendance" class="value" style="color:var(--success)">0%</div></div>
-                <div class="kpi-card"><h4>Top École</h4><div id="statTopSchool" class="value" style="font-size:1.8rem">-</div></div>
-            </div>
-            <div class="chart-container" style="margin-bottom:30px; border-left: 5px solid var(--accent);">
-                <h3>📆 Analyse de la Présence</h3>
-                <div style="display:flex; justify-content:space-around; align-items:center;">
-                    <div style="width:40%; height:250px;"><canvas id="attendancePieChart"></canvas></div>
-                    <div style="width:40%;">
-                         <h4 style="margin-bottom:10px;">Détails (Total jours archivés)</h4>
-                         <ul id="attendanceDetailList" style="list-style:none; padding:0; font-size:1.1rem;"></ul>
-                    </div>
-                </div>
-            </div>
-            <div class="stats-grid">
-                <div class="chart-container"><h3>🏆 Classement des Écoles</h3><ul id="schoolRankingList" class="school-ranking-list"></ul></div>
-                <div class="chart-container"><h3>🚻 Répartition</h3><div style="height:300px"><canvas id="genderPieChart"></canvas></div></div>
-            </div>
-            <div class="stats-grid">
-                <div class="chart-container"><h3>📈 Évolution (Points)</h3><div style="height:350px"><canvas id="lineChart"></canvas></div></div>
-                <div class="chart-container"><h3>📊 Compétences</h3><div style="height:350px"><canvas id="barChart"></canvas></div></div>
-            </div>
-             <div class="chart-container" style="margin-top: 30px;">
-                <h3>📋 Liste Détaillée des Élèves (Filtrée)</h3>
-                <table class="daily-report-table">
-                    <thead><tr><th>Nom</th><th>Sexe</th><th>École</th><th>Total Points</th><th>Absences</th></tr></thead>
-                    <tbody id="statsStudentTableBody"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- HOMEWORK PAGE (NEW v54) -->
-        <div id="homeworkPage" class="content-section">
-            <h2 style="text-align:center; color:var(--primary);">Cahier de Liaison Numérique / Devoirs 📚</h2>
-            <div style="max-width:900px; margin:0 auto;">
-                <div class="homework-notebook">
-                    <textarea id="homeworkTextarea" placeholder="Écrivez les devoirs ici... (Ils s'afficheront automatiquement sur les rapports PDF)" oninput="saveHomework()"></textarea>
-                </div>
-                <p class="homework-info">Le texte est sauvegardé automatiquement. Rendez-vous dans l'onglet <strong>Profil & PDF</strong> pour voir le résultat.</p>
-            </div>
-        </div>
-
-        <!-- PROFILE -->
-        <div id="profile" class="content-section">
-            <div class="profile-layout">
-                <!-- LEFT SIDEBAR: Controls Only -->
-                <div class="profile-sidebar">
-                    <h3 style="color:var(--primary); margin:0;">🛠️ Contrôles</h3>
-                    
-                    <div>
-                        <label style="font-weight:bold; display:block; margin-bottom:5px;">1. Choisir l'élève</label>
-                        <select id="profileStudentSelector" onchange="loadStudentProfile()" class="school-filter-select"></select>
-                    </div>
-
-                    <div style="background:#eafaf1; border:1px solid #27ae60; padding:15px; border-radius:10px;">
-                        <label style="font-weight:bold; color:#27ae60;">2. Devoirs</label>
-                        <p style="font-size:0.9rem; margin:5px 0;">Les devoirs sont gérés dans l'onglet <strong>📝 Devoirs</strong>.</p>
-                        <button class="btn-action" style="background:var(--accent); font-size:0.9rem; padding:5px 10px;" onclick="switchTab('homeworkPage', document.querySelectorAll('.tab-btn')[3])">Modifier les devoirs</button>
-                    </div>
-
-                    <div style="text-align:center; display:flex; flex-direction:column; gap:10px;">
-                        <label style="font-weight:bold;">3. Actions</label>
-                        <button id="btnDownloadPDF" class="btn-action" style="background:#e74c3c; width:100%; justify-content:center;" onclick="downloadPDF()">📄 Télécharger PDF</button>
-                        <button class="btn-action" style="background:#25D366; width:100%; justify-content:center;" onclick="shareViaWhatsapp()">📱 Partager WhatsApp</button>
-                    </div>
-                </div>
-
-                <!-- RIGHT SIDE: Preview -->
-                <div class="profile-preview">
-                    <div id="reportCard">
-                        <div class="report-header">
-                            <div>
-                                <h2 id="pSchool">École</h2>
-                                <div id="pSchoolInfo" style="font-size:0.85rem; color:#555; max-width:300px; margin-top:5px;"></div>
-                            </div>
-                            <div style="text-align:center;">
-                                <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
-                                     <h1 id="pName" style="font-size:2.5rem; margin:0;">Nom</h1>
-                                     <button class="edit-profile-btn" onclick="editProfileFromView()">✏️ Modifier</button>
-                                </div>
-                                <p style="font-weight:bold;">Dossier de Suivi Éducatif</p>
-                            </div>
-                            <div style="text-align:right;">
-                                <p id="pDate">--/--/----</p>
-                                <div id="qrcode" style="margin-top:10px;"></div>
-                            </div>
-                        </div>
-
-                        <div style="display:flex; justify-content:space-around; background:#f8f9fa; padding:20px; border-radius:10px; margin-bottom:30px;">
-                            <div style="text-align:center">
-                                <div>Total Cumulé</div>
-                                <span id="pTotal" style="color:var(--accent); font-size:2rem; font-weight:900;">0</span>
-                            </div>
-                            <div style="text-align:center">
-                                <div>Absences</div>
-                                <span id="pAbsences" style="color:var(--danger); font-size:2rem; font-weight:900;">0</span>
-                            </div>
-                        </div>
-                        
-                        <div class="report-homework-box" id="reportHomeworkBox" style="display:none;">
-                            <h4>📝 Devoirs / Cahier de Liaison</h4>
-                            <div id="reportHomeworkText" class="report-homework-text"></div>
-                        </div>
-                        <div style="height:20px;"></div>
-
-                        <h3>Analyses Graphiques</h3>
-                        <div class="profile-charts-row">
-                            <div class="profile-chart-box">
-                                <h4>📊 Points du Jour (النقاط اليومية)</h4>
-                                <canvas id="profileBalanceChart"></canvas>
-                            </div>
-                            <div class="profile-chart-box">
-                                <h4>🕸️ Répartition des Compétences</h4>
-                                <canvas id="profileSkillDistributionChart"></canvas>
-                            </div>
-                        </div>
-
-                        <h3>Détail des Compétences & Commentaires</h3>
-                        <div class="competence-stats-grid" id="competenceStatsGrid"></div>
-
-                        <h3>Progression Temporelle</h3>
-                        <div style="width:100%; height:250px; margin-bottom:30px;">
-                            <canvas id="profileLineChart"></canvas>
-                        </div>
-
-                        <h3>Suivi Quotidien</h3>
-                        <table class="daily-report-table">
-                            <thead><tr><th>Date</th><th>Présence</th><th>Comportement</th><th>Travail</th><th>Total</th><th>Visa</th></tr></thead>
-                            <tbody id="dailyReportBody"></tbody>
-                        </table>
-                        
-                        <div style="display:flex; justify-content:space-between; margin-top:80px; padding-top:20px; border-top:1px dashed #ccc;">
-                            <div>Signature Professeur</div>
-                            <div>Signature Parents</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- RECORDS -->
-        <div id="records" class="content-section">
-            <h2 style="text-align:center;">Historique & Absences</h2>
-            <div style="display:flex; gap:30px;">
-                <div style="flex:1">
-                    <h3>Toute la classe</h3>
-                    <table class="daily-report-table">
-                        <thead><tr><th>Nom</th><th>École</th><th>Total</th></tr></thead>
-                        <tbody id="recordsTableBody"></tbody>
-                    </table>
-                </div>
-                <div style="flex:1">
-                    <h3>Absences</h3>
-                    <table class="daily-report-table">
-                        <thead><tr><th>Nom</th><th>Jours d'absence</th></tr></thead>
-                        <tbody id="absenceTableBody"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
+      </div>
     </div>
 
-    <script>
-        // --- SCHOOL CONFIGURATION DATA ---
-        const schoolConfigs = {
-            "Parc Artigues": {
-                name: "Ecole primaire du parc artigues",
-                address: "1 All. du Parc, 33370 Artigues-près-Bordeaux",
-                hours: "Lun/Mar: 17h-18h30 | Mer: 15h-16h30",
-                prof: "Prof. SAID ARABE",
-                color: "#e74c3c",
-                id: "Parc Artigues",
-                map: "https://maps.google.com/maps?q=1+All.+du+Parc,+33370+Artigues-près-Bordeaux&t=&z=15&ie=UTF8&iwloc=&output=embed",
-                subgroups: [
-                    { name: "Groupe Lundi", val: "Lundi parc artigues", bg: "#2980b9" },
-                    { name: "Groupe Mardi", val: "Mardi parc artigues", bg: "#8e44ad" },
-                    { name: "Groupe Mercredi", val: "Mercredi parc artigues", bg: "#d35400" }
-                ]
-            },
-            "Henri Bardon": {
-                name: "ECOLE PRIMAIRE HENRI BARDON",
-                address: "11 PLACE DU CHAMP DE FOIRE, 33350 Castillon",
-                hours: "Mercredi: 10h-11h30",
-                prof: "Prof. SAID ARABE",
-                color: "#27ae60",
-                id: "Henri Bardon",
-                map: "https://maps.google.com/maps?q=11+PLACE+DU+CHAMP+DE+FOIRE,+33350+Castillon-la-Bataille&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            },
-            "A.Lacoume": {
-                name: "Ecole élémentaire A.Lacoume",
-                address: "1 PLACE CAMILLE GOURDON, 33670 Créon",
-                hours: "Jeudi: 17h-18h30",
-                prof: "Prof. SAID ARABE",
-                color: "#8e44ad",
-                id: "A.Lacoume",
-                map: "https://maps.google.com/maps?q=1+PLACE+CAMILLE+GOURDON,+33670+Créon&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            },
-            "Condorcet": {
-                name: "Ecole élémentaire Condorcet",
-                address: "1 RUE VALVERT, 33310 Lormont",
-                hours: "Vendredi: 16h30-18h",
-                prof: "Prof. SAID ARABE",
-                color: "#f39c12",
-                id: "Condorcet",
-                map: "https://maps.google.com/maps?q=1+RUE+VALVERT,+33310+Lormont&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            },
-            "De La Jalle": {
-                name: "Ecole élémentaire De La Jalle",
-                address: "5 avenue du Stade, 33480 Castelnau-de-Médoc",
-                hours: "Samedi: 9h-10h30",
-                prof: "Prof. SAID ARABE",
-                color: "#2980b9",
-                id: "De La Jalle",
-                map: "https://maps.google.com/maps?q=5+avenue+du+Stade,+33480+Castelnau-de-Médoc&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            }
-        };
+    <div class="px-6 py-6 text-center bg-white border-t border-slate-100">
+      <p class="text-sm text-slate-500 leading-7">
+        👧🧒 <strong>للأطفال:</strong> نبدأ هنا بالمستويين A1 وA2، مع أنشطة تدريجية تجمع بين الفهم والتواصل والقراءة والكتابة.
+        <br>
+        <span dir="ltr"><strong>Pour les enfants :</strong> commencez avec les niveaux A1 et A2, grâce à une progression adaptée et des activités de compréhension, communication, lecture et écriture.</span>
+      </p>
+    </div>
+  </div>
+</section>
 
-        const academicSkills = [
-            { id: 'rituels', name: 'Rituels', icon: '☀️' },
-            { id: 'interaction', name: 'Interaction', icon: '🗣️' },
-            { id: 'ecoute', name: 'Compréhension', icon: '👂' },
-            { id: 'lecture', name: 'Lecture', icon: '📖' },
-            { id: 'ecriture', name: 'Écriture', icon: '✍️' },
-            { id: 'devoirs', name: 'Devoirs', icon: '📝' }
-        ];
-
-        const behaviorSkills = [
-            { id: 'concentre', name: 'Concentré', icon: '🧠', val: 1, type: 'positive' },
-            { id: 'participation', name: 'Particip.', icon: '🙋‍♂️', val: 1, type: 'positive' },
-            { id: 'bavardage', name: 'Bavardage', icon: '📢', val: -1, type: 'negative' },
-            { id: 'moquerie', name: 'Moquerie', icon: '😏', val: -1, type: 'negative' },
-            { id: 'insulte', name: 'Insulte', icon: '🤬', val: -1, type: 'negative' },
-            { id: 'violent', name: 'Violence', icon: '👊', val: -1, type: 'negative' },
-            { id: 'attitude', name: 'Attitude', icon: '😒', val: -1, type: 'negative' },
-            { id: 'oublie', name: 'Oubli', icon: '🎒', val: -1, type: 'negative' }
-        ];
-
-        const allSkills = [...academicSkills, ...behaviorSkills];
-        let students = JSON.parse(localStorage.getItem('profSaidStudents_v26')) || [];
-        let currentSchoolFilter = null; 
-
-        // --- INIT ---
-        function initData() {
-            const newMardiStudents = ["Ben Hamou Hafsa", "Navaro Sana", "Talla Lamine", "Bouarrouj Ahmed", "Macabre Ines", "Khiar Djoumena", "Gantch Nael", "Sahbani Eden", "chaari Fares", "Pince Hana", "Mourchid Sarah", "Nesta Djibril"];
-            const lundiStudents = ["Belarbi Nayla", "Cruveiller Yanis", "Rizgui Ryan", "Rizgui Hidaya", "Nesta Selma", "Zitoun Souheil", "Bouchouicha Nohe", "Alami Jihane", "Tahiri Solaymane", "Mezrig Ahmed", "Alami Salim", "Zerrouki Wassim"];
-
-            lundiStudents.forEach(n => {
-                if(!students.find(s=>s.name===n)) createStudent(n, "Lundi parc artigues", n.includes("Nayla")||n.includes("Hidaya")||n.includes("Selma")||n.includes("Jihane")?'girl':'boy');
-            });
-            newMardiStudents.forEach(n => {
-                 if(!students.find(s=>s.name===n)) {
-                    let g = (n.includes("Hafsa") || n.includes("Sana") || n.includes("Ines") || n.includes("Djoumena") || n.includes("Hana") || n.includes("Sarah")) ? 'girl' : 'boy';
-                    createStudent(n, "Mardi parc artigues", g);
-                }
-            });
-            renderLandingPage();
-        }
-
-        function createStudent(name, school, gender) {
-            let newStudent = {
-                id: Date.now() + Math.random(),
-                name: name, school: school, gender: gender, birthdate: "",
-                scores: {}, cumulativeScores: {}, dailyTotal: 0, historicalTotal: 0,
-                history: [0], historyLog: [], absences: 0, isAbsent: false
-            };
-            allSkills.forEach(k => { newStudent.scores[k.id] = 0; newStudent.cumulativeScores[k.id] = 0; });
-            students.push(newStudent);
-            saveData();
-        }
-
-        function saveData() { localStorage.setItem('profSaidStudents_v26', JSON.stringify(students)); }
-        function getGrandTotal(s) { return (s.historicalTotal || 0) + (s.dailyTotal || 0); }
-
-        // --- LANDING PAGE ---
-        function renderLandingPage() {
-            const grid = document.getElementById('schoolsGrid');
-            grid.innerHTML = '';
-            
-            Object.values(schoolConfigs).forEach(conf => {
-                let extraContent = '';
-                if(conf.id === "Parc Artigues" && conf.subgroups) {
-                    extraContent += `<div class="subgroup-buttons">`;
-                    conf.subgroups.forEach(sub => {
-                        extraContent += `<button class="btn-subgroup" style="background:${sub.bg}" onclick="event.stopPropagation(); selectSchool('${conf.id}', '${sub.val}')">${sub.name}</button>`;
-                    });
-                    extraContent += `</div>`;
-                } else {
-                    extraContent = `<button class="btn-enter-school" onclick="event.stopPropagation(); selectSchool('${conf.id}')">Accéder à la classe ➡</button>`;
-                }
-
-                grid.innerHTML += `
-                    <div class="school-card" onclick="selectSchool('${conf.id}')">
-                        <div class="school-card-header" style="background:${conf.color}">
-                            <h3>${conf.name}</h3>
-                            <div class="school-badge">${conf.prof}</div>
-                        </div>
-                        <div class="school-card-body">
-                            <div class="school-info-item">📍 ${conf.address}</div>
-                            <div class="school-info-item">🕒 ${conf.hours}</div>
-                            ${extraContent}
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function selectSchool(schoolId, subGroup = null) {
-            const conf = schoolConfigs[schoolId];
-            document.getElementById('schoolSelectionPage').style.display = 'none';
-            document.getElementById('mainApp').style.display = 'block';
-            document.getElementById('currentSchoolDisplay').innerText = conf.name;
-            
-            const mapContainer = document.getElementById('schoolMapContainer');
-            if(conf.map) {
-                mapContainer.style.display = 'block';
-                document.getElementById('schoolMapFrame').src = conf.map;
-            } else mapContainer.style.display = 'none';
-
-            const subGroupSel = document.getElementById('parcSubGroupSelector');
-            const stdLabel = document.getElementById('activeFilterLabel');
-
-            if(schoolId === "Parc Artigues") {
-                subGroupSel.style.display = 'inline-block';
-                stdLabel.style.display = 'none';
-                let target = subGroup || "Lundi parc artigues";
-                subGroupSel.value = target;
-                currentSchoolFilter = target; 
-                document.getElementById('studentSchool').value = target;
-            } else {
-                subGroupSel.style.display = 'none';
-                stdLabel.style.display = 'inline-block';
-                stdLabel.innerText = conf.name;
-                currentSchoolFilter = schoolId;
-                document.getElementById('studentSchool').value = schoolId;
-            }
-            
-            loadHomework(); 
-            renderDashboard();
-        }
-        
-        function updateParcSubGroup() {
-            const val = document.getElementById('parcSubGroupSelector').value;
-            currentSchoolFilter = val;
-            document.getElementById('studentSchool').value = val;
-            loadHomework();
-            renderDashboard();
-        }
-
-        function goBackHome() {
-            document.getElementById('mainApp').style.display = 'none';
-            document.getElementById('schoolSelectionPage').style.display = 'block';
-        }
-
-        // --- HOMEWORK ---
-        function saveHomework() {
-            if(!currentSchoolFilter) return;
-            const text = document.getElementById('homeworkTextarea').value;
-            localStorage.setItem(`homework_${currentSchoolFilter}`, text);
-        }
-
-        function loadHomework() {
-            if(!currentSchoolFilter) return;
-            const text = localStorage.getItem(`homework_${currentSchoolFilter}`) || "";
-            // Ensure element exists in Homework Page
-            const el = document.getElementById('homeworkTextarea');
-            if(el) el.value = text;
-        }
-
-        // --- DASHBOARD ---
-        function renderDashboard() {
-            const container = document.getElementById('studentsContainer');
-            const emptyState = document.getElementById('emptyState');
-            const podium = document.getElementById('podiumDisplay');
-            container.innerHTML = '';
-
-            let filtered = students.filter(s => {
-                if(s.school === currentSchoolFilter) return true;
-                if(currentSchoolFilter === "Henri Bardon" && (s.school === "Henri Bardon" || s.school.includes("bardone"))) return true;
-                if(currentSchoolFilter === "A.Lacoume" && (s.school === "A.Lacoume" || s.school.includes("Albanie"))) return true;
-                return false;
-            });
-
-            if (filtered.length === 0) { emptyState.style.display = 'block'; podium.style.display = 'none'; }
-            else emptyState.style.display = 'none';
-
-            let sorted = [...filtered].sort((a, b) => getGrandTotal(b) - getGrandTotal(a));
-            if(sorted.length >= 3 && getGrandTotal(sorted[0]) > 0) {
-                podium.style.display = 'flex';
-                let html = '';
-                [1,0,2].forEach(i => {
-                    let s = sorted[i];
-                    if(s) html += `<div class="podium-place rank-${i+1}"><div class="crown" style="display:${i==0?'block':'none'}">👑</div><div class="podium-bar">${getGrandTotal(s)}</div><div style="font-weight:bold">${s.gender==='girl'?'👧':'👦'} ${s.name}</div></div>`;
-                });
-                podium.innerHTML = html;
-            } else podium.style.display = 'none';
-
-            filtered.forEach((student) => {
-                const index = students.findIndex(s => s.id === student.id);
-                const card = document.createElement('div');
-                let classes = `student-card ${student.gender}`;
-                if (student.isAbsent) classes += ' absent';
-                card.className = classes;
-
-                let academicHTML = '';
-                academicSkills.forEach(skill => {
-                    academicHTML += `<div class="skill-row"><span class="skill-name">${skill.icon} ${skill.name}</span><div style="display:flex; gap:5px; align-items:center;"><button class="btn-control btn-minus" onclick="updateScore(${index}, '${skill.id}', -1)">-</button><span class="skill-val">${student.scores[skill.id]}</span><button class="btn-control btn-plus" onclick="updateScore(${index}, '${skill.id}', 1)">+</button></div></div>`;
-                });
-
-                let behaviorHTML = '<div class="behavior-grid">';
-                behaviorSkills.forEach(skill => {
-                    const count = student.scores[skill.id];
-                    let bg = count !== 0 ? (skill.type==='positive'?'#e8f8f5':'#fdedec') : 'white';
-                    let border = count !== 0 ? (skill.type==='positive'?'2px solid #27ae60':'2px solid #c0392b') : '1px solid #eee';
-                    behaviorHTML += `<div class="behavior-btn" style="background:${bg}; border:${border}" onclick="updateScore(${index}, '${skill.id}', ${skill.val})">${count!==0 ? `<div class="behavior-counter">${count}</div>` : ''}<div style="font-size:1.5rem;">${skill.icon}</div><div>${skill.name}</div></div>`;
-                });
-                behaviorHTML += '</div>';
-
-                card.innerHTML = `<div style="position:absolute; top:10px; right:10px; display:flex; gap:5px;"><button style="border:none;background:none;cursor:pointer;font-size:1.2rem;" onclick="editStudent(${index})">✏️</button><button style="border:none;background:none;cursor:pointer;font-size:1.2rem;" onclick="deleteStudent(${index})">🗑️</button></div><div class="student-header"><div><div class="student-name">${student.gender==='girl'?'👧':'👦'} ${student.name}</div><small style="color:#777">🏫 ${student.school}</small></div><div style="text-align:center; margin-right:40px;"><div class="total-badge">${getGrandTotal(student)}</div><label class="attendance-switch" style="margin-top:5px;"><input type="checkbox" ${!student.isAbsent?'checked':''} onchange="toggleAbsence(${index}, this.checked)"><span class="slider"></span></label></div></div>${student.isAbsent ? '<div style="text-align:center; padding:50px; color:var(--danger); font-weight:bold;">Élève Absent (-1 Point)</div>' : academicHTML + behaviorHTML}`;
-                container.appendChild(card);
-            });
-            updateProfileDropdown(filtered);
-        }
-
-        function updateScore(index, skillId, change) {
-            if(students[index].isAbsent) return;
-            students[index].scores[skillId] += change;
-            students[index].dailyTotal += change;
-            saveData(); renderDashboard();
-        }
-
-        function toggleAbsence(index, isChecked) {
-            const s = students[index];
-            s.isAbsent = !isChecked;
-            if(s.isAbsent) { s.dailyTotal -= 1; s.absences += 1; }
-            else { s.dailyTotal += 1; s.absences = Math.max(0, s.absences - 1); }
-            saveData(); renderDashboard();
-        }
-        
-        // --- STUDENT MANAGEMENT ---
-        function handleStudentSubmit() {
-            const name = document.getElementById('studentName').value;
-            const gender = document.getElementById('studentGender').value;
-            const birth = document.getElementById('studentBirth').value;
-            const idx = document.getElementById('editIndex').value;
-            const school = currentSchoolFilter; 
-
-            if(!name) return;
-            if(idx === "-1") {
-                createStudent(name, school, gender);
-                students[students.length-1].birthdate = birth;
-            } else {
-                students[idx].name = name;
-                students[idx].gender = gender;
-                students[idx].birthdate = birth;
-                cancelEdit();
-            }
-            saveData(); 
-            document.getElementById('studentName').value = '';
-            renderDashboard();
-            alert('Enregistré !');
-        }
-
-        function editStudent(index) {
-            const s = students[index];
-            document.getElementById('studentName').value = s.name;
-            document.getElementById('studentGender').value = s.gender;
-            document.getElementById('studentBirth').value = s.birthdate || '';
-            document.getElementById('editIndex').value = index;
-            document.getElementById('cancelEditBtn').style.display = 'block';
-            switchTab('dashboard', document.querySelector('.tab-btn:first-child'));
-            window.scrollTo({top:0, behavior:'smooth'});
-        }
-
-        function cancelEdit() {
-            document.getElementById('studentName').value = '';
-            document.getElementById('editIndex').value = "-1";
-            document.getElementById('cancelEditBtn').style.display = 'none';
-        }
-
-        function deleteStudent(index) { if(confirm('Supprimer ?')) { students.splice(index, 1); saveData(); renderDashboard(); } }
-
-        function switchTab(tabId, btn) {
-            document.querySelectorAll('.content-section').forEach(d => d.style.display='none');
-            document.getElementById(tabId).style.display = 'block';
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            if(tabId === 'analytics') setTimeout(updateCharts, 100);
-            if(tabId === 'profile') loadStudentProfile(); 
-            if(tabId === 'ranking') renderRanking();
-            if(tabId === 'records') renderRecords();
-            if(tabId === 'homeworkPage') loadHomework();
-        }
-
-        function updateProfileDropdown(filteredList) {
-            const sel = document.getElementById('profileStudentSelector');
-            sel.innerHTML = '<option value="" disabled selected>-- Sélectionner un élève --</option>';
-            filteredList.forEach(s => {
-                const globalIndex = students.findIndex(st => st.id === s.id);
-                sel.innerHTML += `<option value="${globalIndex}">${s.name}</option>`;
-            });
-        }
-
-        function editProfileFromView() { const idx = document.getElementById('profileStudentSelector').value; if(idx) editStudent(idx); }
-
-        let mainCharts = {}; 
-        let profileCharts = {}; 
-
-        function loadStudentProfile() {
-            const idx = document.getElementById('profileStudentSelector').value;
-            // Always load homework for display
-            const hwText = localStorage.getItem(`homework_${currentSchoolFilter}`) || "";
-            const hwBox = document.getElementById('reportHomeworkBox');
-            if(hwText.trim()) {
-                hwBox.style.display = "block";
-                document.getElementById('reportHomeworkText').innerText = hwText;
-            } else {
-                hwBox.style.display = "none";
-            }
-            
-            if(idx === "") return;
-            const s = students[idx];
-            
-            document.getElementById('pName').innerText = (s.gender==='girl'?'👧':'👦') + ' ' + s.name;
-            document.getElementById('pSchool').innerText = '🏫 ' + s.school;
-            document.getElementById('pTotal').innerText = getGrandTotal(s);
-            document.getElementById('pDate').innerText = new Date().toLocaleDateString('fr-FR');
-            
-            const schoolInfo = Object.values(schoolConfigs).find(c => s.school.includes(c.name) || s.school.includes(c.id.split(' ')[0]) || (c.id === "Parc Artigues" && s.school.includes("artigues")));
-            if(schoolInfo) document.getElementById('pSchoolInfo').innerHTML = `${schoolInfo.address}<br>${schoolInfo.hours}`;
-
-            document.getElementById('qrcode').innerHTML = "";
-            new QRCode(document.getElementById("qrcode"), { text: `${s.name} | ${getGrandTotal(s)} pts | ${s.school}`, width: 80, height: 80 });
-
-            const tbody = document.getElementById('dailyReportBody'); tbody.innerHTML = '';
-            if(s.historyLog.length) {
-                [...s.historyLog].reverse().forEach(log => {
-                    tbody.innerHTML += `<tr><td>${log.date}</td><td>${log.isAbsent?'Abs':'Prés'}</td><td>${log.behavior||0}</td><td>${log.academic||0}</td><td><strong>${log.score}</strong></td><td></td></tr>`;
-                });
-            } else tbody.innerHTML = '<tr><td colspan="6">Aucun historique</td></tr>';
-
-            if(profileCharts.line) profileCharts.line.destroy();
-            if(profileCharts.bar) profileCharts.bar.destroy();
-            if(profileCharts.radar) profileCharts.radar.destroy();
-
-            profileCharts.line = new Chart(document.getElementById('profileLineChart'), {
-                type: 'line', data: { labels: s.historyLog.map(h => h.date.slice(5)), datasets: [{ label: 'Travail', data: s.historyLog.map(h => h.academic), borderColor: '#3498db', tension:0.3 }, { label: 'Comportement', data: s.historyLog.map(h => h.behavior), borderColor: '#e74c3c', tension:0.3 }] }, options: { responsive: true, maintainAspectRatio: false }
-            });
-
-            profileCharts.bar = new Chart(document.getElementById('profileBalanceChart'), {
-                type: 'bar', data: { labels: academicSkills.map(k=>k.name), datasets: [{ label: 'Aujourd\'hui', data: academicSkills.map(k=>s.scores[k.id]), backgroundColor: '#3498db', borderRadius:4 }] }, options: { responsive: true, maintainAspectRatio: false, scales: { y: {beginAtZero:true, ticks:{stepSize:1}} }, plugins:{legend:{display:false}} }
-            });
-
-            let skillValues = academicSkills.map(k => (s.cumulativeScores?s.cumulativeScores[k.id]:0) + s.scores[k.id]);
-            profileCharts.radar = new Chart(document.getElementById('profileSkillDistributionChart'), {
-                type: 'radar', data: { labels: academicSkills.map(k=>k.name), datasets: [{ label: 'Global', data: skillValues, backgroundColor: 'rgba(52,152,219,0.2)', borderColor: '#3498db' }] }, options: { responsive: true, maintainAspectRatio: false, scales:{r:{beginAtZero:true, ticks:{display:false}}} }
-            });
-
-            const statsGrid = document.getElementById('competenceStatsGrid'); statsGrid.innerHTML = '';
-            academicSkills.forEach(skill => {
-                let score = (s.cumulativeScores?s.cumulativeScores[skill.id]:0) + s.scores[skill.id];
-                let badge = score<3?'En cours':(score<5?'Acquis':'Expert');
-                let bClass = score<3?'badge-encours':(score<5?'badge-acquis':'badge-expert');
-                if(score===0) { badge='Non évalué'; bClass='badge-none'; }
-                statsGrid.innerHTML += `<div class="stat-item"><span class="stat-label">${skill.icon} ${skill.name}</span><div class="stat-val-box"><span class="stat-score">${score}</span><span class="stat-badge ${bClass}">${badge}</span></div></div>`;
-            });
-            behaviorSkills.forEach(skill => {
-                let score = (s.cumulativeScores?s.cumulativeScores[skill.id]:0) + s.scores[skill.id];
-                if(score !== 0) {
-                    let count = Math.abs(score);
-                    let isNeg = skill.type === 'negative' || score < 0; 
-                    let text = isNeg ? `⚠️ ${count} fois` : `🌟 ${count} fois`;
-                    let sClass = isNeg ? 'behavior-negative' : 'behavior-positive';
-                    statsGrid.innerHTML += `<div class="stat-item ${sClass}"><span class="stat-label">${skill.icon} ${skill.name}</span><div class="stat-comment">${text}</div></div>`;
-                }
-            });
-        }
-
-        function downloadPDF() {
-            const btn = document.getElementById('btnDownloadPDF'); const original = btn.innerText;
-            btn.innerText = "⏳ Génération..."; window.scrollTo(0,0);
-            const element = document.getElementById('reportCard');
-            html2pdf().set({ margin:0, filename:`Rapport_${document.getElementById('pName').innerText}.pdf`, image:{type:'jpeg',quality:0.98}, html2canvas:{scale:2, useCORS:true, scrollY:0}, jsPDF:{unit:'mm',format:'a4',orientation:'portrait'} }).from(element).save().then(()=>{ btn.innerText=original; });
-        }
-
-        function shareViaWhatsapp() {
-            const name = document.getElementById('pName').innerText; const total = document.getElementById('pTotal').innerText;
-            window.open(`https://wa.me/?text=Rapport ${name}: ${total} points.`, '_blank');
-        }
-
-        function updateCharts() {
-            let filtered = students.filter(s => {
-               if(s.school === currentSchoolFilter) return true;
-               if(currentSchoolFilter === "Henri Bardon" && (s.school === "Henri Bardon" || s.school.includes("bardone"))) return true;
-               if(currentSchoolFilter === "A.Lacoume" && (s.school === "A.Lacoume" || s.school.includes("Albanie"))) return true;
-               return false;
-            });
-            
-            let maxDays = filtered.reduce((max, s) => Math.max(max, (s.historyLog||[]).length), 0);
-            let totalAbsences = filtered.reduce((acc, s) => acc + s.absences, 0);
-            let possibleAttendance = maxDays * filtered.length;
-            let presentDays = possibleAttendance - totalAbsences;
-            let rate = possibleAttendance > 0 ? ((presentDays/possibleAttendance)*100).toFixed(1) : 100;
-            
-            document.getElementById('statAttendance').innerText = rate + "%";
-            document.getElementById('attendanceDetailList').innerHTML = `<li>✅ Présents: <strong>${presentDays}</strong></li><li style="color:var(--danger)">❌ Absents: <strong>${totalAbsences}</strong></li>`;
-
-            if(mainCharts.att) mainCharts.att.destroy();
-            mainCharts.att = new Chart(document.getElementById('attendancePieChart'), { type: 'pie', data: { labels: ['Présents', 'Absents'], datasets:[{ data:[presentDays, totalAbsences], backgroundColor:['#2ecc71','#e74c3c'] }] }, options:{responsive:true,maintainAspectRatio:false} });
-            
-            if(mainCharts.pie) mainCharts.pie.destroy();
-            let boys = filtered.filter(s=>s.gender==='boy').length;
-            let girls = filtered.filter(s=>s.gender==='girl').length;
-            mainCharts.pie = new Chart(document.getElementById('genderPieChart'), { type: 'doughnut', data: { labels:['G','F'], datasets:[{data:[boys,girls], backgroundColor:['#3498db','#fd79a8']}] }, options:{responsive:true,maintainAspectRatio:false} });
-
-            document.getElementById('schoolRankingList').innerHTML = ''; 
-            document.getElementById('statTotalPoints').innerText = filtered.reduce((a,b)=>a+getGrandTotal(b),0);
-        }
-        
-        function saveDay() {
-            if(!confirm('Sauvegarder la journée ?')) return;
-            const today = new Date().toISOString().slice(0, 10);
-            
-            let targetStudents = students.filter(s => {
-               if(s.school === currentSchoolFilter) return true;
-               if(currentSchoolFilter === "Henri Bardon" && (s.school === "Henri Bardon" || s.school.includes("bardone"))) return true;
-               if(currentSchoolFilter === "A.Lacoume" && (s.school === "A.Lacoume" || s.school.includes("Albanie"))) return true;
-               return false;
-            });
-
-            targetStudents.forEach(s => {
-                let ac = 0; academicSkills.forEach(k=>ac+=s.scores[k.id]);
-                let beh = 0; behaviorSkills.forEach(k=>beh+=s.scores[k.id]*k.val);
-                if(!s.cumulativeScores) s.cumulativeScores={};
-                allSkills.forEach(k => { if(!s.cumulativeScores[k.id]) s.cumulativeScores[k.id]=0; s.cumulativeScores[k.id]+=s.scores[k.id]; });
-
-                let idx = s.historyLog.findIndex(l=>l.date===today);
-                if(idx!==-1) {
-                    s.historyLog[idx].score += s.dailyTotal; s.historyLog[idx].academic += ac; s.historyLog[idx].behavior += beh;
-                    if(s.isAbsent) s.historyLog[idx].isAbsent = true;
-                } else {
-                    s.historyLog.push({ date:today, score:s.dailyTotal, academic:ac, behavior:beh, isAbsent:s.isAbsent });
-                }
-                s.historicalTotal += s.dailyTotal; s.dailyTotal = 0; s.isAbsent = false; allSkills.forEach(k=>s.scores[k.id]=0);
-            });
-            saveData(); renderDashboard(); alert('Sauvegardé pour cette école !');
-        }
-
-        function renderRanking() {
-            let filtered = students.filter(s => {
-               if(s.school === currentSchoolFilter) return true;
-               if(currentSchoolFilter === "Henri Bardon" && (s.school === "Henri Bardon" || s.school.includes("bardone"))) return true;
-               if(currentSchoolFilter === "A.Lacoume" && (s.school === "A.Lacoume" || s.school.includes("Albanie"))) return true;
-               return false;
-            });
-            let sorted = [...filtered].sort((a,b) => getGrandTotal(b) - getGrandTotal(a));
-            const tb = document.getElementById('rankingTableBody'); tb.innerHTML='';
-            sorted.forEach((s,i)=>{
-                let c = i===0?'rank-row-1':(i===1?'rank-row-2':(i===2?'rank-row-3':''));
-                tb.innerHTML+=`<tr class="${c}"><td>${i+1}</td><td>${s.name}</td><td>${s.school}</td><td>${getGrandTotal(s)}</td></tr>`;
-            });
-        }
-        
-        function renderRecords() {
-            const tb = document.getElementById('recordsTableBody'); tb.innerHTML='';
-            let filtered = students.filter(s => {
-               if(s.school === currentSchoolFilter) return true;
-               if(currentSchoolFilter === "Henri Bardon" && (s.school === "Henri Bardon" || s.school.includes("bardone"))) return true;
-               if(currentSchoolFilter === "A.Lacoume" && (s.school === "A.Lacoume" || s.school.includes("Albanie"))) return true;
-               return false;
-            });
-            filtered.forEach(s=>tb.innerHTML+=`<tr><td>${s.name}</td><td>${s.school}</td><td>${getGrandTotal(s)}</td></tr>`);
-        }
-
-        function resetAll() {
-            if(!confirm('Vider TOUTES les données ?')) return;
-            students.forEach(s => { s.dailyTotal=0; s.historicalTotal=0; s.historyLog=[]; s.scores={}; s.cumulativeScores={}; s.absences=0; });
-            allSkills.forEach(k=>students.forEach(s=>{s.scores[k.id]=0; s.cumulativeScores[k.id]=0}));
-            saveData(); renderDashboard();
-        }
-
-        initData();
-    </script>
+<footer>SAID EILE • Arabe • العَرَبِيَّةُ</footer>
 </body>
 </html>
