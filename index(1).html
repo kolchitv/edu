@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAID EILE • تعلّم العربية للأطفال</title>
+  <meta name="description" content="منصة SAID EILE لتعلّم اللغة العربية للأطفال الناطقين بالفرنسية — المستوى A1 وA2.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fredoka:wght@400;600;700&family=Noto+Naskh+Arabic:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#17324d;
+      --muted:#60758a;
+      --sky:#0284c7;
+      --sky-dark:#075985;
+      --green:#059669;
+      --green-dark:#065f46;
+      --gold:#f59e0b;
+      --cream:#fffaf0;
+      --white:#fff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:'Cairo',system-ui,sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 8% 12%, rgba(125,211,252,.32), transparent 25%),
+        radial-gradient(circle at 92% 18%, rgba(110,231,183,.28), transparent 24%),
+        linear-gradient(135deg,#f8fbff 0%,#eef9ff 48%,#f0fdf4 100%);
+      overflow-x:hidden;
+    }
+    .font-fr{font-family:'Fredoka',system-ui,sans-serif}
+    .font-ar{font-family:'Noto Naskh Arabic',serif}
+    .top{
+      background:linear-gradient(100deg,#082f49,#0f766e,#064e3b);
+      color:#fff;
+      padding:10px 20px;
+    }
+    .top-inner{
+      max-width:1100px;margin:auto;display:flex;justify-content:space-between;
+      gap:15px;align-items:center;font-size:13px;
+    }
+    .brand-mini{display:flex;align-items:center;gap:9px;font-weight:900}
+    .brand-mini .flag{font-size:20px}
+    .brand-mini .name{color:#fde68a;letter-spacing:1px}
+    .badge{
+      background:#fbbf24;color:#172033;border:1px solid #fde68a;
+      padding:4px 10px;border-radius:999px;font-weight:900;font-size:11px;
+    }
+    main{max-width:1100px;margin:auto;padding:30px 18px 50px}
+    .hero{text-align:center;padding:20px 10px 18px}
+    .logo{
+      width:76px;height:76px;margin:0 auto 13px;border-radius:24px;
+      display:grid;place-items:center;font-size:39px;
+      background:linear-gradient(135deg,#0ea5e9,#047857);
+      box-shadow:0 14px 30px rgba(3,105,161,.18);
+    }
+    h1{margin:0;font-size:clamp(30px,6vw,52px);font-weight:900;color:#0f3550}
+    .hero h1 span{display:inline-block}
+    .hero p{
+      margin:8px auto 0;max-width:680px;color:var(--muted);
+      font-size:clamp(14px,2vw,18px);font-weight:700;
+    }
+    .stars{margin-top:12px;color:#b45309;font-weight:900;font-size:14px}
+    .levels{
+      display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;
+      margin-top:28px;
+    }
+    .card{
+      position:relative;overflow:hidden;text-decoration:none;color:inherit;
+      background:rgba(255,255,255,.93);border:2px solid transparent;
+      border-radius:30px;padding:26px;min-height:300px;
+      box-shadow:0 16px 40px rgba(15,50,75,.10);
+      transition:.22s ease;display:flex;flex-direction:column;
+    }
+    .card:hover{transform:translateY(-7px);box-shadow:0 22px 50px rgba(15,50,75,.16)}
+    .card:active{transform:scale(.99)}
+    .a1{border-color:#bae6fd}
+    .a2{border-color:#a7f3d0}
+    .orb{
+      position:absolute;width:150px;height:150px;border-radius:50%;right:-45px;top:-55px;opacity:.16
+    }
+    .a1 .orb{background:#0284c7}
+    .a2 .orb{background:#059669}
+    .level-row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .level{
+      width:68px;height:68px;border-radius:22px;color:white;display:grid;place-items:center;
+      font-family:'Fredoka',sans-serif;font-size:25px;font-weight:900;box-shadow:0 9px 18px rgba(0,0,0,.12)
+    }
+    .a1 .level{background:linear-gradient(135deg,#0284c7,#0369a1)}
+    .a2 .level{background:linear-gradient(135deg,#059669,#047857)}
+    .age{font-size:11px;font-weight:900;padding:6px 10px;border-radius:999px;background:#f1f5f9;color:#475569}
+    .card h2{margin:18px 0 3px;font-size:25px;font-weight:900}
+    .card .fr{font-family:'Fredoka',sans-serif;font-weight:700;color:#64748b;font-size:15px}
+    .desc{font-size:13px;line-height:1.9;color:#52677a;margin:13px 0 15px}
+    .features{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto}
+    .feature{font-size:11px;font-weight:800;padding:6px 9px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0}
+    .go{
+      margin-top:18px;width:100%;border:0;border-radius:16px;padding:12px 15px;
+      color:white;font-family:'Cairo',sans-serif;font-weight:900;font-size:14px;
+    }
+    .a1 .go{background:linear-gradient(100deg,#0284c7,#0369a1)}
+    .a2 .go{background:linear-gradient(100deg,#059669,#047857)}
+    .hint{
+      text-align:center;margin:25px auto 0;max-width:700px;
+      background:rgba(255,255,255,.72);border:1px solid #dbeafe;border-radius:18px;
+      padding:12px 15px;color:#60758a;font-size:12px;font-weight:700
+    }
+    footer{text-align:center;padding:0 18px 25px;color:#718096;font-size:11px;font-weight:700}
+    @media(max-width:720px){
+      .top-inner{justify-content:center}
+      .top-inner .right{display:none}
+      main{padding-top:20px}
+      .levels{grid-template-columns:1fr}
+      .card{min-height:270px;padding:22px}
+      .hero{padding-top:10px}
+    }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="top-inner">
+      <div class="brand-mini">
+        <span class="flag">🇲🇦</span>
+        <span class="name font-fr">SAID EILE</span>
+        <span>•</span>
+        <span class="font-ar">العَرَبِيَّةُ</span>
+      </div>
+      <div class="right">
+        <span>منصة تعلّم العربية للأطفال الناطقين بالفرنسية</span>
+        <span class="badge font-fr">CECRL</span>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="logo">🏫</div>
+      <h1>
+        <span class="font-ar">مَرْحَبًا بِكَ فِي مَنْصَّةِ العَرَبِيَّةِ</span>
+      </h1>
+      <p>اختر مستواك وابدأ رحلة تعلّم العربية بطريقة تفاعلية وممتعة ⭐</p>
+      <div class="stars">🎧 استمع • 📖 اقرأ • ✍️ اكتب • 🏆 تعلّم والعب</div>
+    </section>
+
+    <section class="levels" aria-label="مستويات تعلم العربية">
+      <a class="card a1" href="a1.html" aria-label="الانتقال إلى المستوى الأول A1">
+        <div class="orb"></div>
+        <div class="level-row">
+          <div class="level">A1</div>
+          <div class="age">المستوى الأول</div>
+        </div>
+        <h2 class="font-ar">المستوى الأوّل</h2>
+        <div class="fr">Niveau A1 • Débutant</div>
+        <p class="desc">
+          البداية مع الحروف والكلمات والتعريف بالنفس والحياة المدرسية،
+          مع أنشطة تفاعلية للاستماع والقراءة والكتابة.
+        </p>
+        <div class="features">
+          <span class="feature">🔤 الحروف</span>
+          <span class="feature">🗣️ التواصل</span>
+          <span class="feature">✍️ الكتابة والخط</span>
+          <span class="feature">🎮 ألعاب تفاعلية</span>
+        </div>
+        <button class="go">🚀 ابدأ المستوى A1</button>
+      </a>
+
+      <a class="card a2" href="a2.html" aria-label="الانتقال إلى المستوى الثاني A2">
+        <div class="orb"></div>
+        <div class="level-row">
+          <div class="level">A2</div>
+          <div class="age">المستوى الثاني</div>
+        </div>
+        <h2 class="font-ar">المستوى الثّاني</h2>
+        <div class="fr">Niveau A2 • Progression</div>
+        <p class="desc">
+          تطوير التعبير الشفوي والقراءة والفهم والتراكيب والإملاء،
+          مع الثقافة المغربية والتطبيقات الكتابية والتقويم.
+        </p>
+        <div class="features">
+          <span class="feature">🗣️ التعبير</span>
+          <span class="feature">📖 القراءة</span>
+          <span class="feature">🧩 التراكيب</span>
+          <span class="feature">🏆 التقويم</span>
+        </div>
+        <button class="go">🚀 ابدأ المستوى A2</button>
+      </a>
+    </section>
+
+    <div class="hint">💡 اضغط على المستوى المناسب للانتقال مباشرة إلى صفحة الدروس.</div>
+  </main>
+
+  
+<section class="max-w-6xl mx-auto px-4 pb-16">
+  <div class="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+    <div class="p-7 md:p-10 text-center">
+      <div class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full font-bold mb-4">
+        🌍 CEFR • Cadre européen commun de référence
+      </div>
+      <h2 class="text-2xl md:text-3xl font-black text-slate-800 mb-4">
+        برنامج تعلّم العربية وفق الإطار الأوروبي المرجعي للغات
+      </h2>
+      <p class="text-slate-600 leading-8 max-w-4xl mx-auto" dir="rtl">
+        يعتمد هذا البرنامج على مستويات <strong>الإطار الأوروبي المشترك المرجعي للغات (CEFR)</strong>،
+        وهو إطار معترف به دوليًا لوصف مستويات الكفاءة في اللغات، مع تطوير مهارات
+        <strong>الاستماع والتحدث والقراءة والكتابة</strong>.
+      </p>
+      <p class="text-slate-600 leading-8 max-w-4xl mx-auto mt-3" dir="ltr">
+        Notre programme d’apprentissage de l’arabe s’inscrit dans le
+        <strong>Cadre européen commun de référence pour les langues (CECRL / CEFR)</strong>,
+        un cadre reconnu internationalement pour décrire les niveaux de compétence
+        en langues et développer les quatre compétences : <strong>compréhension orale,
+        expression orale, compréhension écrite et expression écrite</strong>.
+      </p>
+    </div>
+
+    <div class="bg-slate-50 px-5 md:px-10 py-8">
+      <h3 class="text-xl font-black text-slate-800 text-center mb-7">
+        📊 Les 6 niveaux du CECRL / مستويات CEFR الستة
+      </h3>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white rounded-2xl p-5 border border-blue-100">
+          <div class="font-black text-blue-700 text-lg mb-2">A1 — Débutant</div>
+          <p class="text-sm text-slate-600 leading-7">Comprendre et utiliser des expressions quotidiennes simples et des phrases de base.</p>
+          <p dir="rtl" class="text-sm text-slate-600 leading-7 mt-2">فهم واستخدام التعبيرات اليومية البسيطة والعبارات الأساسية.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-blue-100">
+          <div class="font-black text-blue-700 text-lg mb-2">A2 — Élémentaire</div>
+          <p class="text-sm text-slate-600 leading-7">Comprendre des phrases et expressions courantes liées aux situations de la vie quotidienne.</p>
+          <p dir="rtl" class="text-sm text-slate-600 leading-7 mt-2">فهم الجمل والتعابير الشائعة المرتبطة بالمجالات المباشرة.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-amber-100">
+          <div class="font-black text-amber-700 text-lg mb-2">B1 — Intermédiaire</div>
+          <p class="text-sm text-slate-600 leading-7">Faire face à la plupart des situations courantes et comprendre l’essentiel de sujets familiers.</p>
+          <p dir="rtl" class="text-sm text-slate-600 leading-7 mt-2">التعامل مع معظم المواقف المألوفة وفهم النقاط الرئيسية في المواضيع المعتادة.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-amber-100">
+          <div class="font-black text-amber-700 text-lg mb-2">B2 — Intermédiaire supérieur</div>
+          <p class="text-sm text-slate-600 leading-7">Comprendre les idées principales de textes complexes et communiquer avec aisance.</p>
+          <p dir="rtl" class="text-sm text-slate-600 leading-7 mt-2">فهم الأفكار الرئيسية في النصوص المعقدة والتحدث بطلاقة وتلقائية.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-violet-100">
+          <div class="font-black text-violet-700 text-lg mb-2">C1 — Avancé</div>
+          <p class="text-sm text-slate-600 leading-7">Comprendre une large gamme de textes exigeants et s’exprimer avec souplesse et aisance.</p>
+          <p dir="rtl" class="text-sm text-slate-600 leading-7 mt-2">فهم مجموعة واسعة من النصوص الصعبة والتعبير بمرونة وطلاقة.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-violet-100">
+          <div class="font-black text-violet-700 text-lg mb-2">C2 — Maîtrise</div>
+          <p class="text-sm text-slate-600 leading-7">Comprendre pratiquement tout ce qui est lu ou entendu et s’exprimer avec grande précision.</p>
+          <p dir="rtl" class="text-sm text-slate-600 leading-7 mt-2">فهم ما يُقرأ أو يُسمع بسهولة كبيرة وإعادة صياغة الأفكار والحجج بشكل متماسك.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-6 py-6 text-center bg-white border-t border-slate-100">
+      <p class="text-sm text-slate-500 leading-7">
+        👧🧒 <strong>للأطفال:</strong> نبدأ هنا بالمستويين A1 وA2، مع أنشطة تدريجية تجمع بين الفهم والتواصل والقراءة والكتابة.
+        <br>
+        <span dir="ltr"><strong>Pour les enfants :</strong> commencez avec les niveaux A1 et A2, grâce à une progression adaptée et des activités de compréhension, communication, lecture et écriture.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>SAID EILE • Arabe • العَرَبِيَّةُ</footer>
+</body>
+</html>

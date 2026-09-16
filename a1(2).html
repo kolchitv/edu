@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>منصة SAID EILE • منهاج المستوى الأول A1 الشامل مع كراسة الكتابة</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Google Fonts: Cairo, Fredoka & Noto Naskh Arabic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Fredoka:wght@400;600;700&family=Noto+Naskh+Arabic:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Cairo', system-ui, sans-serif;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .font-fr { font-family: 'Fredoka', system-ui, sans-serif; }
+    .font-naskh { font-family: 'Noto Naskh Arabic', serif; }
+    .seyes-lines {
+      background-color: #f8fafc;
+      background-image: 
+        linear-gradient(to bottom, transparent 27px, #e2e8f0 28px, transparent 29px),
+        linear-gradient(to bottom, transparent 6px, #f1f5f9 7px, transparent 8px),
+        linear-gradient(to bottom, transparent 13px, #f1f5f9 14px, transparent 15px),
+        linear-gradient(to bottom, transparent 20px, #f1f5f9 21px, transparent 22px);
+      background-size: 100% 28px;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .unit-pill-active {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: white !important;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+      border-color: #0284c7 !important;
+    }
+    .support-pill-active {
+      background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+      color: white !important;
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);
+      border-color: #b45309 !important;
+    }
+    .main-tab-active {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      color: white !important;
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);
+      border-color: #059669 !important;
+    }
+    .sub-write-active {
+      background: #0284c7;
+      color: white !important;
+      border-color: #0284c7 !important;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-sky-50 to-blue-100 min-h-screen text-slate-800 flex flex-col antialiased">
+
+  <!-- Top Super Title Bar: SAID EILE العربية -->
+  <div class="bg-gradient-to-r from-sky-950 via-slate-900 to-sky-900 text-white py-1.5 px-4 shadow-sm border-b border-sky-700/40">
+    <div class="max-w-7xl mx-auto flex items-center justify-between text-xs sm:text-sm">
+      <div class="flex items-center gap-2.5">
+        <span class="text-base sm:text-lg text-amber-400">🇲🇦</span>
+        <span class="font-fr font-black tracking-wider text-amber-300 text-xs sm:text-sm">SAID EILE</span>
+        <span class="text-sky-400/60 font-bold">•</span>
+        <span class="font-naskh font-black text-sm sm:text-base text-white tracking-wide">Arabe • العَرَبِيَّةُ</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="hidden md:inline-block text-[11px] text-sky-200 font-medium">مِنْهَاجُ اللُّغَةِ العَرَبِيَّةِ الشَّامِلِ لِلنَّاطِقِينَ بِالفَرَنْسِيَّةِ (CECRL - EILE A1)</span>
+        <span class="text-[10px] bg-emerald-600 text-white border border-emerald-300 px-2.5 py-0.5 rounded-full font-fr font-black tracking-wide">NIVEAU A1</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Main Navigation Bar -->
+  <header class="bg-white/95 backdrop-blur sticky top-0 z-40 border-b border-sky-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-2">
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-3">
+        <div id="unitLogoBadge" class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center text-2xl shadow-md transition">
+          🏫
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="activeUnitBadgeTop" class="font-fr font-black text-[11px] text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">UNITÉ 1</span>
+            <span id="activeUnitDomainTop" class="text-xs bg-sky-100 text-sky-900 px-2 py-0.5 rounded-full font-bold">التَّعْرِيفُ بِالذَّاتِ وَالحَيَاةُ المَدْرَسِيَّةُ</span>
+          </div>
+          <h1 class="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2 leading-tight mt-0.5">
+            <span id="activeUnitTitleHeader" class="font-naskh">الوحدة 1: الحروف (د - ف - ب - م)</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Controls: Sound, Audio Test, Help, Stars -->
+      <div class="flex items-center gap-2">
+        <button id="btnSoundToggle" onclick="toggleSoundSystem()" class="px-2.5 py-1.5 rounded-xl bg-sky-50 border border-sky-300 text-sky-800 text-xs font-bold hover:bg-sky-100 transition flex items-center gap-1.5 shadow-sm">
+          <span id="soundIcon">🔊</span>
+          <span class="hidden sm:inline font-fr" id="soundLabel">Son: Actif</span>
+        </button>
+
+        <button onclick="testWelcomeAudio()" title="Tester le son arabe" class="px-2.5 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-black hover:bg-emerald-700 transition flex items-center gap-1 shadow-sm">
+          <span>📢</span>
+          <span class="hidden sm:inline">نُطْقٌ نَمُوذَجِيٌّ</span>
+        </button>
+
+        <div class="flex items-center gap-1.5 bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-900 px-3 py-1.5 rounded-xl font-black text-sm shadow-md">
+          <span class="text-base">⭐</span>
+          <span id="starCounter">0</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Ribbon with All 6 Units + Inter-unit Support Stations -->
+  <nav class="max-w-7xl mx-auto px-4 mt-3 w-full">
+    <div class="bg-white/95 backdrop-blur border border-sky-100 rounded-3xl p-3 shadow-sm">
+      <div class="flex items-center justify-between gap-2 pb-2 mb-2 border-b border-slate-100">
+        <span class="text-xs font-black text-sky-950 flex items-center gap-1.5">
+          <span>🗺️</span> <span>مَحَطَّاتُ بَرْنَامَجِ المِسْتَوَى الأَوَّلِ (A1) :</span>
+        </span>
+        <span class="text-[11px] font-bold text-slate-500 font-fr">6 Unités + Séances de Consolidation & Soutien</span>
+      </div>
+
+      <!-- Units Ribbon Buttons -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar" id="unitsRibbon">
+        <button onclick="selectCurriculumUnit(1)" id="unitBtn-1" class="unit-ribbon-btn unit-pill-active px-3 py-1.5 rounded-xl border text-xs font-black transition flex items-center gap-1.5 flex-shrink-0">
+          <span>🏫</span> <span>الوَحْدَةُ 1 (د-ف-ب-م)</span>
+        </button>
+        <button onclick="selectCurriculumUnit('supp-1')" id="unitBtn-supp-1" class="unit-ribbon-btn bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 flex-shrink-0">
+          <span>🎯</span> <span>دَعْمُ 1</span>
+        </button>
+
+        <button onclick="selectCurriculumUnit(2)" id="unitBtn-2" class="unit-ribbon-btn bg-slate-50 hover:bg-sky-50 text-slate-700 border border-slate-200 px-3 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 flex-shrink-0">
+          <span>👨‍👩‍👧‍👦</span> <span>الوَحْدَةُ 2: الأُسْرَةُ (م-ل-أ-ر-ك)</span>
+        </button>
+        <button onclick="selectCurriculumUnit('supp-2')" id="unitBtn-supp-2" class="unit-ribbon-btn bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 flex-shrink-0">
+          <span>🎯</span> <span>دَعْمُ 2</span>
+        </button>
+
+        <button onclick="selectCurriculumUnit(3)" id="unitBtn-3" class="unit-ribbon-btn bg-slate-50 hover:bg-sky-50 text-slate-700 border border-slate-200 px-3 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 flex-shrink-0">
+          <span>🍲</span> <span>الوَحْدَةُ 3: التَّغْذِيَةُ وَالسُّوقُ (ش-ح-ج-ت-ط)</span>
+        </button>
+        <button onclick="selectCurriculumUnit('supp-3')" id="unitBtn-supp-3" class="unit-ribbon-btn bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 flex-shrink-0">
+          <span>🎯</span> <span>دَعْمُ 3</span>
+        </button>
+
+        <button onclick="selectCurriculumUnit(4)" id="unitBtn-4" class="unit-ribbon-btn bg-slate-50 hover:bg-sky-50 text-slate-700 border border-slate-200 px-3 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 flex-shrink-0">
+          <span>🏘️</span> <span>الوَحْدَةُ 4: الحَيُّ وَالمَدِينَةُ (س-ص-ز-ع-ي)</span>
+        </button>
+        <button onclick="selectCurriculumUnit('supp-4')" id="unitBtn-supp-4" class="unit-ribbon-btn bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 flex-shrink-0">
+          <span>🎯</span> <span>دَعْمُ 4</span>
+        </button>
+
+        <button onclick="selectCurriculumUnit(5)" id="unitBtn-5" class="unit-ribbon-btn bg-slate-50 hover:bg-sky-50 text-slate-700 border border-slate-200 px-3 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 flex-shrink-0">
+          <span>⚽</span> <span>الوَحْدَةُ 5: الهِوَايَاتُ (ن-هـ-ق-ذ-ث)</span>
+        </button>
+        <button onclick="selectCurriculumUnit('supp-5')" id="unitBtn-supp-5" class="unit-ribbon-btn bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 flex-shrink-0">
+          <span>🎯</span> <span>دَعْمُ 5</span>
+        </button>
+
+        <button onclick="selectCurriculumUnit(6)" id="unitBtn-6" class="unit-ribbon-btn bg-slate-50 hover:bg-sky-50 text-slate-700 border border-slate-200 px-3 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 flex-shrink-0">
+          <span>✈️</span> <span>الوَحْدَةُ 6: السَّفَرُ وَالحَصِيلَةُ (ض-خ-ظ-غ-آ)</span>
+        </button>
+        <button onclick="selectCurriculumUnit('supp-6')" id="unitBtn-supp-6" class="unit-ribbon-btn bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 flex-shrink-0">
+          <span>🏆</span> <span>الحَصِيلَةُ النِّهَائِيَّةُ</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Lesson Sections Ribbon (Oral, Instructions, Basket, WRITING STUDIO, Badge, Videos, Support) -->
+  <div class="max-w-7xl mx-auto px-4 mt-2.5 w-full">
+    <div class="bg-white/95 backdrop-blur border border-sky-100 rounded-2xl p-2 shadow-xs flex items-center justify-between gap-1 overflow-x-auto no-scrollbar">
+      <button onclick="switchMainTab('tab-oral')" id="mainTabBtn-oral" class="main-tab-nav-btn px-3 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 flex-shrink-0 bg-slate-100 text-slate-700 hover:bg-sky-50">
+        <span>🗣️</span> <span>1. التَّفَاعُلُ الشَّفَهِيُّ</span>
+      </button>
+
+      <button onclick="switchMainTab('tab-consignes')" id="mainTabBtn-consignes" class="main-tab-nav-btn px-3 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 flex-shrink-0 bg-slate-100 text-slate-700 hover:bg-sky-50">
+        <span>📋</span> <span>2. تَعْلِيمَاتُ القِسْمِ</span>
+      </button>
+
+      <button onclick="switchMainTab('tab-basket')" id="mainTabBtn-basket" class="main-tab-nav-btn px-3 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 flex-shrink-0 bg-slate-100 text-slate-700 hover:bg-sky-50">
+        <span>🧺</span> <span>3. لُعْبَةُ السَّلَّةِ</span>
+      </button>
+
+      <!-- WRITING SECTION (HIGHLIGHTED WITH EL OUASTANI WORKBOOK) -->
+      <button onclick="switchMainTab('tab-writing')" id="mainTabBtn-writing" class="main-tab-nav-btn main-tab-active px-4 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 flex-shrink-0 ring-2 ring-emerald-500/50">
+        <span>✍️</span> <span>4. قِسْمُ الكِتَابَةِ وَالخَطِّ (كُرَّاسَةُ الوَسْطَانِي)</span>
+      </button>
+
+      <button onclick="switchMainTab('tab-badge')" id="mainTabBtn-badge" class="main-tab-nav-btn px-3 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 flex-shrink-0 bg-slate-100 text-slate-700 hover:bg-sky-50">
+        <span>🪪</span> <span>5. بِطَاقَةُ التَّعْرِيفِ</span>
+      </button>
+
+      <button onclick="switchMainTab('tab-videos')" id="mainTabBtn-videos" class="main-tab-nav-btn px-3 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 flex-shrink-0 bg-slate-100 text-slate-700 hover:bg-sky-50">
+        <span>🎬</span> <span>6. مَكْتَبَةُ الفِيدْيُو</span>
+      </button>
+
+      <button onclick="switchMainTab('tab-support-view')" id="mainTabBtn-support-view" class="main-tab-nav-btn px-3 py-1.5 rounded-xl text-xs font-black transition flex items-center gap-1.5 flex-shrink-0 bg-slate-100 text-slate-700 hover:bg-sky-50">
+        <span>🎯</span> <span>7. تَقْوِيمٌ وَدَعْمٌ</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Audio Speaking Banner -->
+  <div id="speakingBanner" class="hidden max-w-7xl mx-auto px-4 mt-2 w-full">
+    <div class="bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-xl flex items-center justify-between shadow-sm animate-pulse">
+      <div class="flex items-center gap-2">
+        <span class="text-base">📢</span>
+        <span id="speakingTextContent">...</span>
+      </div>
+      <span class="text-[11px] font-fr bg-emerald-700 px-2 py-0.5 rounded-lg">Écoute attentivement !</span>
+    </div>
+  </div>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 py-3 flex-1 w-full" id="mainContentContainer">
+
+    <!-- ======================================================== -->
+    <!-- SECTION 1: التَّفَاعُلُ الشَّفَهِيُّ وَالِاسْتِرْسَالُ (Communication Orale) -->
+    <!-- ======================================================== -->
+    <div id="view-oral" class="main-content-view hidden space-y-4">
+      <div class="bg-white p-5 sm:p-6 rounded-3xl border-2 border-sky-100 shadow-md">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 flex-wrap gap-2">
+          <div>
+            <div class="inline-flex items-center gap-1 bg-sky-100 text-sky-900 px-3 py-0.5 rounded-full text-xs font-black mb-1">
+              <span>🗣️ التَّفَاعُلُ الشَّفَهِيُّ وَالِاسْتِرْسَالُ</span> • <span class="font-fr">Communication Orale</span>
+            </div>
+            <h2 id="oralSectionTitle" class="text-base sm:text-xl font-black text-slate-900 font-naskh">
+              تَبَادُلُ التَّحِيَّةِ وَالتَّعْرِيفُ بِالنَّفْسِ (الحِوَارُ النَّمُوذَجِيُّ)
+            </h2>
+            <p id="oralSectionDesc" class="text-xs text-slate-500 font-fr mt-0.5">
+              Écoute et répète les dialogues pour développer ton expression en arabe.
+            </p>
+          </div>
+          <button onclick="speakCurrentOralDialogue()" class="px-3.5 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-black flex items-center gap-1 shadow-sm transition">
+            <span>🔊</span> <span>اسْتَمِعْ لِلْحِوَارِ كَامِلًا</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="oralDialogueCardsContainer">
+          <!-- Injected dynamically based on active unit -->
+        </div>
+
+        <!-- Parler en continu Tool -->
+        <div class="mt-4 p-4 bg-slate-50 rounded-2xl border border-slate-200">
+          <span class="text-xs font-black text-slate-700 block mb-2">📢 الِاسْتِرْسَالُ فِي الكَلَامِ (Parler en continu) :</span>
+          <div class="flex flex-wrap gap-2" id="oralContinuousButtons">
+            <!-- Buttons injected by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 2: تَعْلِيمَاتُ القِسْمِ (Les consignes de classe) -->
+    <!-- ======================================================== -->
+    <div id="view-consignes" class="main-content-view hidden space-y-4">
+      <div class="bg-white p-5 sm:p-6 rounded-3xl border-2 border-sky-100 shadow-md">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 flex-wrap gap-2">
+          <div>
+            <div class="inline-flex items-center gap-1 bg-sky-100 text-sky-900 px-3 py-0.5 rounded-full text-xs font-black mb-1">
+              <span>📋 فَهْمُ المَسْمُوعِ</span> • <span class="font-fr">Consignes de classe</span>
+            </div>
+            <h2 class="text-base sm:text-xl font-black text-slate-900 font-naskh">
+              أَفْهَمُ تَعْلِيمَاتِ القِسْمِ وَأُطَبِّقُهَا : أُحِيطُ • أَشْطُبُ • أُسَطِّرُ تَحْتَ
+            </h2>
+            <p class="text-xs text-slate-500 font-fr mt-0.5">
+              Écoute la consigne donnée par l'enseignant, puis clique sur l'action correspondante.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-br from-slate-900 to-sky-950 text-white rounded-3xl p-6 text-center max-w-2xl mx-auto shadow-lg space-y-4">
+          <div class="text-xs font-bold text-sky-300">انْقُرْ لِلِاسْتِمَاعِ لِأَمْرِ الأُسْتَاذِ :</div>
+          <div>
+            <button onclick="playCurrentConsigneAudio()" class="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xl rounded-2xl shadow-lg flex items-center gap-2 mx-auto transition transform active:scale-95">
+              <span>🔊</span> <span id="consigneCurrentGoalAr">أُحِيطُ</span>
+            </button>
+            <span id="consigneCurrentGoalFr" class="text-xs text-slate-400 block mt-1 font-fr">Entourez le mot</span>
+          </div>
+
+          <!-- Target Interactive Word -->
+          <div class="py-6 bg-slate-800/80 rounded-2xl border border-slate-700">
+            <span id="consigneTargetWord" class="text-4xl font-black text-amber-300 inline-block px-5 py-2 border-2 border-transparent transition">مَدْرَسَةٌ</span>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="grid grid-cols-3 gap-3 max-w-md mx-auto">
+            <button onclick="handleConsigneAction('أحيط')" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-bold text-xs flex flex-col items-center gap-1 border border-slate-600 transition">
+              <i class="fa-regular fa-circle text-sky-400 text-lg"></i>
+              <span>أُحِيطُ</span>
+              <span class="text-[10px] text-slate-400 font-fr">Entourer</span>
+            </button>
+            <button onclick="handleConsigneAction('أشطب')" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-bold text-xs flex flex-col items-center gap-1 border border-slate-600 transition">
+              <i class="fa-solid fa-xmark text-rose-400 text-lg"></i>
+              <span>أَشْطُبُ</span>
+              <span class="text-[10px] text-slate-400 font-fr">Barrer</span>
+            </button>
+            <button onclick="handleConsigneAction('أسطر تحت')" class="p-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-bold text-xs flex flex-col items-center gap-1 border border-slate-600 transition">
+              <i class="fa-solid fa-underline text-emerald-400 text-lg"></i>
+              <span>أُسَطِّرُ تَحْتَ</span>
+              <span class="text-[10px] text-slate-400 font-fr">Souligner</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 3: لُعْبَةُ السَّلَّةِ (Le jeu du panier) -->
+    <!-- ======================================================== -->
+    <div id="view-basket" class="main-content-view hidden space-y-4">
+      <div class="bg-white p-5 sm:p-6 rounded-3xl border-2 border-sky-100 shadow-md">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 flex-wrap gap-2">
+          <div>
+            <div class="inline-flex items-center gap-1 bg-amber-100 text-amber-900 px-3 py-0.5 rounded-full text-xs font-black mb-1">
+              <span>🧺 فَهْمُ المَكْتُوبِ</span> • <span class="font-fr">Le jeu du panier</span>
+            </div>
+            <h2 class="text-base sm:text-xl font-black text-slate-900 font-naskh">
+              لُعْبَةُ السَّلَّةِ التَّفَاعُلِيَّةُ : صَنِّفِ الكَلِمَةَ فِي سَلَّةِ الحَرْفِ المُنَاسِبِ
+            </h2>
+            <p class="text-xs text-slate-500 font-fr mt-0.5">
+              Écoute et lis le mot affiché, puis clique sur le panier de la lettre correspondante.
+            </p>
+          </div>
+        </div>
+
+        <div class="max-w-2xl mx-auto bg-slate-50 p-6 rounded-3xl border border-slate-200 text-center space-y-4">
+          <div>
+            <span class="text-xs font-bold text-slate-400">الكَلِمَةُ الحَالِيَّةُ :</span>
+            <div id="basketWordText" class="text-3xl sm:text-4xl font-black text-slate-800 my-2 font-naskh">دَفْتَرٌ</div>
+            <button onclick="speakBasketWord()" class="px-3.5 py-1.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-700 shadow-xs hover:bg-sky-50 transition">
+              <span>🔊</span> <span>اسْتَمِعْ لِلْكَلِمَةِ</span>
+            </button>
+          </div>
+
+          <div class="text-xs font-bold text-slate-600">اخْتَرْ سَلَّةَ الحَرْفِ الَّذِي تَبْدَأُ بِهِ الكَلِمَةُ :</div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="basketBasketsContainer">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 4: قِسْمُ الكِتَابَةِ وَالخَطِّ (كُرَّاسَةُ الوَسْطَانِي الشَّامِلَة) -->
+    <!-- ======================================================== -->
+    <div id="view-writing" class="main-content-view block space-y-4">
+      <div class="bg-white p-5 sm:p-6 rounded-3xl border-2 border-emerald-200 shadow-md">
+        
+        <!-- Top banner inside Writing Studio -->
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 flex-wrap gap-2">
+          <div>
+            <div class="inline-flex items-center gap-1.5 bg-emerald-100 text-emerald-950 px-3.5 py-1 rounded-full text-xs font-black mb-1">
+              <span>✍️ كُرَّاسَةُ الخَطِّ وَالكِتَابَةِ</span> • <span class="font-fr">Cahier d'exercices El Ouastani</span>
+            </div>
+            <h2 id="writingLetterMainTitle" class="text-base sm:text-xl font-black text-slate-900 font-naskh">
+              دُرُوسُ وَتَمَارِينُ الكِتَابَةِ : حَرْفُ الكَافِ (ك)
+            </h2>
+            <p class="text-xs text-slate-500 font-fr mt-0.5">
+              Observe le dialogue, étudie le tableau des syllabes, remets la phrase en ordre, et écris sur la réglure Seyès.
+            </p>
+          </div>
+
+          <!-- Letters Picker Ribbon for Writing Studio -->
+          <div class="flex items-center gap-1 bg-slate-100 p-1.5 rounded-2xl border border-slate-200 overflow-x-auto no-scrollbar max-w-full" id="writingLettersPickerRibbon">
+            <!-- Injected by JS (All unit letters + workbook letters) -->
+          </div>
+        </div>
+
+        <!-- 5 Sub-stages of El Ouastani's lesson -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-2 mb-4 border-b border-slate-100 no-scrollbar">
+          <button onclick="switchWritingSubStage('observe')" id="subStageBtn-observe" class="sub-stage-btn sub-write-active px-3 py-1.5 rounded-xl border text-xs font-bold transition flex items-center gap-1 flex-shrink-0">
+            <span>👀</span> <span>1. أُلَاحِظُ وَأَقْرَأُ</span>
+          </button>
+          <button onclick="switchWritingSubStage('syllables')" id="subStageBtn-syllables" class="sub-stage-btn bg-slate-100 text-slate-700 hover:bg-sky-50 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 flex-shrink-0">
+            <span>🗣️</span> <span>2. المَقَاطِعُ وَالكَلِمَاتُ</span>
+          </button>
+          <button onclick="switchWritingSubStage('reorder')" id="subStageBtn-reorder" class="sub-stage-btn bg-slate-100 text-slate-700 hover:bg-sky-50 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 flex-shrink-0">
+            <span>🧩</span> <span>3. رَتِّبِ الجُمْلَةَ</span>
+          </button>
+          <button onclick="switchWritingSubStage('slate')" id="subStageBtn-slate" class="sub-stage-btn bg-slate-100 text-slate-700 hover:bg-sky-50 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 flex-shrink-0">
+            <span>📏</span> <span>4. سَبُّورَةُ الخَطِّ (Seyès)</span>
+          </button>
+          <button onclick="switchWritingSubStage('evaluation')" id="subStageBtn-evaluation" class="sub-stage-btn bg-slate-100 text-slate-700 hover:bg-sky-50 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1 flex-shrink-0">
+            <span>😊</span> <span>5. الِابْتِسَامَاتُ الثَّلَاثُ</span>
+          </button>
+        </div>
+
+        <!-- Sub-Stage 1: أُلَاحِظُ وَأَقْرَأُ (Dialogue & Mots) -->
+        <div id="subview-observe" class="sub-writing-view block space-y-4">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+            <div class="lg:col-span-8 space-y-3" id="writingDialogueBubbles">
+              <!-- Injected by JS -->
+            </div>
+            <div class="lg:col-span-4 bg-gradient-to-b from-sky-50 to-emerald-50 p-4 rounded-2xl border border-sky-200 text-center space-y-2.5">
+              <div class="w-16 h-16 rounded-2xl bg-white text-4xl flex items-center justify-center mx-auto shadow-sm border border-sky-100 font-naskh font-black text-sky-700" id="writingCurrentCharBadge">
+                ك
+              </div>
+              <span id="writingCurrentPhoneticBadge" class="text-xs font-black text-sky-800 bg-sky-100 px-2.5 py-0.5 rounded-md font-fr">Son: K</span>
+              <p id="writingCurrentPhoneticHelp" class="text-xs text-slate-600 leading-relaxed font-fr">
+                Prononciation identique au son « K » en français comme dans Karim.
+              </p>
+              <div class="p-2.5 bg-white rounded-xl border border-slate-200 text-right">
+                <span class="text-[11px] font-bold text-slate-500 block mb-1">كَلِمَاتٌ بَصَرِيَّةٌ فِي الكُرَّاسَةِ :</span>
+                <div id="writingKeywordsBadges" class="flex flex-wrap gap-1.5"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-Stage 2: أَقْرَأُ المَقَاطِعَ وَالكَلِمَاتِ (Tableau des syllabes) -->
+        <div id="subview-syllables" class="sub-writing-view hidden space-y-4">
+          <div class="overflow-x-auto pb-2">
+            <table class="w-full text-center border-collapse border border-slate-200 rounded-2xl overflow-hidden shadow-xs">
+              <thead>
+                <tr class="bg-emerald-700 text-white text-xs font-black">
+                  <th class="p-2.5 border border-emerald-600">النَّوْعُ</th>
+                  <th class="p-2.5 border border-emerald-600">المَفْتُوحُ (َ / ا)</th>
+                  <th class="p-2.5 border border-emerald-600">المَضْمُومُ (ُ / و)</th>
+                  <th class="p-2.5 border border-emerald-600">المَكْسُورُ (ِ / ي)</th>
+                  <th class="p-2.5 border border-emerald-600">السُّكُونُ وَالتَّنْوِينُ</th>
+                </tr>
+              </thead>
+              <tbody id="writingSyllablesTableBody" class="text-sm font-naskh font-black bg-slate-50 divide-y divide-slate-200">
+                <!-- Injected by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-3 pt-3 border-t border-slate-100">
+            <span class="text-xs font-bold text-slate-700 block mb-2">أَقْرَأُ الكَلِمَاتِ النَّمُوذَجِيَّةَ لِلْحَرْفِ (انْقُرْ لِلِاسْتِمَاعِ) :</span>
+            <div id="writingSyllableWordsGrid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2.5 text-center"></div>
+          </div>
+        </div>
+
+        <!-- Sub-Stage 3: أُرَتِّبُ الكَلِمَاتِ لِأَحْصُلَ عَلَى جُمْلَةٍ (Remettre en ordre) -->
+        <div id="subview-reorder" class="sub-writing-view hidden space-y-4">
+          <div class="max-w-2xl mx-auto space-y-4 py-2">
+            <div class="bg-emerald-50/60 p-3.5 rounded-2xl border border-emerald-200 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <span class="text-3xl" id="writingReorderIcon">🎨</span>
+                <div>
+                  <span class="text-xs font-black text-emerald-900 block" id="writingReorderTitle">المَشْهَدُ التَّعْبِيرِيُّ :</span>
+                  <span class="text-[11px] text-slate-600 font-fr" id="writingReorderDesc">Observe le dessin du cahier d'exercices</span>
+                </div>
+              </div>
+              <button onclick="speakWritingTargetSentence()" class="px-3 py-1 bg-emerald-600 text-white rounded-xl text-xs font-black hover:bg-emerald-700 transition flex items-center gap-1 shadow-xs">
+                <span>🔊</span> <span>مُسَاعَدَةٌ</span>
+              </button>
+            </div>
+
+            <!-- Assembled Sentence Display -->
+            <div class="p-4 rounded-2xl border-2 border-dashed border-emerald-300 bg-white min-h-[70px] flex items-center justify-center flex-wrap gap-2 shadow-inner" id="writingAssembledZone">
+              <span class="text-xs text-slate-400 font-bold" id="writingAssembledPlaceholder">انْقُرْ عَلَى الكَلِمَاتِ بِالتَّرْتِيبِ الصَّحِيحِ هُنَا...</span>
+            </div>
+
+            <!-- Shuffled Pool -->
+            <div>
+              <span class="text-xs font-bold text-slate-600 block mb-2">الكَلِمَاتُ المُبَعْثَرَةُ :</span>
+              <div id="writingShuffledPool" class="flex flex-wrap items-center justify-center gap-2"></div>
+            </div>
+
+            <div id="writingReorderAlert" class="hidden p-3 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-xl text-center font-black text-xs">
+              🎉 مُمْتَازٌ جِدًّا ! رَتَّبْتَ الجُمْلَةَ تَرْتِيبًا صَحِيحًا.
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-Stage 4: سَبُّورَةُ الخَطِّ وَالتَّخْطِيطِ (Seyès Canvas) -->
+        <div id="subview-slate" class="sub-writing-view hidden space-y-4">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            <!-- Canvas with Seyes lines -->
+            <div class="lg:col-span-8 bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-3">
+              <div class="flex items-center justify-between text-xs font-bold text-slate-600">
+                <span>📏 سَبُّورَةُ الدَّفْتَرِ المُسَطَّرِ (Interlignes Seyès)</span>
+                <button onclick="clearWritingCanvas()" class="px-2.5 py-1 text-rose-600 bg-rose-50 border border-rose-200 rounded-lg text-xs font-bold hover:bg-rose-100 transition">
+                  <span>🗑️</span> <span>مَسْحُ اللَّوْحَةِ</span>
+                </button>
+              </div>
+
+              <div class="relative w-full h-56 rounded-2xl border border-slate-300 shadow-inner overflow-hidden seyes-lines">
+                <canvas id="writingSlateCanvas" class="w-full h-full cursor-crosshair touch-none relative z-10"></canvas>
+                <div id="writingGhostModel" class="absolute inset-0 flex items-center justify-center text-6xl sm:text-7xl font-black text-sky-200/50 pointer-events-none select-none font-naskh z-0">
+                  كـ
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <div class="flex items-center justify-between flex-wrap gap-2 pt-1 text-xs">
+                <div class="flex items-center gap-1.5">
+                  <span class="font-bold text-slate-500">حَجْمُ القَلَمِ:</span>
+                  <button onclick="setBrushWidth(4)" class="px-2 py-0.5 rounded bg-white border border-slate-200 hover:bg-sky-50 font-bold">رَقِيق</button>
+                  <button onclick="setBrushWidth(8)" class="px-2 py-0.5 rounded bg-sky-600 text-white border border-sky-600 font-bold">مُتَوَسِّط</button>
+                  <button onclick="setBrushWidth(14)" class="px-2 py-0.5 rounded bg-white border border-slate-200 hover:bg-sky-50 font-bold">عَرِيض</button>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <span class="font-bold text-slate-500">اللَّوْنُ:</span>
+                  <button onclick="setBrushColor('#0284c7')" class="w-5 h-5 rounded-full bg-sky-600 ring-2 ring-sky-300"></button>
+                  <button onclick="setBrushColor('#059669')" class="w-5 h-5 rounded-full bg-emerald-600"></button>
+                  <button onclick="setBrushColor('#d97706')" class="w-5 h-5 rounded-full bg-amber-600"></button>
+                  <button onclick="setBrushColor('#1e293b')" class="w-5 h-5 rounded-full bg-slate-800"></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Models List -->
+            <div class="lg:col-span-4 bg-white p-4 rounded-2xl border border-sky-100 shadow-xs space-y-3">
+              <span class="text-xs font-black text-slate-700 block">اخْتَرْ نَمُوذَجَ النَّقْلِ (Modèle à recopier) :</span>
+              <div id="writingCopyModelsList" class="space-y-2"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-Stage 5: الِابْتِسَامَاتُ الثَّلَاثُ (Auto-évaluation) -->
+        <div id="subview-evaluation" class="sub-writing-view hidden space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center space-y-2.5">
+              <span class="text-xs font-black text-slate-700 block">1. التَّمْيِيزُ وَالنُّطْقُ السَّمْعِيُّ</span>
+              <p class="text-[11px] text-slate-500 font-fr">Je reconnais le son de la lettre dans les mots entendus.</p>
+              <button onclick="toggleSmile(1)" id="smileBtn-1" class="text-4xl p-2.5 bg-white rounded-2xl border border-slate-200 shadow-xs transition transform active:scale-95">⚪</button>
+              <span class="text-[10px] text-slate-400 block" id="smileLabel-1">انْقُرْ لِلتَّلْوِينِ</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center space-y-2.5">
+              <span class="text-xs font-black text-slate-700 block">2. قِرَاءَةُ المَقَاطِعِ وَالحَرَكَاتِ</span>
+              <p class="text-[11px] text-slate-500 font-fr">Je lis facilement la lettre avec toutes les voyelles.</p>
+              <button onclick="toggleSmile(2)" id="smileBtn-2" class="text-4xl p-2.5 bg-white rounded-2xl border border-slate-200 shadow-xs transition transform active:scale-95">⚪</button>
+              <span class="text-[10px] text-slate-400 block" id="smileLabel-2">انْقُرْ لِلتَّلْوِينِ</span>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center space-y-2.5">
+              <span class="text-xs font-black text-slate-700 block">3. الخَطُّ وَالنَّقْلُ السَّلِيمُ</span>
+              <p class="text-[11px] text-slate-500 font-fr">Je trace et j'écris la lettre avec ses bons interlignes.</p>
+              <button onclick="toggleSmile(3)" id="smileBtn-3" class="text-4xl p-2.5 bg-white rounded-2xl border border-slate-200 shadow-xs transition transform active:scale-95">⚪</button>
+              <span class="text-[10px] text-slate-400 block" id="smileLabel-3">انْقُرْ لِلتَّلْوِينِ</span>
+            </div>
+          </div>
+
+          <div class="mt-3 p-3.5 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-center justify-between flex-wrap gap-2">
+            <span class="text-xs font-black text-emerald-800" id="evaluationResultText">اضْغَطْ عَلَى الابْتِسَامَاتِ عِنْدَ إِتْقَانِ الدَّرْسِ</span>
+            <button onclick="celebrateMastery()" class="px-3.5 py-1.5 bg-emerald-600 text-white text-xs font-black rounded-xl shadow-xs transition hover:bg-emerald-700">
+              🎉 تَأْكِيدُ التَّمَكُّنِ وَنَيْلُ 5 نُجُومٍ
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 5: بِطَاقَةُ التَّعْرِيفِ المَدْرَسِيَّةِ (Ma Carte d'Identité) -->
+    <!-- ======================================================== -->
+    <div id="view-badge" class="main-content-view hidden space-y-4">
+      <div class="bg-white p-5 sm:p-6 rounded-3xl border-2 border-sky-100 shadow-md">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 flex-wrap gap-2">
+          <div>
+            <div class="inline-flex items-center gap-1 bg-sky-100 text-sky-900 px-3 py-0.5 rounded-full text-xs font-black mb-1">
+              <span>🪪 مَشْرُوعُ الوَحْدَةِ</span> • <span class="font-fr">Ma Carte d'Identité Scolaire</span>
+            </div>
+            <h2 class="text-base sm:text-xl font-black text-slate-900 font-naskh">
+              أَمْلَأُ بِطَاقَةَ التَّعْرِيفِ المَدْرَسِيَّةِ وَأَطْبَعُهَا لِدَفْتَرِي
+            </h2>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+          <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">الاسْمُ الكَامِلُ (Prénom et Nom):</label>
+              <input type="text" id="inputStudentName" value="عُمَر" oninput="updateBadgePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-bold">
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">العُمْرُ (Âge):</label>
+                <input type="number" id="inputStudentAge" value="7" oninput="updateBadgePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-bold">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">مَكَانُ الوِلَادَةِ (Lieu de naissance):</label>
+                <input type="text" id="inputStudentBirth" value="بَوْرْدُو" oninput="updateBadgePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-bold">
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">السَّكَنُ (Résidence):</label>
+                <input type="text" id="inputStudentCity" value="بَوْرْدُو" oninput="updateBadgePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-bold">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1">أَنَا مِنْ (Origine):</label>
+                <input type="text" id="inputStudentCountry" value="فَرَنْسَا" oninput="updateBadgePreview()" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm font-bold">
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Preview -->
+          <div class="bg-gradient-to-tr from-sky-600 to-teal-700 p-6 rounded-3xl text-white shadow-xl relative overflow-hidden space-y-3">
+            <div class="flex items-center justify-between border-b border-white/20 pb-2">
+              <span class="text-xs font-bold">بِطَاقَةُ تِلْمِيذِ اللُّغَةِ العَرَبِيَّةِ EILE</span>
+              <span class="text-[10px] bg-white/20 px-2 py-0.5 rounded font-bold">Niveau A1</span>
+            </div>
+            <div class="space-y-1.5 text-sm font-bold font-naskh">
+              <div>اسْمِي : <span id="badgeName" class="text-amber-300 text-lg">عُمَر</span></div>
+              <div>عُمْرِي : <span id="badgeAge">7 سَنَوَاتٍ</span></div>
+              <div>وُلِدْتُ بِـ : <span id="badgeBirth">بَوْرْدُو</span></div>
+              <div>أَسْكُنُ فِي : <span id="badgeCity">بَوْرْدُو</span></div>
+              <div>أَنَا مِنْ : <span id="badgeCountry">فَرَنْسَا</span></div>
+            </div>
+            <div class="pt-3 border-t border-white/20 flex justify-between">
+              <button onclick="speakBadgeDetails()" class="text-xs bg-white text-sky-800 font-bold px-3 py-1.5 rounded-lg hover:bg-sky-50 transition">
+                <span>🔊</span> اسْتَمِعْ لِبِطَاقَتِي
+              </button>
+              <button onclick="window.print()" class="text-xs bg-sky-800 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-sky-900 transition">
+                <span>🖨️</span> طِبَاعَةُ البِطَاقَةِ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 6: مَكْتَبَةُ الفِيدْيُو (Vidéothèque EILE) -->
+    <!-- ======================================================== -->
+    <div id="view-videos" class="main-content-view hidden space-y-4">
+      <div class="bg-white p-5 sm:p-6 rounded-3xl border-2 border-sky-100 shadow-md">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 flex-wrap gap-2">
+          <div>
+            <div class="inline-flex items-center gap-1 bg-sky-100 text-sky-900 px-3 py-0.5 rounded-full text-xs font-black mb-1">
+              <span>🎬 مَكْتَبَةُ الفِيدْيُو</span> • <span class="font-fr">Vidéothèque EILE</span>
+            </div>
+            <h2 class="text-base sm:text-xl font-black text-slate-900 font-naskh">
+              فِيدْيُوهَاتُ الحُرُوفِ، الحِوَارَاتِ، وَالمُعْجَمِ لِبَرْنَامَجِ A1
+            </h2>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="videosGridContainer">
+          <!-- Injected dynamically based on curriculum -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SECTION 7: أَنْشِطَةُ التَّقْوِيمِ وَالدَّعْمِ (Consolidation & Quiz) -->
+    <!-- ======================================================== -->
+    <div id="view-support-view" class="main-content-view hidden space-y-4">
+      <div class="bg-white p-5 sm:p-6 rounded-3xl border-2 border-amber-200 shadow-md">
+        <div class="flex items-center justify-between pb-3 border-b border-amber-100 mb-4 flex-wrap gap-2">
+          <div>
+            <div class="inline-flex items-center gap-1 bg-amber-100 text-amber-900 px-3 py-0.5 rounded-full text-xs font-black mb-1">
+              <span>🎯 أَنْشِطَةُ التَّقْوِيمِ وَالدَّعْمِ</span> • <span class="font-fr">Consolidation & Évaluation</span>
+            </div>
+            <h2 id="supportStationTitle" class="text-base sm:text-xl font-black text-slate-900 font-naskh">
+              أَنْشِطَةُ تَقْوِيمِ وَدَعْمِ تَعَلُّمَاتِ الوَحْدَةِ
+            </h2>
+          </div>
+        </div>
+
+        <div class="max-w-2xl mx-auto bg-slate-50 p-6 rounded-3xl border border-slate-200 text-center space-y-4">
+          <span class="text-xs font-bold text-slate-400">اخْتَرِ الحَرْفَ النَّاقِصَ لِتَكْمِلَةِ الكَلِمَةِ :</span>
+          <div>
+            <span id="supportQuizWordDisplay" class="text-4xl font-black text-sky-700 tracking-wider font-naskh">_َفْتَرٌ</span>
+          </div>
+          <button onclick="speakSupportQuizWord()" class="px-3.5 py-1.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-700 hover:bg-sky-50 transition shadow-xs">
+            <span>🔊</span> <span>اسْتَمِعْ لِلنُّطْقِ الكَامِلِ لِلْكَلِمَةِ</span>
+          </button>
+          <div class="grid grid-cols-4 gap-3 max-w-md mx-auto" id="supportQuizButtons">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl w-full max-w-3xl overflow-hidden shadow-2xl">
+      <div class="flex items-center justify-between p-4 border-b border-slate-800 text-white">
+        <h3 id="modalVideoTitle" class="font-bold text-sm">مشاهدة الفيديو</h3>
+        <button onclick="closeVideoModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-white transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="relative pt-[56.25%] bg-black">
+        <iframe id="videoIframe" class="absolute inset-0 w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="p-3 bg-slate-950 flex justify-end">
+        <a id="modalDriveLink" href="#" target="_blank" class="text-xs font-bold text-emerald-400 hover:text-emerald-300 flex items-center gap-1.5">
+          <i class="fa-brands fa-google-drive"></i> تحميل الفيديو من Google Drive
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-white border-t border-slate-200 py-3 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400 font-medium">
+      SAID EILE • Arabe (Niveau A1) • منهاج تدريس اللغة العربية وفق الإطار الأوروبي المشترك للغات
+    </div>
+  </footer>
+
+  <script>
+    /* --- APPLICATION STATE --- */
+    const appState = {
+      stars: 0,
+      soundEnabled: true,
+      audioCtx: null,
+      activeUnit: 1, // 1, 2, 3, 4, 5, 6 or 'supp-1', 'supp-2' ...
+      activeMainTab: 'tab-writing', // oral, consignes, basket, writing, badge, videos, support-view
+      activeWritingChar: 'kaf',
+      activeWritingSubStage: 'observe', // observe, syllables, reorder, slate, evaluation
+      reorderUserSeq: [],
+      brushColor: '#0284c7',
+      brushWidth: 8,
+      smiles: { 1: false, 2: false, 3: false }
+    };
+
+    /* --- CURRICULUM DATA: 6 UNITS (A1) ACCORDING TO OFFICIAL DISTRIBUTION --- */
+    const curriculumUnits = {
+      1: {
+        num: 1,
+        title: 'الوحدة 1: التَّعْرِيفُ بِالذَّاتِ وَالحَيَاةُ المَدْرَسِيَّةُ',
+        domainFr: 'Identité et vie scolaire',
+        letters: ['د', 'ف', 'ب', 'م'],
+        writingKeys: ['dal', 'faa', 'baa', 'meem', 'kaf'],
+        oral: {
+          title: 'تَبَادُلُ التَّحِيَّةِ وَالتَّعْرِيفُ بِالنَّفْسِ',
+          dialogue: [
+            { spk: 'عُمَر', text: 'السَّلَامُ عَلَيْكُمْ، أَنَا اسْمِي عُمَر، وَعُمْرِي سَبْعُ سَنَوَاتٍ.', av: '👦' },
+            { spk: 'مَرْيَم', text: 'وَعَلَيْكُمُ السَّلَامُ يَا عُمَر، أَنَا اسْمِي مَرْيَم، أَنَا مِنْ فَرَنْسَا وَأَسْكُنُ فِي بَوْرْدُو.', av: '👧' }
+          ],
+          continuous: ['أَنَا اسْمِي...', 'عُمْرِي...', 'وُلِدْتُ بِـ...', 'أَسْكُنُ فِي...', 'أَنَا مِنْ...']
+        },
+        basket: [
+          { word: 'دَفْتَرٌ', letter: 'د' },
+          { word: 'فَرَنْسَا', letter: 'ف' },
+          { word: 'بَابٌ', letter: 'ب' },
+          { word: 'مَدْرَسَةٌ', letter: 'م' }
+        ],
+        videos: [
+          { id: 'SbRp0kl3AUc', title: 'حَرْفُ الدَّالِ (د)', drive: 'https://drive.google.com/file/d/103DV3tEMZVMAbvzWIEOFaeytDAbrx1V6/view?usp=sharing' },
+          { id: 'Ky5MX54IFSA', title: 'حَرْفُ الفَاءِ (ف)', drive: 'https://drive.google.com/file/d/1q8O1V9LTlv51DfuYL_ebX65vrAKATE1-/view?usp=sharing' },
+          { id: 'f-2gA5NfPcY', title: 'حَرْفُ البَاءِ (ب)', drive: 'https://drive.google.com/file/d/1vPoRlvz5NQJIK5sz_bgzvZY-jFmlsrh/view?usp=sharing' },
+          { id: 'Za1ZgsNupFY', title: 'حَرْفُ المِيمِ (م)', drive: 'https://drive.google.com/file/d/1xjiDpNbNuuJXNSMZ6tkNDnSQG62UfFHM/view?usp=sharing' },
+          { id: 'RXFixbghMxl', title: 'الأَدَوَاتُ المَدْرَسِيَّةُ', drive: 'https://drive.google.com/file/d/1ly003eXeBUU7R9v4aEtKJvxlClr9Tznw/view?usp=sharing' }
+        ],
+        supportQuiz: [
+          { text: '_َفْتَرٌ', ans: 'د', full: 'دَفْتَرٌ', options: ['د', 'ف', 'ب', 'م'] },
+          { text: '_َرَنْسَا', ans: 'ف', full: 'فَرَنْسَا', options: ['د', 'ف', 'ب', 'م'] },
+          { text: '_َابٌ', ans: 'ب', full: 'بَابٌ', options: ['د', 'ف', 'ب', 'م'] },
+          { text: '_َدْرَسَةٌ', ans: 'م', full: 'مَدْرَسَةٌ', options: ['د', 'ف', 'ب', 'م'] }
+        ]
+      },
+
+      2: {
+        num: 2,
+        title: 'الوحدة 2: الأُسْرَةُ وَالمُحِيطُ',
+        domainFr: 'La famille et l\'entourage',
+        letters: ['م', 'ل', 'أ', 'ر', 'ك'],
+        writingKeys: ['meem', 'laam', 'alif', 'raa', 'kaf'],
+        oral: {
+          title: 'تَقْدِيمُ أَفْرَادِ الأُسْرَةِ وَالأَلْوَانِ وَالحَيَوَانِ الأَلِيفِ',
+          dialogue: [
+            { spk: 'نَبِيل', text: 'هَذَا أَبِي اسْمُهُ كَرِيمٌ، وَهَذِهِ أُمِّي اسْمُهَا أَمِينَةُ.', av: '👦' },
+            { spk: 'لَمِيس', text: 'أَهْلًا يَا نَبِيلُ، عِنْدِي قِطَّةٌ بَيْضَاءُ اسْمُهَا مِيشُو.', av: '👧' }
+          ],
+          continuous: ['هَذَا أَبِي...', 'هَذِهِ أُمِّي...', 'لَوْنِي المُفَضَّلُ...', 'عِنْدِي حَيَوَانٌ...']
+        },
+        basket: [
+          { word: 'أُمِّي', letter: 'أ' },
+          { word: 'مَنْزِلٌ', letter: 'م' },
+          { word: 'لُعْبَةٌ', letter: 'ل' },
+          { word: 'رَبَابُ', letter: 'ر' }
+        ],
+        videos: [
+          { id: 'gwaGohtO9z0', title: 'حَرْفُ اللَّامِ (ل)', drive: 'https://drive.google.com/file/d/1d9ESks8tfPhSxXXXrFIRCDXfKq5tDHXi/view?usp=sharing' },
+          { id: 'BJiQ0p-YQMS', title: 'الحُرُوفُ وَالحَرَكَاتُ', drive: 'https://drive.google.com/file/d/1TQ26nfzRM4W603v8aHsMSdqJh1jYdcwh/view?usp=sharing' },
+          { id: 'QmTz4Ox9e8Q', title: 'أَفْرَادُ الأُسْرَةِ', drive: 'https://drive.google.com/file/d/1i0y2B2ztX8RJM523D3TIrWCAkzB421Uv/view?usp=sharing' }
+        ],
+        supportQuiz: [
+          { text: '_ُمِّي', ans: 'أ', full: 'أُمِّي', options: ['أ', 'م', 'ل', 'ر'] },
+          { text: '_َنْزِلٌ', ans: 'م', full: 'مَنْزِلٌ', options: ['أ', 'م', 'ل', 'ر'] },
+          { text: '_ُعْبَةٌ', ans: 'ل', full: 'لُعْبَةٌ', options: ['أ', 'م', 'ل', 'ر'] },
+          { text: '_َأْسٌ', ans: 'ر', full: 'رَأْسٌ', options: ['أ', 'م', 'ل', 'ر'] }
+        ]
+      },
+
+      3: {
+        num: 3,
+        title: 'الوحدة 3: التَّغْذِيَةُ وَالسُّوقُ وَالحَيَاةُ الاجْتِمَاعِيَّةُ',
+        domainFr: 'Nutrition, marché et goûts',
+        letters: ['ش', 'ح', 'ج', 'ت', 'ط'],
+        writingKeys: ['sheen', 'haa', 'jeem', 'taa', 'taa_fort'],
+        oral: {
+          title: 'سَنَدُ الحِوَارِ: إِعْدَادُ الشَّايِ عِنْدَ البَقَّالِ إِبْرَاهِيم',
+          dialogue: [
+            { spk: 'لَيْلَى', text: 'أَلُو سُعَاد، أُرِيدُ إِعْدَادَ الشَّايِ بِالنَّعْنَاعِ، كَمْ ثَمَنُ الرَّبْطَةِ عِنْدَ البَقَّالِ إِبْرَاهِيم ؟', av: '👧' },
+            { spk: 'سُعَاد', text: 'ثَمَنُهَا أُورُو وَاحِدٌ يَا لَيْلَى، أَنَا فِي انْتِظَارِكِ لِنَشْرَبَ الشَّايَ مَعًا.', av: '🧒' }
+          ],
+          continuous: ['هَذَا فُلْفُلٌ...', 'هَذِهِ طَمَاطِمُ...', 'أَنَا أُحِبُّ...', 'لَا أُحِبُّ...', 'كَمِ الثَّمَنُ ؟']
+        },
+        basket: [
+          { word: 'شَايٌ', letter: 'ش' },
+          { word: 'حَلِيبٌ', letter: 'ح' },
+          { word: 'جَزَرٌ', letter: 'ج' },
+          { word: 'طَمَاطِمُ', letter: 'ط' }
+        ],
+        videos: [
+          { id: 'znVJJCWZmmY', title: 'حَرْفُ الشِّينِ (ش)', drive: 'https://drive.google.com/file/d/1sBdBW9-vf6pO4odQHG5Ya_3FJnJRiHOh/view?usp=sharing' },
+          { id: 'uDTaEWYEwkw', title: 'حَرْفُ الحَاءِ (ح)', drive: 'https://drive.google.com/file/d/1-pCZBje7kv9nNFQ3MJU29PEOWFsotgKs/view?usp=sharing' },
+          { id: '3x19hJX9ad8', title: 'حَرْفُ الجِيمِ (ج)', drive: 'https://drive.google.com/file/d/1xm7rW0vQ80B6XhrgaUafle6UlzCumlih/view?usp=sharing' },
+          { id: 'CmKa2N5m9d8', title: 'مُعْجَمُ الفَوَاكِهِ وَالخُضَرِ', drive: 'https://drive.google.com/file/d/1LEoGqgJDB-slhldzMOEehc_2zH1d9VY9/view?usp=sharing' }
+        ],
+        supportQuiz: [
+          { text: '_َايٌ', ans: 'ش', full: 'شَايٌ', options: ['ش', 'ح', 'ج', 'ط'] },
+          { text: '_َلِيبٌ', ans: 'ح', full: 'حَلِيبٌ', options: ['ش', 'ح', 'ج', 'ط'] },
+          { text: '_َزَرٌ', ans: 'ج', full: 'جَزَرٌ', options: ['ش', 'ح', 'ج', 'ط'] },
+          { text: '_َمَاطِمُ', ans: 'ط', full: 'طَمَاطِمُ', options: ['ش', 'ح', 'ج', 'ط'] }
+        ]
+      },
+
+      4: {
+        num: 4,
+        title: 'الوحدة 4: الحَيُّ وَالمَدِينَةُ وَالقَرْيَةُ',
+        domainFr: 'Le quartier, la ville et le village',
+        letters: ['س', 'ص', 'ز', 'ع', 'ي'],
+        writingKeys: ['seen', 'saad', 'zay', 'ayn', 'yaa'],
+        oral: {
+          title: 'وَصْفُ المَدِينَةِ وَالقَرْيَةِ وَالمَرَافِقِ',
+          dialogue: [
+            { spk: 'مُنِير', text: 'أَسْكُنُ فِي مَدِينَةٍ كَبِيرَةٍ فِيهَا حَدِيقَةٌ وَمَسْجِدٌ وَمَتْجَرٌ.', av: '👦' },
+            { spk: 'زَيْنَب', text: 'وَجَدِّي يَسْكُنُ فِي قَرْيَةٍ هَادِئَةٍ فِيهَا حُقُولٌ خَضْرَاءُ.', av: '👧' }
+          ],
+          continuous: ['أَسْكُنُ فِي شَارِعِ...', 'فِي حَيِّنَا مَدْرَسَةٌ...', 'قَرِيبٌ مِنْ...', 'بَعِيدٌ عَنْ...']
+        },
+        basket: [
+          { word: 'سَيَّارَةٌ', letter: 'س' },
+          { word: 'صَيْدَلِيَّةٌ', letter: 'ص' },
+          { word: 'زَيْتُونٌ', letter: 'ز' },
+          { word: 'عَرَبَةٌ', letter: 'ع' }
+        ],
+        videos: [
+          { id: 'isTvFKmaHwl', title: 'حَرْفُ السِّينِ (س)', drive: 'https://drive.google.com/file/d/1ju5EVoCfcbGlKdOeu9JvVKnu5D4aqGtk/view?usp=sharing' },
+          { id: 'LWwSaeQbrLU', title: 'حَرْفُ الصَّادِ (ص)', drive: 'https://drive.google.com/file/d/1VWWtRT_COKJZg0u6rjLNQmEbMaarbVGB/view?usp=sharing' },
+          { id: '11u2h_LpJOA', title: 'وَسَائِلُ النَّقْلِ', drive: 'https://drive.google.com/file/d/1ba5gGxcUt8VKyHC4OazkFBoE2Sywepts/view?usp=sharing' }
+        ],
+        supportQuiz: [
+          { text: '_َيَّارَةٌ', ans: 'س', full: 'سَيَّارَةٌ', options: ['س', 'ص', 'ز', 'ع'] },
+          { text: '_َيْدَلِيَّةٌ', ans: 'ص', full: 'صَيْدَلِيَّةٌ', options: ['س', 'ص', 'ز', 'ع'] },
+          { text: '_َيْتُونٌ', ans: 'ز', full: 'زَيْتُونٌ', options: ['س', 'ص', 'ز', 'ع'] },
+          { text: '_َرَبَةٌ', ans: 'ع', full: 'عَرَبَةٌ', options: ['س', 'ص', 'ز', 'ع'] }
+        ]
+      },
+
+      5: {
+        num: 5,
+        title: 'الوحدة 5: الهِوَايَاتُ وَالأَلْعَابُ وَالحَفَلَاتُ',
+        domainFr: 'Loisirs, jeux et fêtes',
+        letters: ['ن', 'هـ', 'ق', 'ذ', 'ث'],
+        writingKeys: ['noon', 'haa_round', 'qaaf', 'dhal', 'thaa'],
+        oral: {
+          title: 'التَّعْبِيرُ عَنِ الهِوَايَاتِ وَالأَلْعَابِ المُفَضَّلَةِ',
+          dialogue: [
+            { spk: 'هِشَام', text: 'أَنَا أُحِبُّ كُرَةَ القَدَمِ وَالسِّبَاحَةَ، وَأَنْتِ يَا نَدَى ؟', av: '👦' },
+            { spk: 'نَدَى', text: 'أَنَا أُفَضِّلُ الرَّسْمَ وَالعَزْفَ عَلَى المِعْزَفِ.', av: '👧' }
+          ],
+          continuous: ['هِوَايَتِي هِيَ...', 'فِي وَقْتِ الفَرَاغِ...', 'أَلْعَبُ مَعَ...', 'حَفْلَةُ عِيدِ مِيلَادِي...']
+        },
+        basket: [
+          { word: 'نَافِذَةٌ', letter: 'ن' },
+          { word: 'هَاتِفٌ', letter: 'هـ' },
+          { word: 'قَلَمٌ', letter: 'ق' },
+          { word: 'ثَوْبٌ', letter: 'ث' }
+        ],
+        videos: [
+          { id: 'G4J_D4w0YHK', title: 'حَرْفُ النُّونِ (ن)', drive: 'https://drive.google.com/file/d/1x2pTWIG4tXDco020bDyqkdhAyji1jcvf/view?usp=sharing' },
+          { id: 'TjOxjIb3-WI', title: 'حَرْفُ القَافِ (ق)', drive: 'https://drive.google.com/file/d/1d0dki_k_IfTCqhl-9u9y5cDp0yc3slg7/view?usp=sharing' },
+          { id: 'MjhTGNMjRfO', title: 'مُعْجَمُ الحَيَوَانَاتِ', drive: 'https://drive.google.com/file/d/1lamHYWoMkOr9qdR5ZmgPZUojqhfbxaTs/view?usp=sharing' }
+        ],
+        supportQuiz: [
+          { text: '_َافِذَةٌ', ans: 'ن', full: 'نَافِذَةٌ', options: ['ن', 'هـ', 'ق', 'ث'] },
+          { text: '_َاتِفٌ', ans: 'هـ', full: 'هَاتِفٌ', options: ['ن', 'هـ', 'ق', 'ث'] },
+          { text: '_َلَمٌ', ans: 'ق', full: 'قَلَمٌ', options: ['ن', 'هـ', 'ق', 'ث'] },
+          { text: '_َوْبٌ', ans: 'ث', full: 'ثَوْبٌ', options: ['ن', 'هـ', 'ق', 'ث'] }
+        ]
+      },
+
+      6: {
+        num: 6,
+        title: 'الوحدة 6: السَّفَرُ وَمَعَالِمُ بِلَادِي وَالحَصِيلَةُ',
+        domainFr: 'Voyages, patrimoine et bilan annuel',
+        letters: ['ض', 'خ', 'ظ', 'غ', 'آ'],
+        writingKeys: ['dhaad', 'khaa', 'dhaa', 'ghayn', 'laam_alif'],
+        oral: {
+          title: 'السَّفَرُ إِلَى المَغْرِبِ وَزِيَارَةُ المَعَالِمِ',
+          dialogue: [
+            { spk: 'خَالِد', text: 'فِي العُطْلَةِ الصَّيْفِيَّةِ سَأُسَافِرُ إِلَى المَغْرِبِ لِزِيَارَةِ عَائِلَتِي.', av: '👦' },
+            { spk: 'غِيثَة', text: 'عُطْلَةٌ سَعِيدَةٌ يَا خَالِدُ ! أَنَا سَأَزُورُ شَاطِئَ البَحْرِ.', av: '👧' }
+          ],
+          continuous: ['سَأُسَافِرُ إِلَى...', 'بَلَدِي المَغْرِبُ جَمِيلٌ...', 'زُرْتُ مَدِينَةَ...', 'شُكْرًا لِمَدْرَسَتِي...']
+        },
+        basket: [
+          { word: 'ضَبَابٌ', letter: 'ض' },
+          { word: 'خَيْمَةٌ', letter: 'خ' },
+          { word: 'مِظَلَّةٌ', letter: 'ظ' },
+          { word: 'غُرَابٌ', letter: 'غ' }
+        ],
+        videos: [
+          { id: 'XYIQ7pmxbeQ', title: 'حَرْفُ الطَّاءِ (ط)', drive: 'https://drive.google.com/file/d/1n-ipe1vPFJmkD33UnqDbaNZh81D-HEVz/view?usp=sharing' },
+          { id: 'gDJZYlv4VPg', title: 'حَرْفُ الخَاءِ (خ)', drive: 'https://drive.google.com/file/d/1ZZUvfIQnMow-DPIUMtwHNN4PCN1UHpbg/view?usp=sharing' },
+          { id: 's9pjxzrXZ2w', title: 'حَرْفُ العَيْنِ (ع)', drive: 'https://drive.google.com/file/d/14SnYsV9CF7Drt1GB-C5BXZdzxacrXnMo/view?usp=sharing' }
+        ],
+        supportQuiz: [
+          { text: '_َبَابٌ', ans: 'ض', full: 'ضَبَابٌ', options: ['ض', 'خ', 'ظ', 'غ'] },
+          { text: '_َيْمَةٌ', ans: 'خ', full: 'خَيْمَةٌ', options: ['ض', 'خ', 'ظ', 'غ'] },
+          { text: '_ِظَلَّةٌ', ans: 'ظ', full: 'مِظَلَّةٌ', options: ['ض', 'خ', 'ظ', 'غ'] },
+          { text: '_ُرَابٌ', ans: 'غ', full: 'غُرَابٌ', options: ['ض', 'خ', 'ظ', 'غ'] }
+        ]
+      }
+    };
+
+    /* --- EL OUASTANI COMPREHENSIVE WRITING LESSONS DATABASE --- */
+    const elOuastaniLessons = {
+      kaf: {
+        char: 'ك',
+        phoneticFr: 'K',
+        helpFr: 'Son identique au « K » en français comme dans Karim.',
+        nameAr: 'حَرْفُ الكَافِ',
+        dialogue: {
+          speaker1: { name: 'كَرِيمٌ', text: 'السَّلَامُ عَلَيْكُمْ، اِسْمِي كَرِيمٌ، وَأَنْتِ مَا اسْمُكِ ؟', avatar: '👦' },
+          speaker2: { name: 'مَلَاكُ', text: 'وَعَلَيْكُمُ السَّلَامُ يَا كَرِيمُ، أَنَا اسْمِي مَلَاكُ.', avatar: '👧' }
+        },
+        keywords: ['كَرِيمٌ', 'مَلَاكُ', 'كَتَبَ', 'يَكْتُبُ', 'كِتَابٌ', 'مَكْتَبٌ', 'كُرْسِيٌّ'],
+        syllables: {
+          short: { fatha: 'كَ (ka)', damma: 'كُ (ko)', kasra: 'كِ (ki)', sukoon: 'كْ (k)' },
+          long: { fatha: 'كَا (kaa)', damma: 'كُو (koo)', kasra: 'كِي (kii)' },
+          tanween: { fath: 'كاً (kane)', damm: 'كٌ (kone)', kasr: 'كٍ (kine)' }
+        },
+        reorderGame: {
+          correctSentence: ['كَتَبَ', 'كَرِيمٌ', 'فِي', 'الدَّفْتَرِ'],
+          shuffled: ['فِي', 'كَتَبَ', 'الدَّفْتَرِ', 'كَرِيمٌ'],
+          scenarioIcon: '📝',
+          scenarioTitle: 'مَشْهَدُ الكِتَابَةِ المَدْرَسِيَّةِ',
+          scenarioDesc: 'Karim écrit dans son cahier.'
+        },
+        copyModels: [
+          { label: 'أَوَّلُ الكَلِمَةِ', text: 'كـ' },
+          { label: 'وَسَطُ الكَلِمَةِ', text: 'ـكـ' },
+          { label: 'آخِرُ الكَلِمَةِ', text: 'ـك / ك' },
+          { label: 'كَلِمَةٌ نَمُوذَجِيَّةٌ', text: 'كِتَابٌ' },
+          { label: 'جُمْلَةُ الدَّفْتَرِ', text: 'كَتَبَ كَرِيمٌ كَلِمَةً.' }
+        ]
+      },
+
+      baa: {
+        char: 'ب',
+        phoneticFr: 'B',
+        helpFr: 'Son identique au « B » en français comme dans Bonjour.',
+        nameAr: 'حَرْفُ البَاءِ',
+        dialogue: {
+          speaker1: { name: 'بَسْمَةُ', text: 'بَسْمَةُ وَعَبِيرُ فِي القِسْمِ، مَرْحَبًا بِكِ يَا عَبِيرُ.', avatar: '👧' },
+          speaker2: { name: 'عَبِيرُ', text: 'أَهْلًا يَا بَسْمَةُ، أَنَا أَجْلِسُ بِجَانِبِكِ فِي الفَصْلِ.', avatar: '🧒' }
+        },
+        keywords: ['بَسْمَةُ', 'عَبِيرُ', 'بَابٌ', 'بِنْتٌ', 'بَطَّةٌ', 'مِبْرَاةٌ', 'بِجَانِبِ'],
+        syllables: {
+          short: { fatha: 'بَ (ba)', damma: 'بُ (bo)', kasra: 'بِ (bi)', sukoon: 'بْ (b)' },
+          long: { fatha: 'بَا (baa)', damma: 'بُو (boo)', kasra: 'بِي (bii)' },
+          tanween: { fath: 'باً (bane)', damm: 'بٌ (bone)', kasr: 'بٍ (bine)' }
+        },
+        reorderGame: {
+          correctSentence: ['تَجْلِسُ', 'بَسْمَةُ', 'بِجَانِبِ', 'عَبِيرٍ'],
+          shuffled: ['بِجَانِبِ', 'عَبِيرٍ', 'تَجْلِسُ', 'بَسْمَةُ'],
+          scenarioIcon: '🏫',
+          scenarioTitle: 'مَشْهَدُ الفَصْلِ الدِّرَاسِيِّ',
+          scenarioDesc: 'Basma est assise à côté de Abir.'
+        },
+        copyModels: [
+          { label: 'أَوَّلُ الكَلِمَةِ', text: 'بـ' },
+          { label: 'وَسَطُ الكَلِمَةِ', text: 'ـبـ' },
+          { label: 'آخِرُ الكَلِمَةِ', text: 'ـب' },
+          { label: 'كَلِمَةٌ نَمُوذَجِيَّةٌ', text: 'بَابٌ' },
+          { label: 'جُمْلَةُ الدَّفْتَرِ', text: 'تَجْلِسُ بَسْمَةُ بِجَانِبِ عَبِيرٍ.' }
+        ]
+      },
+
+      dal: {
+        char: 'د',
+        phoneticFr: 'D',
+        helpFr: 'Son identique au « D » en français comme dans Dattes.',
+        nameAr: 'حَرْفُ الدَّالِ',
+        dialogue: {
+          speaker1: { name: 'هِنْدُ', text: 'مَاذَا تُرِيدُ أَنْ تَشْرَبَ يَا نَبِيلُ ؟', avatar: '👧' },
+          speaker2: { name: 'نَبِيلٌ', text: 'أُرِيدُ أَنْ أَشْرَبَ كَأْسًا مِنَ الحَلِيبِ، وَأَنْتِ ؟', avatar: '👦' }
+        },
+        keywords: ['هِنْدُ', 'دُمْيَةٌ', 'جَدٌّ', 'جَدَّةٌ', 'دَجَاجَةٌ', 'دَوَاءٌ', 'دُكَّانٌ'],
+        syllables: {
+          short: { fatha: 'دَ (da)', damma: 'دُ (do)', kasra: 'دِ (di)', sukoon: 'دْ (d)' },
+          long: { fatha: 'دَا (daa)', damma: 'دُو (doo)', kasra: 'دِي (dii)' },
+          tanween: { fath: 'داً (dane)', damm: 'دٌ (done)', kasr: 'دٍ (dine)' }
+        },
+        reorderGame: {
+          correctSentence: ['أَنَا', 'أُفَضِّلُ', 'أَنْ', 'أَشْرَبَ', 'عَصِيرًا'],
+          shuffled: ['أَشْرَبَ', 'أَنَا', 'عَصِيرًا', 'أُفَضِّلُ', 'أَنْ'],
+          scenarioIcon: '🥛',
+          scenarioTitle: 'مَشْهَدُ المَشْرُوبَاتِ',
+          scenarioDesc: 'Moi je préfère boire un jus.'
+        },
+        copyModels: [
+          { label: 'أَوَّلُ الكَلِمَةِ', text: 'د...' },
+          { label: 'مُتَّصِلٌ', text: 'ـد' },
+          { label: 'كَلِمَةٌ نَمُوذَجِيَّةٌ', text: 'دَفْتَرٌ' },
+          { label: 'جُمْلَةُ الدَّفْتَرِ', text: 'دَفْتَرُ هِنْدَ جَمِيلٌ وَمُرَتَّبٌ.' }
+        ]
+      },
+
+      faa: {
+        char: 'ف',
+        phoneticFr: 'F',
+        helpFr: 'Son identique au « F » en français comme dans France.',
+        nameAr: 'حَرْفُ الفَاءِ',
+        dialogue: {
+          speaker1: { name: 'فَدْوَى', text: 'مَاذَا تَفْعَلُ الآنَ يَا فَرِيدُ ؟', avatar: '👧' },
+          speaker2: { name: 'فَرِيدٌ', text: 'أَنَا أَتَنَاوَلُ الغَدَاءَ فِي المَطْعَمِ، وَأَنْتِ ؟', avatar: '👦' }
+        },
+        keywords: ['فَدْوَى', 'فَرِيدٌ', 'فَرَنْسَا', 'فُرْشَاةٌ', 'فُسْتَانٌ', 'قُفْلٌ', 'فِنْجَانٌ'],
+        syllables: {
+          short: { fatha: 'فَ (fa)', damma: 'فُ (fo)', kasra: 'فِ (fi)', sukoon: 'فْ (f)' },
+          long: { fatha: 'فَا (faa)', damma: 'فُو (foo)', kasra: 'فِي (fii)' },
+          tanween: { fath: 'فاً (fane)', damm: 'فٌ (fone)', kasr: 'فٍ (fine)' }
+        },
+        reorderGame: {
+          correctSentence: ['فَرِيدٌ', 'يَأْكُلُ', 'فِي', 'المَطْعَمِ'],
+          shuffled: ['فِي', 'فَرِيدٌ', 'المَطْعَمِ', 'يَأْكُلُ'],
+          scenarioIcon: '🍽️',
+          scenarioTitle: 'مَشْهَدُ المَطْعَمِ المَدْرَسِيِّ',
+          scenarioDesc: 'Farid mange au restaurant.'
+        },
+        copyModels: [
+          { label: 'أَوَّلُ الكَلِمَةِ', text: 'فـ' },
+          { label: 'وَسَطُ الكَلِمَةِ', text: 'ـفـ' },
+          { label: 'آخِرُ الكَلِمَةِ', text: 'ـف / ف' },
+          { label: 'كَلِمَةٌ نَمُوذَجِيَّةٌ', text: 'فَرَنْسَا' },
+          { label: 'جُمْلَةُ الدَّفْتَرِ', text: 'فَرَنْسَا بَلَدِي المَحْبُوبُ.' }
+        ]
+      },
+
+      meem: {
+        char: 'م',
+        phoneticFr: 'M',
+        helpFr: 'Son identique au « M » en français comme dans Maman.',
+        nameAr: 'حَرْفُ المِيمِ',
+        dialogue: {
+          speaker1: { name: 'مَرْوَانُ', text: 'مِنْ أَيْنَ أَنْتِ يَا مَرْيَمُ ؟', avatar: '👦' },
+          speaker2: { name: 'مَرْيَمُ', text: 'أَنَا مِنَ المَغْرِبِ، وَأَنْتَ مِنْ أَيِّ بَلَدٍ ؟', avatar: '👧' }
+        },
+        keywords: ['مَرْوَانُ', 'مَرْيَمُ', 'المَغْرِبُ', 'مِسْطَرَةٌ', 'مِمْحَاةٌ', 'مُعَلِّمَةٌ', 'مُدِيرٌ'],
+        syllables: {
+          short: { fatha: 'مَ (ma)', damma: 'مُ (mo)', kasra: 'مِ (mi)', sukoon: 'مْ (m)' },
+          long: { fatha: 'مَا (maa)', damma: 'مُو (moo)', kasra: 'مِي (mii)' },
+          tanween: { fath: 'ماً (mane)', damm: 'مٌ (mone)', kasr: 'مٍ (mine)' }
+        },
+        reorderGame: {
+          correctSentence: ['أَنَا', 'مِنَ', 'المَغْرِبِ', 'يَا', 'مَرْوَانُ'],
+          shuffled: ['يَا', 'المَغْرِبِ', 'أَنَا', 'مَرْوَانُ', 'مِنَ'],
+          scenarioIcon: '🇲🇦',
+          scenarioTitle: 'مَشْهَدُ البَلَدِ الأَصْلِيِّ',
+          scenarioDesc: 'Je viens du Maroc, Marwane.'
+        },
+        copyModels: [
+          { label: 'أَوَّلُ الكَلِمَةِ', text: 'مـ' },
+          { label: 'وَسَطُ الكَلِمَةِ', text: 'ـمـ' },
+          { label: 'آخِرُ الكَلِمَةِ', text: 'ـم / م' },
+          { label: 'كَلِمَةٌ نَمُوذَجِيَّةٌ', text: 'مَدْرَسَةٌ' },
+          { label: 'جُمْلَةُ الدَّفْتَرِ', text: 'أَنَا مِنَ المَغْرِبِ الحَبِيبِ.' }
+        ]
+      },
+
+      laam: {
+        char: 'ل',
+        phoneticFr: 'L',
+        helpFr: 'Son identique au « L » en français comme dans Lamis.',
+        nameAr: 'حَرْفُ اللَّامِ',
+        dialogue: {
+          speaker1: { name: 'لَمِيسُ', text: 'أَيْنَ تَسْكُنُ يَا نَبِيلُ ؟', avatar: '👧' },
+          speaker2: { name: 'نَبِيلٌ', text: 'أَنَا أَسْكُنُ فِي لِيلَ، وَأَنْتِ أَيْنَ تَسْكُنِينَ ؟', avatar: '👦' }
+        },
+        keywords: ['لَمِيسُ', 'لِيلَ', 'مَنْزِلٌ', 'لِبَاسٌ', 'لُعْبَةٌ', 'لِسَانٌ', 'مِلْعَقَةٌ'],
+        syllables: {
+          short: { fatha: 'لَ (la)', damma: 'لُ (lo)', kasra: 'لِ (li)', sukoon: 'لْ (l)' },
+          long: { fatha: 'لَا (laa)', damma: 'لُو (loo)', kasra: 'لِي (lii)' },
+          tanween: { fath: 'لاً (lane)', damm: 'لٌ (lone)', kasr: 'لٍ (line)' }
+        },
+        reorderGame: {
+          correctSentence: ['أَنَا', 'أَسْكُنُ', 'فِي', 'مَدِينَةِ', 'إِفْرُو'],
+          shuffled: ['فِي', 'إِفْرُو', 'أَسْكُنُ', 'أَنَا', 'مَدِينَةِ'],
+          scenarioIcon: '🏡',
+          scenarioTitle: 'مَشْهَدُ السَّكَنِ وَالمَدِينَةِ',
+          scenarioDesc: 'J\'habite dans la ville d\'Évreux.'
+        },
+        copyModels: [
+          { label: 'أَوَّلُ الكَلِمَةِ', text: 'لـ' },
+          { label: 'وَسَطُ الكَلِمَةِ', text: 'ـلـ' },
+          { label: 'آخِرُ الكَلِمَةِ', text: 'ـل / ل' },
+          { label: 'كَلِمَةٌ نَمُوذَجِيَّةٌ', text: 'مَنْزِلٌ' },
+          { label: 'جُمْلَةُ الدَّفْتَرِ', text: 'أَنَا أَسْكُنُ فِي مَدِينَةِ لِيلَ.' }
+        ]
+      },
+
+      raa: {
+        char: 'ر',
+        phoneticFr: 'R',
+        helpFr: 'Son « R » roulé avec la pointe de la langue.',
+        nameAr: 'حَرْفُ الرَّاءِ',
+        dialogue: {
+          speaker1: { name: 'لَمِيسُ', text: 'مَنْ هَذَا يَا نَبِيلُ ؟', avatar: '👧' },
+          speaker2: { name: 'نَبِيلٌ', text: 'هَذَا صَدِيقِي مُنِيرٌ، وَمَنْ هَذِهِ ؟ هَذِهِ صَدِيقَتِي رَبَابُ.', avatar: '👦' }
+        },
+        keywords: ['رَبَابُ', 'مُنِيرٌ', 'رَجُلٌ', 'دَرَّاجَةٌ', 'سَرِيرٌ', 'رَأْسٌ', 'وَرْدَةٌ'],
+        syllables: {
+          short: { fatha: 'رَ (ra)', damma: 'رُ (ro)', kasra: 'رِ (ri)', sukoon: 'رْ (r)' },
+          long: { fatha: 'رَا (raa)', damma: 'رُو (roo)', kasra: 'رِي (rii)' },
+          tanween: { fath: 'راً (rane)', damm: 'رٌ (rone)', kasr: 'رٍ (rine)' }
+        },
+        reorderGame: {
+          correctSentence: ['هَذَا', 'صَدِيقِي', 'مُنِيرٌ', 'وَهَذِهِ', 'رَبَابُ'],
+          shuffled: ['رَبَابُ', 'هَذَا', 'وَهَذِهِ', 'مُنِيرٌ', 'صَدِيقِي'],
+          scenarioIcon: '🤝',
+          scenarioTitle: 'مَشْهَدُ تَقْدِيمِ الأَصْدِقَاءِ',
+          scenarioDesc: 'Voici mon ami Mounir et voici Rabab.'
+        },
+        copyModels: [
+          { label: 'حَرْفُ الرَّاءِ', text: 'ر' },
+          { label: 'مَعَ المَدِّ', text: 'رَا' },
+          { label: 'كَلِمَةٌ نَمُوذَجِيَّةٌ', text: 'دَرَّاجَةٌ' },
+          { label: 'جُمْلَةُ الدَّفْتَرِ', text: 'هَذَا صَدِيقِي مُنِيرٌ يَرْكَبُ الدَّرَّاجَةَ.' }
+        ]
+      },
+
+      sheen: {
+        char: 'ش',
+        phoneticFr: 'Ch',
+        helpFr: 'Son identique au « ch » en français comme dans Chocolat.',
+        nameAr: 'حَرْفُ الشِّينِ',
+        dialogue: {
+          speaker1: { name: 'إِشْرَاقُ', text: 'اليَوْمَ عِيدُ مِيلَادِي يَا شَادِي.', avatar: '👧' },
+          speaker2: { name: 'شَادِي', text: 'عِيدُ مِيلَادٍ سَعِيدٍ يَا إِشْرَاقُ، هَذِهِ هَدِيَّةٌ لَكِ.', avatar: '👦' }
+        },
+        keywords: ['شَادِي', 'إِشْرَاقُ', 'شَمْسٌ', 'عُشْبٌ', 'عُشٌّ', 'مِشْمِشٌ', 'شَايٌ'],
+        syllables: {
+          short: { fatha: 'شَ (cha)', damma: 'شُ (cho)', kasra: 'شِ (chi)', sukoon: 'شْ (ch)' },
+          long: { fatha: 'شَا (chaa)', damma: 'شُو (choo)', kasra: 'شِي (chii)' },
+          tanween: { fath: 'شاً (chane)', damm: 'شٌ (chone)', kasr: 'شٍ (chine)' }
+        },
+        reorderGame: {
+          correctSentence: ['أَعَدَّتْ', 'لَيْلَى', 'شَايًا', 'بِالنَّعْنَاعِ'],
+          shuffled: ['شَايًا', 'بِالنَّعْنَاعِ', 'أَعَدَّتْ', 'لَيْلَى'],
+          scenarioIcon: '🫖',
+          scenarioTitle: 'مَشْهَدُ إِعْدَادِ الشَّايِ',
+          scenarioDesc: 'Leila a préparé du thé à la menthe.'
+        },
+        copyModels: [
+          { label: 'أَوَّلُ الكَلِمَةِ', text: 'شـ' },
+          { label: 'وَسَطُ الكَلِمَةِ', text: 'ـشـ' },
+          { label: 'آخِرُ الكَلِمَةِ', text: 'ـش / ش' },
+          { label: 'كَلِمَةٌ نَمُوذَجِيَّةٌ', text: 'شَايٌ' },
+          { label: 'جُمْلَةُ الدَّفْتَرِ', text: 'أَعَدَّتْ لَيْلَى شَايًا لَذِيذًا.' }
+        ]
+      }
+    };
+
+    /* --- AUDIO SYNTHESIS & SFX ENGINE --- */
+    function initAudioContext() {
+      try {
+        if (!appState.audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) appState.audioCtx = new AudioContextClass();
+        }
+        if (appState.audioCtx && appState.audioCtx.state === 'suspended') {
+          appState.audioCtx.resume();
+        }
+      } catch (e) {}
+    }
+
+    function playSfx(type) {
+      if (!appState.soundEnabled) return;
+      try {
+        initAudioContext();
+        if (!appState.audioCtx) return;
+        const ctx = appState.audioCtx;
+        const now = ctx.currentTime;
+        if (type === 'click') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(600, now);
+          osc.frequency.exponentialRampToValueAtTime(800, now + 0.04);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.linearRampToValueAtTime(0, now + 0.04);
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.start(now); osc.stop(now + 0.04);
+        } else if (type === 'star' || type === 'success') {
+          [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.frequency.setValueAtTime(freq, now + i * 0.05);
+            gain.gain.setValueAtTime(0.18, now + i * 0.05);
+            gain.gain.linearRampToValueAtTime(0, now + i * 0.05 + 0.15);
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.start(now + i * 0.05); osc.stop(now + i * 0.05 + 0.15);
+          });
+        }
+      } catch (e) {}
+    }
+
+    function speakText(text) {
+      if (!appState.soundEnabled) return;
+      initAudioContext();
+
+      const banner = document.getElementById('speakingBanner');
+      const bannerText = document.getElementById('speakingTextContent');
+      if (banner && bannerText) {
+        bannerText.textContent = text;
+        banner.classList.remove('hidden');
+        clearTimeout(window.bannerTimer);
+        window.bannerTimer = setTimeout(() => banner.classList.add('hidden'), 3500);
+      }
+
+      if ('speechSynthesis' in window) {
+        try {
+          window.speechSynthesis.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = 'ar-SA';
+          utterance.rate = 0.88;
+          window.speechSynthesis.speak(utterance);
+        } catch (e) {}
+      }
+    }
+
+    function toggleSoundSystem() {
+      appState.soundEnabled = !appState.soundEnabled;
+      const label = document.getElementById('soundLabel');
+      const icon = document.getElementById('soundIcon');
+      if (appState.soundEnabled) {
+        initAudioContext(); playSfx('click');
+        if (label) label.textContent = 'Son: Actif';
+        if (icon) icon.textContent = '🔊';
+        speakText('الصَّوْتُ مُفَعَّلٌ');
+      } else {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        if (label) label.textContent = 'Son: Muet';
+        if (icon) icon.textContent = '🔇';
+      }
+    }
+
+    function testWelcomeAudio() {
+      initAudioContext();
+      appState.soundEnabled = true;
+      playSfx('star');
+      speakText('مَرْحَبًا بِكُمْ فِي مَنَصَّةِ سَعِيدْ لِتَعْلِيمِ اللُّغَةِ العَرَبِيَّةِ');
+    }
+
+    function addStars(num) {
+      appState.stars += num;
+      const counter = document.getElementById('starCounter');
+      if (counter) counter.textContent = appState.stars;
+      playSfx('star');
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 35, spread: 60, origin: { y: 0.8 } });
+      }
+    }
+
+    /* --- UNIT & MAIN TABS SWITCHING --- */
+    function selectCurriculumUnit(uKey) {
+      playSfx('click');
+      appState.activeUnit = uKey;
+
+      // Update Unit Ribbon Styles
+      document.querySelectorAll('.unit-ribbon-btn').forEach(btn => {
+        btn.classList.remove('unit-pill-active', 'support-pill-active');
+      });
+
+      const activeBtn = document.getElementById(`unitBtn-${uKey}`);
+      if (activeBtn) {
+        if (String(uKey).startsWith('supp')) {
+          activeBtn.classList.add('support-pill-active');
+        } else {
+          activeBtn.classList.add('unit-pill-active');
+        }
+      }
+
+      // If support session selected, switch to support view directly
+      if (String(uKey).startsWith('supp')) {
+        const uNum = parseInt(String(uKey).replace('supp-', ''), 10) || 1;
+        document.getElementById('activeUnitBadgeTop').textContent = `SOUTIEN ${uNum}`;
+        document.getElementById('activeUnitDomainTop').textContent = `أَنْشِطَةُ التَّقْوِيمِ وَالدَّعْمِ لِلْوَحْدَةِ ${uNum}`;
+        document.getElementById('activeUnitTitleHeader').textContent = `حَصِيلَةُ وَتَثْبِيتُ حُرُوفِ الوَحْدَةِ ${uNum}`;
+        switchMainTab('tab-support-view');
+        renderSupportStation(uNum);
+        speakText(`حِصَّةُ الدَّعْمِ وَالتَّقْوِيمِ لِلْوَحْدَةِ ${uNum}`);
+        return;
+      }
+
+      // Standard Unit Selected
+      const unitData = curriculumUnits[uKey];
+      if (!unitData) return;
+
+      document.getElementById('activeUnitBadgeTop').textContent = `UNITÉ ${unitData.num}`;
+      document.getElementById('activeUnitDomainTop').textContent = unitData.domainFr;
+      document.getElementById('activeUnitTitleHeader').textContent = `${unitData.title}`;
+
+      renderOralSection(unitData);
+      renderBasketSection(unitData);
+      renderVideosSection(unitData);
+      renderSupportStation(unitData.num);
+      renderWritingLettersRibbon(unitData);
+
+      // Select first letter for writing studio
+      const firstWKey = unitData.writingKeys[0] || 'kaf';
+      selectWritingLesson(firstWKey);
+
+      speakText(unitData.title);
+    }
+
+    function switchMainTab(tabKey) {
+      playSfx('click');
+      appState.activeMainTab = tabKey;
+
+      // Hide all views
+      document.querySelectorAll('.main-content-view').forEach(el => el.classList.add('hidden'));
+
+      // Show targeted view
+      const viewMap = {
+        'tab-oral': 'view-oral',
+        'tab-consignes': 'view-consignes',
+        'tab-basket': 'view-basket',
+        'tab-writing': 'view-writing',
+        'tab-badge': 'view-badge',
+        'tab-videos': 'view-videos',
+        'tab-support-view': 'view-support-view'
+      };
+
+      const activeView = document.getElementById(viewMap[tabKey]);
+      if (activeView) activeView.classList.remove('hidden');
+
+      // Update Nav Buttons
+      document.querySelectorAll('.main-tab-nav-btn').forEach(btn => {
+        btn.classList.remove('main-tab-active', 'text-white');
+        btn.classList.add('bg-slate-100', 'text-slate-700');
+      });
+
+      const activeBtn = document.getElementById(`mainTabBtn-${tabKey.replace('tab-', '')}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+        activeBtn.classList.add('main-tab-active', 'text-white');
+      }
+
+      if (tabKey === 'tab-writing' && appState.activeWritingSubStage === 'slate') {
+        setTimeout(initWritingCanvas, 150);
+      }
+    }
+
+    /* --- SECTION 1: ORAL INTERACTION RENDERER --- */
+    function renderOralSection(unitData) {
+      document.getElementById('oralSectionTitle').textContent = unitData.oral.title;
+
+      const container = document.getElementById('oralDialogueCardsContainer');
+      container.innerHTML = unitData.oral.dialogue.map((d, i) => {
+        const bg = i % 2 === 0 ? 'bg-sky-50/80 border-sky-200' : 'bg-emerald-50/80 border-emerald-200';
+        return `
+          <div onclick="speakText('${d.text}')" class="p-4 ${bg} rounded-2xl border hover:shadow-xs transition cursor-pointer flex items-start gap-3">
+            <div class="w-11 h-11 rounded-2xl bg-white text-2xl flex items-center justify-center shadow-xs border border-slate-100 flex-shrink-0">
+              ${d.av}
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-black text-slate-800">${d.spk}</span>
+                <span class="text-[10px] text-sky-600 font-fr flex items-center gap-1"><span>🔊</span> Écouter</span>
+              </div>
+              <p class="text-sm sm:text-base font-black text-slate-800 font-naskh leading-relaxed">${d.text}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const contBox = document.getElementById('oralContinuousButtons');
+      contBox.innerHTML = unitData.oral.continuous.map(item => `
+        <button onclick="speakText('${item}')" class="px-3 py-1.5 bg-white hover:bg-sky-50 border border-slate-200 rounded-xl text-xs font-black text-slate-800 transition font-naskh">
+          📢 ${item}
+        </button>
+      `).join('');
+    }
+
+    function speakCurrentOralDialogue() {
+      const u = curriculumUnits[appState.activeUnit] || curriculumUnits[1];
+      const full = u.oral.dialogue.map(d => `${d.spk}: ${d.text}`).join('. ');
+      speakText(full);
+    }
+
+    /* --- SECTION 2: CONSIGNES CHALLENGE --- */
+    const consignesList = [
+      { ar: 'أُحِيطُ', fr: 'Entourez le mot', action: 'أحيط', word: 'مَدْرَسَةٌ' },
+      { ar: 'أَشْطُبُ', fr: 'Barrez le mot', action: 'أشطب', word: 'دَفْتَرٌ' },
+      { ar: 'أُسَطِّرُ تَحْتَ', fr: 'Soulignez le mot', action: 'أسطر تحت', word: 'قَلَمٌ' }
+    ];
+    let currentConsigneIdx = 0;
+
+    function playCurrentConsigneAudio() {
+      speakText(consignesList[currentConsigneIdx].ar);
+    }
+
+    function handleConsigneAction(act) {
+      const target = consignesList[currentConsigneIdx];
+      const wordEl = document.getElementById('consigneTargetWord');
+
+      if (act === target.action) {
+        if (act === 'أحيط') {
+          wordEl.style.border = '3px solid #0284c7';
+          wordEl.style.borderRadius = '9999px';
+        } else if (act === 'أشطب') {
+          wordEl.style.textDecoration = 'line-through';
+          wordEl.style.textDecorationColor = '#f43f5e';
+        } else if (act === 'أسطر تحت') {
+          wordEl.style.borderBottom = '4px solid #10b981';
+        }
+        addStars(2);
+        speakText('أَحْسَنْتَ ! جَوَابٌ صَحِيحٌ');
+
+        setTimeout(() => {
+          wordEl.style.border = '2px solid transparent';
+          wordEl.style.borderRadius = '0px';
+          wordEl.style.textDecoration = 'none';
+          currentConsigneIdx = (currentConsigneIdx + 1) % consignesList.length;
+          document.getElementById('consigneCurrentGoalAr').textContent = consignesList[currentConsigneIdx].ar;
+          document.getElementById('consigneCurrentGoalFr').textContent = consignesList[currentConsigneIdx].fr;
+          document.getElementById('consigneTargetWord').textContent = consignesList[currentConsigneIdx].word;
+        }, 1400);
+      } else {
+        speakText('حَاوِلْ مَرَّةً أُخْرَى');
+      }
+    }
+
+    /* --- SECTION 3: BASKET GAME --- */
+    let currentBasketWordIdx = 0;
+    function renderBasketSection(unitData) {
+      currentBasketWordIdx = 0;
+      updateBasketWordDisplay(unitData);
+
+      const container = document.getElementById('basketBasketsContainer');
+      container.innerHTML = unitData.letters.map(char => `
+        <button onclick="checkBasketAnswer('${char}')" class="p-4 bg-white hover:bg-amber-50 border-2 border-slate-200 hover:border-amber-400 rounded-2xl text-center transition group shadow-xs">
+          <span class="text-3xl block mb-1 group-hover:scale-110 transition">🧺</span>
+          <span class="text-xl font-black text-slate-800 font-naskh block">سَلَّةُ (${char})</span>
+        </button>
+      `).join('');
+    }
+
+    function updateBasketWordDisplay(unitData) {
+      const bWord = unitData.basket[currentBasketWordIdx] || unitData.basket[0];
+      const wordText = document.getElementById('basketWordText');
+      if (wordText) wordText.textContent = bWord.word;
+    }
+
+    function speakBasketWord() {
+      const u = curriculumUnits[appState.activeUnit] || curriculumUnits[1];
+      speakText(u.basket[currentBasketWordIdx].word);
+    }
+
+    function checkBasketAnswer(chosenChar) {
+      const u = curriculumUnits[appState.activeUnit] || curriculumUnits[1];
+      const target = u.basket[currentBasketWordIdx];
+      if (chosenChar === target.letter) {
+        addStars(2);
+        speakText(`أَحْسَنْتَ ! ${target.word} تَبْدَأُ بِحَرْفِ ${target.letter}`);
+        currentBasketWordIdx = (currentBasketWordIdx + 1) % u.basket.length;
+        updateBasketWordDisplay(u);
+      } else {
+        speakText('حَاوِلْ مَرَّةً أُخْرَى مَعَ سَلَّةٍ أُخْرَى');
+      }
+    }
+
+    /* --- SECTION 4: EL OUASTANI WRITING & COPYING STUDIO --- */
+    function renderWritingLettersRibbon(unitData) {
+      const ribbon = document.getElementById('writingLettersPickerRibbon');
+      if (!ribbon) return;
+
+      const keys = unitData.writingKeys || Object.keys(elOuastaniLessons);
+      ribbon.innerHTML = keys.map(k => {
+        const item = elOuastaniLessons[k];
+        if (!item) return '';
+        const isActive = (appState.activeWritingChar === k);
+        const activeClass = isActive 
+          ? 'bg-emerald-600 text-white shadow-xs font-black' 
+          : 'bg-white text-slate-700 hover:bg-emerald-50';
+        return `
+          <button onclick="selectWritingLesson('${k}')" class="px-3 py-1 rounded-xl text-xs transition border border-slate-200 flex items-center gap-1 font-naskh flex-shrink-0 ${activeClass}">
+            <span class="text-sm">${item.char}</span>
+            <span class="text-[10px] font-fr opacity-80">(${item.phoneticFr})</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectWritingLesson(lessonKey) {
+      playSfx('click');
+      appState.activeWritingChar = lessonKey;
+      const lesson = elOuastaniLessons[lessonKey] || elOuastaniLessons.kaf;
+
+      const u = curriculumUnits[appState.activeUnit] || curriculumUnits[1];
+      renderWritingLettersRibbon(u);
+
+      document.getElementById('writingLetterMainTitle').textContent = `دُرُوسُ وَتَمَارِينُ الكِتَابَةِ : ${lesson.nameAr} (${lesson.char})`;
+      document.getElementById('writingCurrentCharBadge').textContent = lesson.char;
+      document.getElementById('writingCurrentPhoneticBadge').textContent = `Son: ${lesson.phoneticFr}`;
+      document.getElementById('writingCurrentPhoneticHelp').textContent = lesson.helpFr;
+      document.getElementById('writingGhostModel').textContent = lesson.copyModels[0]?.text || lesson.char;
+
+      // Render Stage 1: Observe
+      const bubbles = document.getElementById('writingDialogueBubbles');
+      bubbles.innerHTML = `
+        <div onclick="speakText('${lesson.dialogue.speaker1.text}')" class="p-3.5 bg-sky-50/80 rounded-2xl border border-sky-200 cursor-pointer flex items-start gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-sky-600 text-white flex items-center justify-center text-xl flex-shrink-0">
+            ${lesson.dialogue.speaker1.avatar}
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-black text-sky-900">${lesson.dialogue.speaker1.name}</span>
+              <span class="text-[10px] text-sky-600 font-fr">🔊 Écouter</span>
+            </div>
+            <p class="text-sm font-black text-slate-800 font-naskh leading-relaxed">${lesson.dialogue.speaker1.text}</p>
+          </div>
+        </div>
+
+        <div onclick="speakText('${lesson.dialogue.speaker2.text}')" class="p-3.5 bg-emerald-50/80 rounded-2xl border border-emerald-200 cursor-pointer flex items-start gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-xl flex-shrink-0">
+            ${lesson.dialogue.speaker2.avatar}
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-black text-emerald-900">${lesson.dialogue.speaker2.name}</span>
+              <span class="text-[10px] text-emerald-600 font-fr">🔊 Écouter</span>
+            </div>
+            <p class="text-sm font-black text-slate-800 font-naskh leading-relaxed">${lesson.dialogue.speaker2.text}</p>
+          </div>
+        </div>
+      `;
+
+      // Keywords
+      const kwBox = document.getElementById('writingKeywordsBadges');
+      kwBox.innerHTML = lesson.keywords.map(w => `
+        <button onclick="speakText('${w}')" class="px-2 py-0.5 bg-white border border-slate-200 rounded-lg text-xs font-bold hover:bg-sky-50 font-naskh">
+          ${w}
+        </button>
+      `).join('');
+
+      // Render Stage 2: Syllables
+      const sylBody = document.getElementById('writingSyllablesTableBody');
+      const s = lesson.syllables;
+      sylBody.innerHTML = `
+        <tr>
+          <td class="p-2 border border-slate-200 text-xs font-bold text-slate-600">الحَرَكَاتُ القَصِيرَةُ</td>
+          <td onclick="speakText('${s.short.fatha}')" class="p-2 border border-slate-200 cursor-pointer text-sky-800 hover:bg-sky-50">${s.short.fatha}</td>
+          <td onclick="speakText('${s.short.damma}')" class="p-2 border border-slate-200 cursor-pointer text-sky-800 hover:bg-sky-50">${s.short.damma}</td>
+          <td onclick="speakText('${s.short.kasra}')" class="p-2 border border-slate-200 cursor-pointer text-sky-800 hover:bg-sky-50">${s.short.kasra}</td>
+          <td onclick="speakText('${s.short.sukoon}')" class="p-2 border border-slate-200 cursor-pointer text-slate-600 hover:bg-sky-50">${s.short.sukoon}</td>
+        </tr>
+        <tr>
+          <td class="p-2 border border-slate-200 text-xs font-bold text-slate-600">المُدُودُ الطَّوِيلَةُ</td>
+          <td onclick="speakText('${s.long.fatha}')" class="p-2 border border-slate-200 cursor-pointer text-emerald-800 hover:bg-emerald-50">${s.long.fatha}</td>
+          <td onclick="speakText('${s.long.damma}')" class="p-2 border border-slate-200 cursor-pointer text-emerald-800 hover:bg-emerald-50">${s.long.damma}</td>
+          <td onclick="speakText('${s.long.kasra}')" class="p-2 border border-slate-200 cursor-pointer text-emerald-800 hover:bg-emerald-50">${s.long.kasra}</td>
+          <td class="p-2 border border-slate-200 text-slate-400 font-fr text-xs">-</td>
+        </tr>
+        <tr>
+          <td class="p-2 border border-slate-200 text-xs font-bold text-slate-600">التَّنْوِينُ (Ane, One, Ine)</td>
+          <td onclick="speakText('${s.tanween.fath}')" class="p-2 border border-slate-200 cursor-pointer text-amber-800 hover:bg-amber-50">${s.tanween.fath}</td>
+          <td onclick="speakText('${s.tanween.damm}')" class="p-2 border border-slate-200 cursor-pointer text-amber-800 hover:bg-amber-50">${s.tanween.damm}</td>
+          <td onclick="speakText('${s.tanween.kasr}')" class="p-2 border border-slate-200 cursor-pointer text-amber-800 hover:bg-amber-50">${s.tanween.kasr}</td>
+          <td class="p-2 border border-slate-200 text-slate-400 font-fr text-xs">-</td>
+        </tr>
+      `;
+
+      const wordsGrid = document.getElementById('writingSyllableWordsGrid');
+      wordsGrid.innerHTML = lesson.keywords.map(w => `
+        <button onclick="speakText('${w}'); addStars(1);" class="p-2.5 bg-white hover:bg-sky-50 border border-slate-200 rounded-xl transition">
+          <span class="text-sm font-black text-slate-800 font-naskh block">${w}</span>
+          <span class="text-[10px] text-sky-600 font-fr block">🔊 Écouter</span>
+        </button>
+      `).join('');
+
+      // Render Stage 3: Reorder
+      renderWritingReorderStage(lesson);
+
+      // Render Stage 4: Copy models
+      const copyList = document.getElementById('writingCopyModelsList');
+      copyList.innerHTML = lesson.copyModels.map(m => `
+        <button onclick="setWritingGhostModel('${m.text}')" class="w-full text-right p-2.5 bg-slate-50 hover:bg-emerald-50 border border-slate-200 rounded-xl transition flex items-center justify-between">
+          <div>
+            <span class="text-[10px] text-slate-500 font-bold block">${m.label}</span>
+            <span class="text-base font-black text-slate-900 font-naskh block mt-0.5">${m.text}</span>
+          </div>
+          <span class="text-xs text-emerald-600 font-fr font-bold">Copier ✍️</span>
+        </button>
+      `).join('');
+    }
+
+    function switchWritingSubStage(stageKey) {
+      playSfx('click');
+      appState.activeWritingSubStage = stageKey;
+
+      document.querySelectorAll('.sub-writing-view').forEach(el => el.classList.add('hidden'));
+      const activeEl = document.getElementById(`subview-${stageKey}`);
+      if (activeEl) activeEl.classList.remove('hidden');
+
+      document.querySelectorAll('.sub-stage-btn').forEach(btn => {
+        btn.classList.remove('sub-write-active');
+        btn.classList.add('bg-slate-100', 'text-slate-700');
+      });
+
+      const activeBtn = document.getElementById(`subStageBtn-${stageKey}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+        activeBtn.classList.add('sub-write-active');
+      }
+
+      if (stageKey === 'slate') {
+        setTimeout(initWritingCanvas, 120);
+      }
+    }
+
+    function renderWritingReorderStage(lesson) {
+      const g = lesson.reorderGame;
+      document.getElementById('writingReorderIcon').textContent = g.scenarioIcon;
+      document.getElementById('writingReorderTitle').textContent = g.scenarioTitle;
+      document.getElementById('writingReorderDesc').textContent = g.scenarioDesc;
+      document.getElementById('writingReorderAlert').classList.add('hidden');
+
+      appState.reorderUserSeq = [];
+      updateWritingAssembledZone();
+
+      const pool = document.getElementById('writingShuffledPool');
+      pool.innerHTML = g.shuffled.map(word => `
+        <button onclick="pickWritingReorderWord('${word}', this)" class="px-3.5 py-1.5 bg-white hover:bg-emerald-50 border border-slate-200 rounded-xl font-black text-sm text-slate-800 font-naskh transition shadow-xs">
+          ${word}
+        </button>
+      `).join('');
+    }
+
+    function pickWritingReorderWord(word, btn) {
+      playSfx('click');
+      appState.reorderUserSeq.push(word);
+      btn.classList.add('opacity-40', 'pointer-events-none');
+      updateWritingAssembledZone();
+
+      const lesson = elOuastaniLessons[appState.activeWritingChar];
+      if (appState.reorderUserSeq.length === lesson.reorderGame.correctSentence.length) {
+        checkWritingReorderSentence();
+      }
+    }
+
+    function updateWritingAssembledZone() {
+      const zone = document.getElementById('writingAssembledZone');
+      if (appState.reorderUserSeq.length === 0) {
+        zone.innerHTML = `<span class="text-xs text-slate-400 font-bold" id="writingAssembledPlaceholder">انْقُرْ عَلَى الكَلِمَاتِ بِالتَّرْتِيبِ الصَّحِيحِ هُنَا...</span>`;
+      } else {
+        zone.innerHTML = appState.reorderUserSeq.map(w => `
+          <span class="px-3 py-1 bg-emerald-600 text-white rounded-xl font-black text-sm font-naskh shadow-xs">
+            ${w}
+          </span>
+        `).join('');
+      }
+    }
+
+    function checkWritingReorderSentence() {
+      const lesson = elOuastaniLessons[appState.activeWritingChar];
+      const target = lesson.reorderGame.correctSentence;
+      const isOk = appState.reorderUserSeq.every((v, i) => v === target[i]);
+
+      if (isOk) {
+        addStars(3);
+        document.getElementById('writingReorderAlert').classList.remove('hidden');
+        speakText(`أَحْسَنْتَ ! ${target.join(' ')}`);
+      } else {
+        speakText('حَاوِلْ مَرَّةً أُخْرَى لِتَرْتِيبِ الجُمْلَةِ');
+        setTimeout(() => renderWritingReorderStage(lesson), 1300);
+      }
+    }
+
+    function speakWritingTargetSentence() {
+      const lesson = elOuastaniLessons[appState.activeWritingChar];
+      speakText(lesson.reorderGame.correctSentence.join(' '));
+    }
+
+    /* --- SEYES CANVAS IMPLEMENTATION --- */
+    let writeCanvas, writeCtx, isWriting = false, lastX = 0, lastY = 0;
+    function initWritingCanvas() {
+      writeCanvas = document.getElementById('writingSlateCanvas');
+      if (!writeCanvas) return;
+      const rect = writeCanvas.parentElement.getBoundingClientRect();
+      writeCanvas.width = rect.width;
+      writeCanvas.height = rect.height;
+
+      writeCtx = writeCanvas.getContext('2d');
+      writeCtx.lineCap = 'round';
+      writeCtx.lineJoin = 'round';
+      writeCtx.lineWidth = appState.brushWidth;
+      writeCtx.strokeStyle = appState.brushColor;
+
+      writeCanvas.onmousedown = (e) => {
+        isWriting = true; const p = getWritePos(e); lastX = p.x; lastY = p.y;
+      };
+      writeCanvas.onmousemove = (e) => {
+        if (!isWriting) return;
+        const p = getWritePos(e);
+        writeCtx.beginPath();
+        writeCtx.moveTo(lastX, lastY);
+        writeCtx.lineTo(p.x, p.y);
+        writeCtx.stroke();
+        lastX = p.x; lastY = p.y;
+      };
+      window.onmouseup = () => { isWriting = false; };
+
+      writeCanvas.ontouchstart = (e) => {
+        e.preventDefault(); isWriting = true;
+        const p = getWritePos(e.touches[0]);
+        lastX = p.x; lastY = p.y;
+      };
+      writeCanvas.ontouchmove = (e) => {
+        e.preventDefault();
+        if (!isWriting) return;
+        const p = getWritePos(e.touches[0]);
+        writeCtx.beginPath();
+        writeCtx.moveTo(lastX, lastY);
+        writeCtx.lineTo(p.x, p.y);
+        writeCtx.stroke();
+        lastX = p.x; lastY = p.y;
+      };
+      writeCanvas.ontouchend = () => { isWriting = false; };
+    }
+
+    function getWritePos(e) {
+      const rect = writeCanvas.getBoundingClientRect();
+      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    }
+
+    function clearWritingCanvas() {
+      if (writeCtx && writeCanvas) {
+        writeCtx.clearRect(0, 0, writeCanvas.width, writeCanvas.height);
+      }
+    }
+
+    function setWritingGhostModel(text) {
+      playSfx('click');
+      document.getElementById('writingGhostModel').textContent = text;
+      clearWritingCanvas();
+      speakText(text);
+    }
+
+    function setBrushWidth(w) {
+      appState.brushWidth = w;
+      if (writeCtx) writeCtx.lineWidth = w;
+    }
+
+    function setBrushColor(c) {
+      appState.brushColor = c;
+      if (writeCtx) writeCtx.strokeStyle = c;
+    }
+
+    /* --- 3 SMILES EVALUATION --- */
+    function toggleSmile(num) {
+      playSfx('click');
+      appState.smiles[num] = !appState.smiles[num];
+      const btn = document.getElementById(`smileBtn-${num}`);
+      const lbl = document.getElementById(`smileLabel-${num}`);
+
+      if (appState.smiles[num]) {
+        btn.textContent = '🟢';
+        lbl.textContent = 'مُتَمَكِّنٌ (Acquis)';
+        lbl.classList.add('text-emerald-700', 'font-black');
+      } else {
+        btn.textContent = '⚪';
+        lbl.textContent = 'انْقُرْ لِلتَّلْوِينِ';
+        lbl.classList.remove('text-emerald-700', 'font-black');
+      }
+
+      const all = appState.smiles[1] && appState.smiles[2] && appState.smiles[3];
+      document.getElementById('evaluationResultText').textContent = all 
+        ? 'هَنِيئًا لَكَ ! أَتْقَنْتَ الحَرْفَ نُطْقًا وَقِرَاءَةً وَكِتَابَةً (3/3)' 
+        : 'اضْغَطْ عَلَى الابْتِسَامَاتِ عِنْدَ إِتْقَانِ الدَّرْسِ';
+    }
+
+    function celebrateMastery() {
+      [1, 2, 3].forEach(i => {
+        appState.smiles[i] = true;
+        document.getElementById(`smileBtn-${i}`).textContent = '🟢';
+        document.getElementById(`smileLabel-${i}`).textContent = 'مُتَمَكِّنٌ (Acquis)';
+        document.getElementById(`smileLabel-${i}`).classList.add('text-emerald-700', 'font-black');
+      });
+      document.getElementById('evaluationResultText').textContent = 'هَنِيئًا لَكَ ! أَتْقَنْتَ الحَرْفَ نُطْقًا وَقِرَاءَةً وَكِتَابَةً (3/3)';
+      addStars(5);
+      speakText('مَبْرُوكٌ عَلَيْكَ يَا بَطَلَ اللُّغَةِ العَرَبِيَّةِ ! لَقَدْ أَتْقَنْتَ الدَّرْسَ بِامْتِيَازٍ.');
+    }
+
+    /* --- SECTION 5: STUDENT BADGE LOGIC --- */
+    function updateBadgePreview() {
+      document.getElementById('badgeName').textContent = document.getElementById('inputStudentName').value || '...';
+      document.getElementById('badgeAge').textContent = (document.getElementById('inputStudentAge').value || '7') + ' سَنَوَاتٍ';
+      document.getElementById('badgeBirth').textContent = document.getElementById('inputStudentBirth').value || '...';
+      document.getElementById('badgeCity').textContent = document.getElementById('inputStudentCity').value || '...';
+      document.getElementById('badgeCountry').textContent = document.getElementById('inputStudentCountry').value || '...';
+    }
+
+    function speakBadgeDetails() {
+      const name = document.getElementById('inputStudentName').value;
+      const age = document.getElementById('inputStudentAge').value;
+      const birth = document.getElementById('inputStudentBirth').value;
+      const city = document.getElementById('inputStudentCity').value;
+      const country = document.getElementById('inputStudentCountry').value;
+      speakText(`أَنَا اسْمِي ${name}، عُمْرِي ${age} سَنَوَات، وُلِدْتُ بِـ ${birth}، أَسْكُنُ فِي ${city}، وَأَنَا مِنْ ${country}`);
+      addStars(3);
+    }
+
+    /* --- SECTION 6: VIDEOS --- */
+    function renderVideosSection(unitData) {
+      const grid = document.getElementById('videosGridContainer');
+      grid.innerHTML = unitData.videos.map(v => `
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden hover:shadow-md transition">
+          <div class="relative pt-[56.25%] bg-slate-200 cursor-pointer" onclick="openVideoModal('${v.id}', '${v.title}', '${v.drive}')">
+            <img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="${v.title}" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/30 flex items-center justify-center hover:bg-black/20 transition">
+              <div class="w-11 h-11 rounded-full bg-emerald-600 text-white flex items-center justify-center text-lg shadow-lg">
+                <i class="fa-solid fa-play"></i>
+              </div>
+            </div>
+          </div>
+          <div class="p-3">
+            <h4 class="font-bold text-xs text-slate-800 mb-2 truncate">${v.title}</h4>
+            <div class="flex items-center justify-between text-[11px]">
+              <button onclick="openVideoModal('${v.id}', '${v.title}', '${v.drive}')" class="text-emerald-700 font-bold hover:underline">
+                ▶️ مُشَاهَدَةٌ
+              </button>
+              <a href="${v.drive}" target="_blank" class="text-slate-500 hover:text-slate-700">
+                <i class="fa-brands fa-google-drive"></i> تَحْمِيلٌ
+              </a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openVideoModal(id, title, drive) {
+      document.getElementById('modalVideoTitle').textContent = title;
+      document.getElementById('videoIframe').src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+      document.getElementById('modalDriveLink').href = drive;
+      document.getElementById('videoModal').classList.remove('hidden');
+    }
+
+    function closeVideoModal() {
+      document.getElementById('videoIframe').src = '';
+      document.getElementById('videoModal').classList.add('hidden');
+    }
+
+    /* --- SECTION 7: SUPPORT & CONSOLIDATION --- */
+    let currentSupportQuizIdx = 0;
+    function renderSupportStation(unitNum) {
+      const u = curriculumUnits[unitNum] || curriculumUnits[1];
+      currentSupportQuizIdx = 0;
+      document.getElementById('supportStationTitle').textContent = `أَنْشِطَةُ تَقْوِيمِ وَدَعْمِ تَعَلُّمَاتِ الوَحْدَةِ ${unitNum} : ${u.title}`;
+
+      updateSupportQuizDisplay(u);
+    }
+
+    function updateSupportQuizDisplay(u) {
+      const q = u.supportQuiz[currentSupportQuizIdx];
+      document.getElementById('supportQuizWordDisplay').textContent = q.text;
+
+      const btnBox = document.getElementById('supportQuizButtons');
+      btnBox.innerHTML = q.options.map(char => `
+        <button onclick="answerSupportQuiz('${char}')" class="p-3.5 bg-white hover:bg-emerald-50 border border-slate-200 hover:border-emerald-500 rounded-2xl text-xl font-black text-slate-800 font-naskh transition shadow-xs">
+          ${char}
+        </button>
+      `).join('');
+    }
+
+    function speakSupportQuizWord() {
+      const u = curriculumUnits[appState.activeUnit] || curriculumUnits[1];
+      speakText(u.supportQuiz[currentSupportQuizIdx].full);
+    }
+
+    function answerSupportQuiz(char) {
+      const u = curriculumUnits[appState.activeUnit] || curriculumUnits[1];
+      const q = u.supportQuiz[currentSupportQuizIdx];
+      if (char === q.ans) {
+        addStars(2);
+        speakText(`مُمْتَازٌ ! الكَلِمَةُ هِيَ: ${q.full}`);
+        currentSupportQuizIdx = (currentSupportQuizIdx + 1) % u.supportQuiz.length;
+        updateSupportQuizDisplay(u);
+      } else {
+        speakText('حَاوِلْ مَرَّةً أُخْرَى');
+      }
+    }
+
+    /* --- INITIALIZATION --- */
+    window.onload = function() {
+      selectCurriculumUnit(1);
+      switchMainTab('tab-writing');
+      document.addEventListener('pointerdown', () => initAudioContext(), { once: true });
+    };
+  </script>
+</body>
+</html>
