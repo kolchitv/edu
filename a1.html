@@ -2270,6 +2270,31 @@
       speakText('تَمَّ حِفْظُ إِعْدَادَاتِ المُعَلِّمِ بِنَجَاحٍ');
     }
 
+    function renderWritingLettersRibbon(unitData) {
+      const ribbon = document.getElementById('writingLettersPickerRibbon');
+      if (!ribbon) return;
+
+      const keys = (unitData && unitData.writingKeys && unitData.writingKeys.length)
+        ? unitData.writingKeys
+        : Object.keys(elOuastaniLessons);
+
+      ribbon.innerHTML = keys.map(k => {
+        const lesson = elOuastaniLessons[k];
+        if (!lesson) return '';
+        const isActive = appState.activeWritingChar === k;
+        return `
+          <button onclick="selectWritingLesson('${k}')" class="px-3 py-1.5 rounded-xl text-xs font-black font-naskh transition flex items-center gap-1.5 flex-shrink-0 ${
+            isActive
+              ? 'bg-emerald-600 text-white shadow-xs ring-2 ring-emerald-400'
+              : 'bg-white text-slate-700 hover:bg-emerald-50 border border-slate-200'
+          }">
+            <span class="text-sm">${lesson.char}</span>
+            <span class="text-[10px] font-fr opacity-80 font-normal">(${lesson.phoneticFr})</span>
+          </button>
+        `;
+      }).join('');
+    }
+
     function selectWritingLesson(lessonKey) {
       playSfx('click');
       appState.activeWritingChar = lessonKey;
